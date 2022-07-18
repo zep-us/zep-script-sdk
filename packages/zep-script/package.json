@@ -1,0 +1,14 @@
+{
+  "name": "@zep.us/zep-script",
+  "version": "0.0.1",
+  "description": "ZEP Script API for ZEP app",
+  "author": "ZEP",
+  "homepage": "",
+  "license": "MIT",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "files": [
+    "index.js",
+    "*.d.ts"
+  ]
+}

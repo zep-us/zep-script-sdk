@@ -1,0 +1,6 @@
+{
+  "name": "Example ZEP Script Application",
+  "description": "This is a example ZEP Script application.",
+  "type": "Normal",
+  "iconFilePath": "./icon.png"
+}
