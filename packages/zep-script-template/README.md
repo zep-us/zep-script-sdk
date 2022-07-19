@@ -1,5 +1,7 @@
 # ZEP Script App Template
 
+Template for ZEP Script app.
+
 ## Directory Structure
 
 ```
