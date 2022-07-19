@@ -1,0 +1,58 @@
+name: Publish
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+
+jobs:
+  publish:
+    if: ${{ !contains(github.event.head_commit.message, 'chore(release)') }}
+    name: Publish
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build
+        run: yarn lerna run build --ignore @zep.us/zep-script-template
+
+      - name: Login to NPM registry
+        run: |
+          echo "@zep.us:registry=https://registry.npmjs.org/" > .npmrc
+          echo "zep-script:registry=https://registry.npmjs.org/" > .npmrc
+          echo "registry=https://registry.npmjs.org/" >> .npmrc
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
+          npm whoami
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: GIT Setup
+        run: |
+          git config --global user.name 'ZEP'
+          git config --global user.email 'dev@zep.us'
+          git remote set-url origin git@github.com:$GITHUB_REPOSITORY
+
+      - uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Publish Packages
+        run: |
+          git diff --exit-code
+          yarn lerna version --yes
+          yarn lerna publish from-package --yes
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -9,7 +9,6 @@
  ┣ main.ts
  ┣ package.json
  ┣ tsconfig.json
- ┣ zep-script.json
  ┗ yarn.lock
 ```
 
@@ -18,27 +17,26 @@
 - `main.ts`: Main entry file of the app. The name of this file should not be changed.
 - `package.json`: Package.json file.
 - `tsconfig.json`: TypeScript configuration file.
-- `zep-script.json`: ZEP Script configuration file.
 - `yarn.lock`: Yarn lock file.
 
 ## Usage
 
-### Configuration File
+### Build the project
 
-All configurations of your ZEP app is located inside `zep-script.json`.
+You need to build the project before you can archive your project.
 
-#### `name`
+```bash
+yarn build
+```
 
-Name of your app.
+### Archive the project
 
-#### `description`
+Archive the project by running the following command. You can upload the generated project archive in the [ZEP desktop website](https://zep.us/me/apps/).
 
-Description of your app.
+```bash
+yarn archive
+```
 
-#### `type`
+### ZEP Script API Documentation
 
-Type of your app. ZEP app has two types: `Normal` and `Installable`.
-
-#### `iconFilePath`
-
-Path to the icon file of your app relative to the config file.
+Refer to official [documentation page](https://teamzep.notion.site/ZEP-Script-a629ed81be6841ed8d38411108a410f9)

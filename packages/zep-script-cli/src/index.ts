@@ -1,10 +1,7 @@
 import chalk from "chalk";
-import clear from "clear";
 import { program } from "commander";
 import { Command, commands } from "./commands";
-import logger from "./logger";
-
-clear();
+import logger from "./tools/logger";
 
 const handleError = (err: Error) => {
   logger.enable();
@@ -74,7 +71,7 @@ async function setupAndRun() {
   program.parse();
 }
 
-async function run() {
+export async function run() {
   try {
     await setupAndRun();
   } catch (e) {
@@ -83,5 +80,3 @@ async function run() {
     }
   }
 }
-
-run();

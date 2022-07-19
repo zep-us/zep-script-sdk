@@ -6,10 +6,11 @@
       "es2017",
       "dom"
     ],
+    "rootDir": "src",
+    "outDir": "dist",
     "declaration": true,
     "declarationMap": true,
     "composite": true,
-    "emitDeclarationOnly": true,
     "strict": true,
     /* Additional Checks */
     "noUnusedLocals": true,
@@ -19,10 +20,10 @@
     /* Module Resolution Options */
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
   },
   "exclude": [
-    "**/__tests__/**/*",
-    "**/build/**/*"
+    "dist",
+    "template"
   ]
 }

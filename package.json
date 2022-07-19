@@ -1,6 +1,9 @@
 {
   "name": "@zep.us/zep-script-sdk",
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "devDependencies": {
     "lerna": "^5.1.6"
   }

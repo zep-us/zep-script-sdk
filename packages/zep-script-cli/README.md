@@ -6,8 +6,8 @@
 npx zep-script init MyZepApp
 ```
 
-## `deploy`
+## `archive`
 
 ```bash
-npx zep-script deploy
+npx zep-script archive
 ```

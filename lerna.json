@@ -1,7 +1,17 @@
 {
+  "npmClient": "yarn",
   "packages": [
     "packages/*"
   ],
-  "useNx": false,
-  "version": "0.0.0"
+  "useWorkspaces": true,
+  "command": {
+    "version": {
+      "allowBranch": "main",
+      "conventionalCommits": true,
+      "exact": true,
+      "gitRemote": "origin",
+      "message": "chore(release): release packages"
+    }
+  },
+  "version": "0.0.25"
 }

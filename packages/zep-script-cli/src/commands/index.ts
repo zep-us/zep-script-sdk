@@ -1,4 +1,5 @@
 import archive from "./archive";
+import build from "./build";
 import init from "./init";
 
 export type OptionValue = string | boolean | number;
@@ -22,4 +23,4 @@ export type Command = {
   func: CommandFunction<Object>;
 };
 
-export const commands = [init, archive] as Command[];
+export const commands = [init, build, archive] as Command[];

@@ -1,14 +1,19 @@
 {
-  "name": "@zep.us/zep-script",
-  "version": "0.0.1",
+  "name": "zep-script",
+  "version": "0.0.25",
   "description": "ZEP Script API for ZEP app",
   "author": "ZEP",
   "homepage": "",
   "license": "MIT",
   "main": "index.js",
   "types": "index.d.ts",
+  "bin": "./cli.js",
   "files": [
     "index.js",
-    "*.d.ts"
-  ]
+    "**/*.d.ts"
+  ],
+  "dependencies": {
+    "@zep.us/babel-plugin-zep-script": "0.0.25",
+    "@zep.us/zep-script-cli": "0.0.25"
+  }
 }

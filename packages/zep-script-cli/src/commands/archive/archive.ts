@@ -1,8 +1,9 @@
 import archiver from "archiver";
+import chalk from "chalk";
 import fs from "fs-extra";
 import ora from "ora";
 import path from "path";
-import logger from "../../logger";
+import logger from "../../tools/logger";
 
 type Options = {
   projectRoot?: string;
@@ -31,13 +32,13 @@ export default (async function archive([]: Array<string>, options: Options) {
   const cwd = process.cwd();
   const root = options.projectRoot || cwd;
 
+  const loader = ora();
+
   try {
     // const configJsonPath = path.join(root, "zep-script.json");
     // const configJsonObject = JSON.parse(
     //   fs.readFileSync(configJsonPath).toString()
     // );
-
-    const loader = ora();
 
     loader.start("Analyzing project");
 
@@ -65,10 +66,12 @@ export default (async function archive([]: Array<string>, options: Options) {
     archive.finalize();
 
     output.on("close", function () {
-      console.log(archive.pointer() + " total bytes");
       loader.succeed();
+
+      logger.log(chalk.green(`Project ${projectName} archived successfully.`));
     });
   } catch (e) {
+    loader.fail();
     if (e instanceof Error) {
       logger.error(e.message);
     }

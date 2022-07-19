@@ -1,3 +1,4 @@
+import { ScriptDynamicResource } from "./ScriptDynamicResource";
 import { ScriptWidget } from "./ScriptWidget";
 
 export class ScriptPlayer {
