@@ -7,16 +7,6 @@ export class ScriptWidget {
   id: number;
 
   /**
-   * 위젯 존재 여부
-   */
-  destroyed: boolean;
-
-  /**
-   * 위젯 소유 플레이어
-   */
-  player: ScriptPlayer;
-
-  /**
    * 위젯에 리스너 콜백을 등록
    */
   onMessage: {
