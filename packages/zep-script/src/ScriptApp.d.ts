@@ -216,11 +216,12 @@ declare global {
      * @param anims
      * @param frameRate
      */
+
     function loadSpritesheet(
       fileName: string,
       frameWidth?: number,
       frameHeight?: number,
-      anims?: Record<"left" | "up" | "down" | "right" | "dance" | "down_jump" | "left_jump" | "right_jump" | "up_jump", number[]>,
+      anims?: number[] | {"left"?: number[], "up"?: number[], "down"?: number[], "right"?: number[], "dance"?: number[], "down_jump"?: number[], "left_jump"?: number[], "right_jump"?: number[], "up_jump"?: number[]},
       frameRate?: number
     ): ScriptDynamicResource;
 
@@ -344,7 +345,7 @@ declare global {
     ): void;
 
     /**
-     * 해당 URL에 HTTP Get 포스팅을 실행
+     * 해당 URL에 HTTP Post 포스팅을 실행
      * @param url
      * @param headers
      * @param body
