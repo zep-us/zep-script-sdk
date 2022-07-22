@@ -7,9 +7,9 @@ export class ScriptPlayer {
    */
   readonly id: number;
   /**
-   * 플레이어 이름 (Read Only)
+   * 플레이어 이름
    */
-  readonly name: number;
+	name: string;
   /**
    * 플레이어 이름 색상
    */
