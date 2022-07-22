@@ -220,7 +220,7 @@ declare global {
       fileName: string,
       frameWidth?: number,
       frameHeight?: number,
-      anims?: Record<"left" | "up" | "down" | "right", number[]>,
+      anims?: Record<"left" | "up" | "down" | "right" | "dance" | "down_jump" | "left_jump" | "right_jump" | "up_jump", number[]>,
       frameRate?: number
     ): ScriptDynamicResource;
 
