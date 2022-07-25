@@ -36,6 +36,16 @@ declare global {
     const playerCount: number;
 
     /**
+		 * App을 실행한 플레이어의 ID 값 (Read Only)
+		 */
+		const creatorID: number;
+
+		/**
+		 * 화면의 줌을 컨트롤 하는 값 (기본 값: 1)
+		 */
+		let displayRatio: number;
+
+    /**
      * NONE : 아무 효과 없음
      * SPOTLIGHT : 비네팅 효과 적용
      */
