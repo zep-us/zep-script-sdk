@@ -9,7 +9,7 @@ export class ScriptPlayer {
   /**
    * 플레이어 이름
    */
-	name: string;
+  name: string;
   /**
    * 닉네임 위에 노란색으로 노출시킬 텍스트
    */
