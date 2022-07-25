@@ -216,6 +216,7 @@ declare global {
      * @param anims
      * @param frameRate
      */
+
     function loadSpritesheet(
       fileName: string,
       frameWidth?: number,
