@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.1](https://github.com/zep-us/zep-script-sdk/compare/v0.1.0...v0.1.1) (2022-07-25)
+
+
+### Bug Fixes
+
+* update ScriptApp.d.ts ScriptPlayer.d.ts ([#2](https://github.com/zep-us/zep-script-sdk/issues/2)) ([04cc23e](https://github.com/zep-us/zep-script-sdk/commit/04cc23e8b31fab0b81e6337a5c83781171ff2bdb))
+
+
+
+
+
 # [0.1.0](https://github.com/zep-us/zep-script-sdk/compare/v0.0.26...v0.1.0) (2022-07-22)
 
 
