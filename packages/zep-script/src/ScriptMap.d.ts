@@ -2,7 +2,7 @@ import { ScriptDynamicResource } from "./ScriptDynamicResource";
 
 export {};
 
-export enum TileEffectType{
+export enum TileEffectType {
   NONE = 0,
   IMPASSABLE = 1,
   SPAWN = 2,
