@@ -2,11 +2,6 @@ import { ScriptDynamicResource } from "./ScriptDynamicResource";
 import { ScriptPlayer } from "./ScriptPlayer";
 import { ScriptWidget } from "./ScriptWidget";
 
-export enum CameraEffect {
-  NONE = 0,
-  SPOTLIGHT = 1,
-}
-
 declare global {
   namespace ScriptApp {
     /**
@@ -46,10 +41,10 @@ declare global {
 		let displayRatio: number;
 
     /**
-     * NONE : 아무 효과 없음
-     * SPOTLIGHT : 비네팅 효과 적용
+     * NONE = 0 : 아무 효과 없음
+     * SPOTLIGHT = 1 : 비네팅 효과 적용
      */
-    let cameraEffect: CameraEffect;
+    let cameraEffect: number;
 
     /**
      * cameraEffect가 NONE이 아닐 경우의 상태값 : 클수록 영역이 커진다.
