@@ -2,11 +2,6 @@ import { ScriptDynamicResource } from "./ScriptDynamicResource";
 import { ScriptPlayer } from "./ScriptPlayer";
 import { ScriptWidget } from "./ScriptWidget";
 
-export enum CameraEffect {
-  NONE = 0,
-  SPOTLIGHT = 1,
-}
-
 declare global {
   namespace ScriptApp {
     /**
@@ -36,10 +31,20 @@ declare global {
     const playerCount: number;
 
     /**
-     * NONE : 아무 효과 없음
-     * SPOTLIGHT : 비네팅 효과 적용
+     * App을 실행한 플레이어의 ID 값 (Read Only)
+    */
+    const creatorID: number;
+
+    /**
+     * 화면의 줌을 컨트롤 하는 값 (기본 값: 1)
      */
-    let cameraEffect: CameraEffect;
+    let displayRatio: number;
+
+    /**
+     * NONE = 0 : 아무 효과 없음
+     * SPOTLIGHT = 1 : 비네팅 효과 적용
+     */
+    let cameraEffect: number;
 
     /**
      * cameraEffect가 NONE이 아닐 경우의 상태값 : 클수록 영역이 커진다.
@@ -373,5 +378,6 @@ declare global {
      * App 스토리지 값을 저장
      */
     function save(): void;
+		
   }
 }
