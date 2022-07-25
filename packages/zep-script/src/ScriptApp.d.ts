@@ -41,8 +41,8 @@ declare global {
     let displayRatio: number;
 
     /**
-     * NONE = 0 : 아무 효과 없음
-     * SPOTLIGHT = 1 : 비네팅 효과 적용
+     * 0 = NONE : 아무 효과 없음
+     * 1 = SPOTLIGHT : 비네팅 효과 적용
      */
     let cameraEffect: number;
 
