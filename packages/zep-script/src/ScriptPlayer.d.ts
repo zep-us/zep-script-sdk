@@ -11,10 +11,6 @@ export class ScriptPlayer {
    */
 	name: string;
   /**
-   * 플레이어 이름 색상
-   */
-  nameColor: number;
-  /**
    * 닉네임 위에 노란색으로 노출시킬 텍스트
    */
   title: string;
