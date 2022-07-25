@@ -383,5 +383,6 @@ declare global {
      * App 스토리지 값을 저장
      */
     function save(): void;
+		
   }
 }
