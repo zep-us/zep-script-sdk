@@ -158,7 +158,6 @@ ScriptApp.onJoinPlayer.Add(function (p) {
   else if (p.tag.team == 1) _blueTeam.push(p);
 
   TEAM_COUNTER++;
-  p.nameColor = p.tag.team == 0 ? 16711680 : 255;
   p.sprite = p.tag.team == 0 ? redman : blueman;
   p.sendUpdated();
 

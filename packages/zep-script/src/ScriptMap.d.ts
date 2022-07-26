@@ -2,19 +2,20 @@ import { ScriptDynamicResource } from "./ScriptDynamicResource";
 
 export {};
 
-export type TileEffectType =
-  | "NONE"
-  | "IMPASSABLE"
-  | "SPAWN"
-  | "PORTAL"
-  | "PRIVATE_AREA"
-  | "SPOTLIGHT"
-  | "EMBED"
-  | "LOCATION"
-  | "AMBIENT_SOUND"
-  | "TILE_EMBED"
-  | "WEB_PORTAL"
-  | "SPACE_PORTAL";
+export enum TileEffectType {
+  NONE = 0,
+  IMPASSABLE = 1,
+  SPAWN = 2,
+  PORTAL = 3,
+  PRIVATE_AREA = 4,
+  SPOTLIGHT = 5,
+  EMBED = 6,
+  LOCATION = 7,
+  AMBIENT_SOUND = 8,
+  TILE_EMBED = 9,
+  WEB_PORTAL = 10,
+  SPACE_PORTAL = 11
+}
 
 declare global {
   namespace ScriptMap {
