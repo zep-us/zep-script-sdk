@@ -58,7 +58,7 @@ declare global {
      * @param dynamicResource `App.loadSpritesheet()` 함수를 통해 사전에 로드한 이미지 파일 객체
      * @param data
      */
-     function putObject(
+     function putObjectWithKey(
       x: number,
       y: number,
       dynamicResource: ScriptDynamicResource,
