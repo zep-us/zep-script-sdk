@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/zep-us/zep-script-sdk/compare/v0.2.0...v0.3.0) (2022-08-17)
+
+
+### Features
+
+* add new API type definitions. ([0805a76](https://github.com/zep-us/zep-script-sdk/commit/0805a76a06841c7d58cc841157c36cfcec33a2d1))
+
+
+
+
+
 # 0.2.0 (2022-08-17)
 
 
