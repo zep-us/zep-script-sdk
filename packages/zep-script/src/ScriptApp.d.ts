@@ -57,6 +57,11 @@ declare global {
     let storage: string;
 
     /**
+     * App의 따라가기 기능 활성화 여부
+     */
+    let followPlayer: boolean;
+
+    /**
      * ==========================================
      *              Event Listeners
      * ==========================================
@@ -169,6 +174,15 @@ declare global {
     }
 
     /**
+     * 플레이어가 사이드바 앱을 클릭(터치) 했을 때 호출 되는 이벤트
+     */
+    namespace onSidebarTouched {
+      function Add(
+        callback: (sender: ScriptPlayer) => void
+      ): void;
+    }
+
+    /**
      * time(초) 후에 callback 함수를 실행
      * @param callback
      * @param time
@@ -232,16 +246,34 @@ declare global {
 
     /**
      * 모든 플레이어에게 지정된 위치에 해당 text를 1초간 표시
-     * @param text
-     * @param color
-     * @param bgColor
-     * @param offset
+     * @param text 출력할 텍스트 값
+     * @param color 텍스트 색상
+     * @param bgColor 라벨 배경 색상
+     * @param offset 라벨 표시 위치 조정 값
      */
     function showCenterLabel(
       text: string,
       color?: number,
       bgColor?: number,
       offset?: number
+    ): void;
+
+    /**
+     * 모든 플레이어에게 지정된 위치에 해당 text를 1초간 표시. span태그 사용 가능
+     * @param text 출력할 텍스트 값, span태그 사용 가능
+     * @param color 텍스트 색상
+     * @param bgColor 라벨 배경 색상
+     * @param offset 라벨 표시 위치 조정 값
+     * @param width 라벨의 너비 n% (0 ~ 100)
+     * @param opacity 라벨 배경색 투명도 (0 ~ 1)
+     */
+     function showCustomLabel(
+      text: string,
+      color?: number,
+      bgColor?: number,
+      offset?: number,
+      width?: number,
+      opacity?: number
     ): void;
 
     /**
