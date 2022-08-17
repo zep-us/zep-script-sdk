@@ -52,20 +52,6 @@ declare global {
     ): Promise<void>;
 
     /**
-     * 지정한 좌표에 키 값을 가진 오브젝트를 놓음 (기준 좌표 : Left-Top)
-     * @param x X 좌표
-     * @param y Y 좌표
-     * @param dynamicResource `App.loadSpritesheet()` 함수를 통해 사전에 로드한 이미지 파일 객체
-     * @param data
-     */
-     function putObject(
-      x: number,
-      y: number,
-      dynamicResource: ScriptDynamicResource,
-      data?: any
-    ): Promise<void>;
-
-    /**
      * 해당 좌표에 있는 오브젝트의 스프라이트 애니메이션을 실행시킴 (putObject가 선행되어야 함)
      * @param x X 좌표
      * @param y Y 좌표
@@ -98,18 +84,6 @@ declare global {
       targetX: number,
       targetY: number,
       time: number
-    ): void;
-
-    /**
-     * key 값을 가진 오브젝트를 타겟 좌표로 이동
-     * @param key 오브젝트의 키 값
-     * @param targetX 목표가 되는 X 좌표
-     * @param targetY 목표가 되는 Y 좌표
-     */
-     function moveObjectWithKey(
-      key: string,
-      targetX: number,
-      targetY: number
     ): void;
   }
 }
