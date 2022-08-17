@@ -94,6 +94,18 @@ export class ScriptPlayer {
   ): void;
 
   /**
+   * 플레이어에게 지정된 위치에 해당 text를 1초간 표시. span태그 사용 가능
+   */
+  showCustomLabel(
+    text: string,
+    color?: number,
+    bgColor?: number,
+    offset?: number,
+    width?: number,
+    opacity?: number
+  ): void;
+
+  /**
    * 플레이어에게 지정된 align의 위치에 해당 html파일을 위젯으로 불러옴
    */
   showWidget(
