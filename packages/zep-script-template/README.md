@@ -41,4 +41,5 @@ yarn archive
 
 ### ZEP Script API Documentation
 
-Refer to official [documentation page](https://teamzep.notion.site/ZEP-Script-a629ed81be6841ed8d38411108a410f9)
+- [English](https://docs.zep.us/zep-script)
+- [Korean](https://docs-kr.zep.us/zep-script)
