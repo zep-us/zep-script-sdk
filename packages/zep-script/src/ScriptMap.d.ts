@@ -109,7 +109,8 @@ declare global {
      function moveObjectWithKey(
       key: string,
       targetX: number,
-      targetY: number
+      targetY: number,
+      path?: boolean
     ): void;
   }
 }

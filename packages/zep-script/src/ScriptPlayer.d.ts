@@ -59,7 +59,7 @@ export class ScriptPlayer {
    */
   disableAudio: boolean;
   /**
-   * 어택 타입(기본 : 1)
+   * 어택 타입(기본 : 0, 원거리공격 : 2)
    */
   attackType: number;
   /**
@@ -72,6 +72,7 @@ export class ScriptPlayer {
   attackParam1: number;
   /**
    * 실제 영향이 미치는 거리(기준: Tile)
+   * attackType이 2인 경우 유효
    */
   attackParam2: number;
   /**
