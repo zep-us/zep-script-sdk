@@ -74,14 +74,14 @@ export default (async function publish([]: Array<string>, options: Options) {
 
     const sessionCookie = (await fs.readFile(sessionFilePath)).toString();
 
-    const archiveFilePath = fs
+    const archiveFiles = fs
       .readdirSync(root)
       .filter((file) => file.endsWith(".zepapp.zip"));
 
-    const archiveFile = fs.createReadStream(archiveFilePath[0]);
+    const archiveFile = fs.createReadStream(archiveFiles[0]);
 
     const formData = new FormData();
-    formData.append("file", archiveFile);
+    formData.append("file", archiveFile, archiveFiles[0]);
     formData.append("name", configJsonObject.name);
     formData.append("desc", configJsonObject.description);
 
@@ -99,9 +99,14 @@ export default (async function publish([]: Array<string>, options: Options) {
 
     loader.start("Publishing...");
 
+    const length = await new Promise<number>((resolve) =>
+      formData.getLength((e, l) => resolve(l))
+    );
+
     await axios.post(`https://zep.us/me/apps/${appId}`, formData, {
       headers: {
         cookie: sessionCookie,
+        "Content-Length": length,
         ...formData.getHeaders(),
       },
     });
