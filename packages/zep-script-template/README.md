@@ -39,7 +39,7 @@ Archive the project by running the following command. You can upload the generat
 yarn archive
 ```
 
-### Pulbish the app 
+### Publish the app 
 
 Publish your app by running the following command. You have to fill in configuration file(`zep-script.json`) before running this command.
 

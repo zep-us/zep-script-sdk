@@ -16,7 +16,7 @@ const auth = async (loader: Ora, sessionFilePath: string) => {
 
   const { email } = await prompt.get({
     name: "email",
-    description: "Enter code sent to your email",
+    description: "Enter your email",
     type: "string",
     required: true,
   });
