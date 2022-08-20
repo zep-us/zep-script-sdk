@@ -10,12 +10,13 @@
     "babel.config.js",
     "main.ts",
     "README.md",
-    "tsconfig.json"
+    "tsconfig.json",
+    "zep-script.json"
   ],
   "scripts": {
     "build": "zep-script build",
     "archive": "zep-script archive",
-    "publish": "zep-script publish"
+    "deploy": "zep-script publish"
   },
   "devDependencies": {
     "@babel/cli": "^7.18.6",
