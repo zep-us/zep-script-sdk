@@ -78,7 +78,7 @@ export default (async function publish([]: Array<string>, options: Options) {
       .readdirSync(root)
       .filter((file) => file.endsWith(".zepapp.zip"));
 
-    const archiveFile = await fs.readFile(archiveFilePath[0]);
+    const archiveFile = fs.createReadStream(archiveFilePath[0]);
 
     const formData = new FormData();
     formData.append("file", archiveFile);
@@ -100,7 +100,7 @@ export default (async function publish([]: Array<string>, options: Options) {
     loader.start("Publishing...");
 
     await axios.post(`https://zep.us/me/apps/${appId}`, formData, {
-      headers: { cookie: sessionCookie },
+      headers: { "Content-Type": "multipart/form-data", cookie: sessionCookie, ...formData.getHeaders() },
     });
 
     loader.succeed();
