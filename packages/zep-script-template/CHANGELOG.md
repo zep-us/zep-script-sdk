@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.5](https://github.com/zep-us/zep-script-sdk/compare/v0.6.4...v0.6.5) (2022-08-20)
+
+**Note:** Version bump only for package @zep.us/zep-script-template
+
+
+
+
+
 ## [0.6.4](https://github.com/zep-us/zep-script-sdk/compare/v0.6.3...v0.6.4) (2022-08-20)
 
 **Note:** Version bump only for package @zep.us/zep-script-template

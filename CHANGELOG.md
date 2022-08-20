@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.5](https://github.com/zep-us/zep-script-sdk/compare/v0.6.4...v0.6.5) (2022-08-20)
+
+
+### Bug Fixes
+
+* fix file not uploading ([48a6c2d](https://github.com/zep-us/zep-script-sdk/commit/48a6c2de43c245f5c8f1763825b6659b9b96198a))
+
+
+
+
+
 ## [0.6.4](https://github.com/zep-us/zep-script-sdk/compare/v0.6.3...v0.6.4) (2022-08-20)
 
 
