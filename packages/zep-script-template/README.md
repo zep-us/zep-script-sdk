@@ -39,6 +39,21 @@ Archive the project by running the following command. You can upload the generat
 yarn archive
 ```
 
+### Pulbish the app 
+
+Publish your app by running the following command. You have to fill in configuration file(`zep-script.json`) before running this command.
+
+```bash
+yarn publish
+```
+
+#### `zep-script.json`
+
+- `appId`: The app id of the app. Leave it empty if you want to publish a new app. Setting this property will update the app already uploaded.
+- `name`: Name of the app.
+- `description`: Description of the app.
+- `type`: Type of the app. One of `normal`, `minigame`, `sidebar`
+
 ### ZEP Script API Documentation
 
 - [English](https://docs.zep.us/zep-script)
