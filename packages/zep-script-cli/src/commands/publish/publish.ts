@@ -1,6 +1,7 @@
 import axios from "axios";
 import prompt from "prompt";
 import FormData from "form-data";
+import { createReadStream } from "fs";
 import fs from "fs-extra";
 import ora, { Ora } from "ora";
 import os from "os";
@@ -78,7 +79,7 @@ export default (async function publish([]: Array<string>, options: Options) {
       .readdirSync(root)
       .filter((file) => file.endsWith(".zepapp.zip"));
 
-    const archiveFile = fs.createReadStream(archiveFilePath[0]);
+    const archiveFile = createReadStream(archiveFilePath[0]);
 
     const formData = new FormData();
     formData.append("file", archiveFile);
