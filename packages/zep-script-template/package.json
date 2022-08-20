@@ -14,7 +14,8 @@
   ],
   "scripts": {
     "build": "zep-script build",
-    "archive": "zep-script archive"
+    "archive": "zep-script archive",
+    "publish": "zep-script publish"
   },
   "devDependencies": {
     "@babel/cli": "^7.18.6",

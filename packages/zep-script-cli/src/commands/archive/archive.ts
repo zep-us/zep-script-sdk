@@ -48,7 +48,7 @@ export default (async function archive([]: Array<string>, options: Options) {
     loader.succeed();
     loader.start("Archiving project");
 
-    const archiveOutputPath = path.join(cwd, `${projectName}.zip`);
+    const archiveOutputPath = path.join(cwd, `${projectName}.zepapp.zip`);
     const output = fs.createWriteStream(archiveOutputPath);
     const archive = archiver("zip");
     archive.pipe(output);
