@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.7](https://github.com/zep-us/zep-script-sdk/compare/v0.6.6...v0.6.7) (2022-08-24)
+
+
+### Bug Fixes
+
+* Typo correction ([5429ce0](https://github.com/zep-us/zep-script-sdk/commit/5429ce06481d63e4d41c6991fad997da5547cd77))
+
+
+
+
+
 ## [0.6.6](https://github.com/zep-us/zep-script-sdk/compare/v0.6.5...v0.6.6) (2022-08-20)
 
 **Note:** Version bump only for package zep-script
