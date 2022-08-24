@@ -13,7 +13,7 @@ declare global {
     /**
      * App이 설치된 스페이스의 해쉬값 (Read Only)
      */
-    const worldHashID: string;
+    const spaceHashID: string;
 
     /**
      * App이 설치된 맵의 해쉬값 (Read Only)
