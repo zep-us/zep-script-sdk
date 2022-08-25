@@ -34,8 +34,9 @@ declare global {
      * @param x X 좌표
      * @param y Y 좌표
      * @param tileID 타일에 적용할 효과
+     * @param option 타일 효과 옵션
      */
-    function putTileEffect(x: number, y: number, tileID: TileEffectType, data: object): void;
+    function putTileEffect(x: number, y: number, tileID: TileEffectType, option?: object): void;
 
     /**
      * 지정된 좌표에 오브젝트를 놓음 (기준 좌표 : Left-Top)
