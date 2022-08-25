@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/zep-us/zep-script-sdk/compare/v0.6.7...v0.7.0) (2022-08-25)
+
+
+### Features
+
+* update putTileEffect ([bd0e2ac](https://github.com/zep-us/zep-script-sdk/commit/bd0e2ac2d761d1fba00c2063bc185fb08adfb46f))
+
+
+
+
+
 ## [0.6.7](https://github.com/zep-us/zep-script-sdk/compare/v0.6.6...v0.6.7) (2022-08-24)
 
 
