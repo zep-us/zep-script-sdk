@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/zep-us/zep-script-sdk/compare/v0.7.1...v0.8.0) (2022-09-02)
+
+
+### Features
+
+* update playSound function ([030df14](https://github.com/zep-us/zep-script-sdk/commit/030df14f1e5ffc109c78f7fb2ea1a4f551af4ab5))
+
+
+
+
+
 ## [0.7.1](https://github.com/zep-us/zep-script-sdk/compare/v0.7.0...v0.7.1) (2022-08-25)
 
 
