@@ -348,8 +348,9 @@ declare global {
      * 모든 플레이어에게 사운드를 재생
      * @param fileName
      * @param loop
+     * @param overlap 사운드 오버랩(겹침) 재생 가능 여부
      */
-    function playSound(fileName: string, loop?: boolean): void;
+    function playSound(fileName: string, loop?: boolean = false, overlap?: boolean = false): void;
 
     /**
      * 모든 플레이어에게 링크에 해당하는 사운드를 재생
