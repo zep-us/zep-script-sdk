@@ -143,8 +143,11 @@ export class ScriptPlayer {
 
   /**
    * 플레이어에게 사운드를 재생
+  * @param fileName
+  * @param loop
+  * @param overlap 사운드 오버랩(겹침) 재생 가능 여부
    */
-  playSound(fileName: string, loop: boolean): void;
+  playSound(fileName: string, loop: boolean, overlap : boolean): void;
 
   /**
    * 플레이어에게 링크에 해당하는 사운드를 재생
