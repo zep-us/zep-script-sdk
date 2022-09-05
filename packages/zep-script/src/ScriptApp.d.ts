@@ -183,6 +183,15 @@ declare global {
     }
 
     /**
+     * 플레이어가 사이드바 앱을 클릭(터치) 했을 때 호출 되는 이벤트
+     */
+    namespace onAppObjectTouched {
+      function Add(
+        callback: (key: string, sender: ScriptPlayer, x: number, y: number) => void
+      ): void;
+    }
+
+    /**
      * time(초) 후에 callback 함수를 실행
      * @param callback
      * @param time
@@ -218,6 +227,26 @@ declare global {
      */
     function addOnKeyDown(
       keycode: number,
+      callback: (player: ScriptPlayer) => void
+    ): void;
+
+    /**
+     * enable이 true이면 모바일 환경에서 펀치 버튼이 추가
+     * @param enabled
+     */
+     function putMobilePunch(enabled: boolean): void;
+
+    /**
+     * 모바일 환경에서 커스텀 모바일 버튼을 추가하고, 버튼을 눌렀을 때 동작하는 함수를 지정
+     * @param anchor
+     * @param posX
+     * @param posY
+     * @param callback
+     */
+    function addMobileButton(
+      anchor: number,
+      posX: number,
+      posY: number,
       callback: (player: ScriptPlayer) => void
     ): void;
 
@@ -390,6 +419,20 @@ declare global {
      * @param callback
      */
     function httpPost(
+      url: string,
+      headers: object,
+      body: object,
+      callback: (response: string) => void
+    ): void;
+
+    /**
+     * 해당 URL에 Json 형태의 http post 요청을 보내는 함수
+     * @param url
+     * @param headers
+     * @param body
+     * @param callback
+     */
+     function httpPostJson(
       url: string,
       headers: object,
       body: object,

@@ -163,4 +163,19 @@ export class ScriptPlayer {
    * 플레이어 스토리지값을 저장
    */
   save(): void;
+
+  /**
+   * 플레이어의 모바일 접속 여부를 true/false 로 출력
+   */
+  isMobile(): boolean;
+
+  /**
+   * 플레이어가 움직이고 있으면 True, 아니면 False를 반환
+   */
+  isMoving(): boolean;
+
+  /**
+   * 플레이어가 점프하고 있으면 True, 아니면 False를 반환
+   */
+  isJumping(): boolean; 
 }
