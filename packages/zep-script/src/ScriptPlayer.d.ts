@@ -101,6 +101,11 @@ export class ScriptPlayer {
 
   /**
    * 플레이어에게 지정된 위치에 해당 text를 3초간 표시
+   * @param text 출력할 텍스트 값
+   * @param color 텍스트 색상
+   * @param bgColor 라벨 배경 색상
+   * @param offset 라벨 표시 위치 조정 값
+   * @param time 라벨 표시 시간 (default 3000)
    */
   showCenterLabel(
     text: string,
@@ -112,6 +117,13 @@ export class ScriptPlayer {
 
   /**
    * 플레이어에게 지정된 위치에 해당 text를 3초간 표시. span태그 사용 가능
+   * @param text 출력할 텍스트 값, span태그 사용 가능
+   * @param color 텍스트 색상
+   * @param bgColor 라벨 배경 색상
+   * @param offset 라벨 표시 위치 조정 값
+   * @param width 라벨의 너비 n% (0 ~ 100)
+   * @param opacity 라벨 배경색 투명도 (0 ~ 1)
+   * @param time 라벨 표시 시간 (default 3000)
    */
   showCustomLabel(
     text: string,
