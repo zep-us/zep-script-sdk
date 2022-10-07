@@ -284,7 +284,8 @@ declare global {
       text: string,
       color?: number,
       bgColor?: number,
-      offset?: number
+      offset?: number,
+      time?: number
     ): void;
 
     /**
@@ -302,7 +303,8 @@ declare global {
       bgColor?: number,
       offset?: number,
       width?: number,
-      opacity?: number
+      opacity?: number,
+      time?: number
     ): void;
 
     /**

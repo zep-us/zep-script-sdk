@@ -113,5 +113,26 @@ declare global {
       targetY: number,
       path?: boolean
     ): void;
+
+    /**
+     * 해당 키 값을 가진 오브젝트의 정보를 가져옴
+     * @param key 오브젝트의 키 값
+     */
+    function getObjectWithKey(
+      key: string,
+    ): object;
+
+    /**
+     * 해당하는 레이어의 x, y 좌표에 있는 타일의 타입 값을 리턴, 타일이 없으면 -1을 리턴합니다.
+     * @param layer 레이어에 해당하는 값 0 = Floor, 1 = WALL,2 = TileEffect, 3 = Object, 5 = TopObject,
+     * @param x X 좌표
+     * @param y Y 좌표
+     */
+    function getTile(
+      layer: number,
+      x: number, 
+      y: number
+    ): number;
+
   }
 }

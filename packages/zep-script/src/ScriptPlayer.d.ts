@@ -85,17 +85,33 @@ export class ScriptPlayer {
   storage: string;
 
   /**
-   * 플레이어에게 지정된 위치에 해당 text를 1초간 표시
+   * 플레이어의 모바일 접속 여부를 true/false 로 출력
+   */
+  readonly isMobile: boolean;
+
+  /**
+   * 플레이어가 움직이고 있으면 True, 아니면 False를 반환
+   */
+  readonly isMoving: boolean;
+
+  /**
+   * 플레이어가 점프하고 있으면 True, 아니면 False를 반환
+   */
+  readonly isJumping: boolean; 
+
+  /**
+   * 플레이어에게 지정된 위치에 해당 text를 3초간 표시
    */
   showCenterLabel(
     text: string,
     color?: number,
     bgColor?: number,
-    offset?: number
+    offset?: number,
+    time?: number
   ): void;
 
   /**
-   * 플레이어에게 지정된 위치에 해당 text를 1초간 표시. span태그 사용 가능
+   * 플레이어에게 지정된 위치에 해당 text를 3초간 표시. span태그 사용 가능
    */
   showCustomLabel(
     text: string,
@@ -103,7 +119,8 @@ export class ScriptPlayer {
     bgColor?: number,
     offset?: number,
     width?: number,
-    opacity?: number
+    opacity?: number,
+    time?: number
   ): void;
 
   /**
@@ -163,19 +180,4 @@ export class ScriptPlayer {
    * 플레이어 스토리지값을 저장
    */
   save(): void;
-
-  /**
-   * 플레이어의 모바일 접속 여부를 true/false 로 출력
-   */
-  isMobile(): boolean;
-
-  /**
-   * 플레이어가 움직이고 있으면 True, 아니면 False를 반환
-   */
-  isMoving(): boolean;
-
-  /**
-   * 플레이어가 점프하고 있으면 True, 아니면 False를 반환
-   */
-  isJumping(): boolean; 
 }
