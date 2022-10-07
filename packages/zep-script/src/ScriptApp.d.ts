@@ -279,6 +279,7 @@ declare global {
      * @param color 텍스트 색상
      * @param bgColor 라벨 배경 색상
      * @param offset 라벨 표시 위치 조정 값
+     * @param time 라벨 표시 시간 (default 3000)
      */
     function showCenterLabel(
       text: string,
@@ -296,6 +297,7 @@ declare global {
      * @param offset 라벨 표시 위치 조정 값
      * @param width 라벨의 너비 n% (0 ~ 100)
      * @param opacity 라벨 배경색 투명도 (0 ~ 1)
+     * @param time 라벨 표시 시간 (default 3000)
      */
      function showCustomLabel(
       text: string,
