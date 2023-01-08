@@ -23,10 +23,9 @@ const auth = async (loader: Ora, sessionFilePath: string) => {
 
   loader.start("Sending login code to your email...");
 
-  const loginData = new FormData();
-  loginData.append("email", email);
+  const loginData = {email};
 
-  await axios.post("https://zep.us/api/me/signin", loginData);
+  await axios.post("https://zep.us/api/v2/signin", loginData);
 
   loader.succeed();
 
@@ -103,7 +102,7 @@ export default (async function publish([]: Array<string>, options: Options) {
       formData.getLength((e, l) => resolve(l))
     );
 
-    await axios.post(`https://zep.us/me/apps/${appId}`, formData, {
+    await axios.post(`https://zep.us/iframe/me/apps/${appId}`, formData, {
       headers: {
         cookie: sessionCookie,
         "Content-Length": length,
