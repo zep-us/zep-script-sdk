@@ -26,7 +26,7 @@ const auth = async (loader: Ora, sessionFilePath: string) => {
   const loginData = new FormData();
   loginData.append("email", email);
 
-  await axios.post("https://zep.us/api/me/signin", loginData);
+  await axios.post("https://zep.us/api/v2/signin", loginData);
 
   loader.succeed();
 
