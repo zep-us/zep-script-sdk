@@ -1,4 +1,5 @@
 import { ScriptDynamicResource } from "./ScriptDynamicResource";
+import { ObjectEffectType } from "./ScriptObjectEffectType";
 
 export {};
 
@@ -16,6 +17,7 @@ export enum TileEffectType {
   WEB_PORTAL = 10,
   SPACE_PORTAL = 11
 }
+
 
 declare global {
   namespace ScriptMap {
@@ -133,6 +135,42 @@ declare global {
       x: number, 
       y: number
     ): number;
+
+    /**
+     * Type에 해당하는 상단오브젝트들을 리턴하는 함수
+     * @param type 오브젝트의 타입 
+     */
+    function getTopObjectsByType(
+      type: ObjectEffectType
+    ): [];
+
+    /**
+     * Type에 해당하는 오브젝트들을 리턴하는 함수
+     * @param type 오브젝트의 타입 
+     */
+    function getObjectsByType(
+      type: ObjectEffectType
+    ): [];
+
+    /**
+     * key 값이 일치하는 오브젝트의 스프라이트 애니메이션을 실행시키는 함수
+     * @param key 오브젝트의 키값
+     * @param animName 플레이할 애니메이션의 이름
+     * @param repeatCount 애니메이션 반복 횟수 ( -1 입력시 무한반복 )
+     */
+    function playObjectAnimationWithKey(
+      key: string, 
+      animName: string, 
+      repeatCount: number
+    ): [];
+
+    /**
+     * 맵에 해당 로케이션이 있는지 체크하여 true/false 값을 리턴합니다.
+     * @param locationName 로케이션 이름
+     */
+    function hasLocation(
+      locationName: string
+    ): boolean;
 
   }
 }

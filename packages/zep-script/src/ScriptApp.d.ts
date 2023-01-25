@@ -62,6 +62,16 @@ declare global {
     let followPlayer: boolean;
 
     /**
+     * App의 HashId 
+     */
+    let appHashID: string;
+
+    /**
+     * 플레이어 닉네임 숨김 여부 
+     */
+    let showName: boolean;
+
+    /**
      * ==========================================
      *              Event Listeners
      * ==========================================
@@ -145,7 +155,8 @@ declare global {
           sender: ScriptPlayer,
           x: number,
           y: number,
-          tileID: number
+          tileID: number,
+          obj: object
         ) => void
       ): void;
     }
@@ -187,7 +198,7 @@ declare global {
      */
     namespace onAppObjectTouched {
       function Add(
-        callback: (key: string, sender: ScriptPlayer, x: number, y: number) => void
+        callback: (sender: ScriptPlayer, key: string, x: number, y: number) => void
       ): void;
     }
 
@@ -458,6 +469,16 @@ declare global {
      * App 스토리지 값을 저장
      */
     function save(): void;
+
+    /**
+     * 미니게임 앱을 강제 종료하는 함수
+     */
+    function forceDestroy(): void;
+
+    /**
+     * 모든 채팅 내용을 삭제하는 함수
+     */
+    function clearChat(): void;
 		
   }
 }
