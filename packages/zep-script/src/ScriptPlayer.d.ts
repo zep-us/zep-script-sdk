@@ -1,6 +1,10 @@
 import { ScriptDynamicResource } from "./ScriptDynamicResource";
 import { ScriptWidget } from "./ScriptWidget";
 
+export enum ColorType{
+  WHITE, BLACK, RED, GREEN, BLUE, ORANGE, PURPLE, GRAY, YELLOW, MAGENTA, CYAN 
+}
+
 export class ScriptPlayer {
   /**
    * 플레이어 ID (Read Only)
@@ -83,6 +87,22 @@ export class ScriptPlayer {
    * 스페이스 내의 플레이어 값 저장공간(스페이스 한정)
    */
   storage: string;
+
+  /**
+   * 플레이어의 타이틀 색상을 읽거나 수정 할 수 있습니다. 
+   * Enum 값 또는 컬러  Hex Code 값을 입력할 수 있습니다.
+   */
+  titleColor: ColorType | number;
+
+  /**
+   * 플레이어의 화면 줌 비율을 조절 할 수 있습니다.
+   */
+  displayRatio: number;
+  
+  /**
+   * 플레이어의 이메일해쉬
+   */
+  emailHash: string;
 
   /**
    * 플레이어의 모바일 접속 여부를 true/false 로 출력
@@ -192,4 +212,19 @@ export class ScriptPlayer {
    * 플레이어 스토리지값을 저장
    */
   save(): void;
+
+  /**
+   * 플레이어 개인에게 채팅 메시지를 보냅니다.
+   * @param message 라벨에 출력할 텍스트
+   * @param color 출력할 글씨의 색을 지정합니다. (HexCode), 값을 입력하지 않을 경우, 흰색(0xFFFFFF)으로 적용됩니다.
+   */
+  sendMessage(message:string , color:number): void;
+
+  /**
+   * 플레이어 개인에게 채팅 메시지를 보냅니다.
+   * @param itemName 구매창에 표시할 아이템의 이름
+   * @param price 아이템의 가격 (화폐단위: ZEM)
+   * @param callback 구매 성공시 동작할 콜백함수 
+   */
+  showBuyAlert(itemName:string,price:number,callback:()=>void): void;
 }
