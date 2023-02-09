@@ -9,7 +9,7 @@ export class ScriptPlayer {
   /**
    * 플레이어 ID (Read Only)
    */
-  readonly id: number;
+  readonly id: string;
   /**
    * 플레이어 이름
    */
@@ -117,7 +117,12 @@ export class ScriptPlayer {
   /**
    * 플레이어가 점프하고 있으면 True, 아니면 False를 반환
    */
-  readonly isJumping: boolean; 
+  readonly isJumping: boolean;
+
+  /**
+   * 비로그인 플레이어인 경우 true 값을 반환
+   */
+  readonly isGuest: boolean; 
 
   /**
    * 플레이어에게 지정된 위치에 해당 text를 3초간 표시
@@ -225,6 +230,7 @@ export class ScriptPlayer {
    * @param itemName 구매창에 표시할 아이템의 이름
    * @param price 아이템의 가격 (화폐단위: ZEM)
    * @param callback 구매 성공시 동작할 콜백함수 
+   * @param payToSpaceOwner false인 경우 앱 소유자에게 수익이 전달되고, true인 경우 맵 소유자에게 수익이 전달됩니다. (default: false)
    */
-  showBuyAlert(itemName:string,price:number,callback:()=>void): void;
+  showBuyAlert(itemName:string,price:number,callback:(result: number)=>void, payToSpaceOwner?:boolean): void;
 }

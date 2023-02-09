@@ -203,6 +203,15 @@ declare global {
     }
 
     /**
+     * 클라이언트에서 window.parent.postMessage를 사용해 메시지를 보내는 경우 callback 함수를 실행합니다.
+     */
+    namespace onPostMessage {
+      function Add(
+        callback: (player: ScriptPlayer, body: string) => void
+      ): void;
+    }
+
+    /**
      * time(초) 후에 callback 함수를 실행
      * @param callback
      * @param time
