@@ -18,6 +18,28 @@ export enum TileEffectType {
   SPACE_PORTAL = 11
 }
 
+export type AppKeyObjectData = {
+  
+  key?: string,
+  userDirAnim?: boolean,
+  movespeed?: number,
+  overlap?: boolean,
+  collide?: boolean,
+  npcProperty?: NpcProperty
+}
+
+export type NpcProperty = {
+  name?:string;
+  hp?: number;
+  hpMax?: number;
+  gaugeWidth?: number; 
+  hpColor?: number;
+}
+
+export enum PutObjectType {
+    STROKE= 1
+}
+
 
 declare global {
   namespace ScriptMap {
@@ -59,14 +81,14 @@ declare global {
      * @param x X 좌표
      * @param y Y 좌표
      * @param dynamicResource `App.loadSpritesheet()` 함수를 통해 사전에 로드한 이미지 파일 객체
-     * @param data
+     * @param option
      */
      function putObjectWithKey(
-      x: number,
-      y: number,
-      dynamicResource: ScriptDynamicResource,
-      data?: any
-    ): Promise<void>;
+        x: number,
+        y: number,
+        dynamicResource: ScriptDynamicResource,
+        option?: AppKeyObjectData,
+     ): void;
 
     /**
      * 해당 좌표에 있는 오브젝트의 스프라이트 애니메이션을 실행시킴 (putObject가 선행되어야 함)
@@ -171,6 +193,20 @@ declare global {
     function hasLocation(
       locationName: string
     ): boolean;
-
+    
+    /**
+     * 오브젝트를 배치할 좌표들을 2차원 배열로 입력하여 한 번에 오브젝트를 설치하는 기능입니다. 이 기능을 사용하면 한 번에 많은 오브젝트를 설치할 경우 부하를 줄이는 효과를 얻을 수 있습니다.
+     */
+    function putObjectMultiple(
+        tileArray: Array<Array<number>>, type: PutObjectType, dynamicResource: ScriptDynamicResource, option?: object
+    ) : void
+    
+    /**
+     *  key 값을 가진 오브젝트 위에 말풍선을 표시하는 함수입니다.
+     */
+    function sayObjectWithKey(
+        key: string, message: string 
+    ) : void
   }
 }
+

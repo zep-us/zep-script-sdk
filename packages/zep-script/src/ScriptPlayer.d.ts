@@ -4,6 +4,20 @@ import { ScriptWidget } from "./ScriptWidget";
 export enum ColorType{
   WHITE, BLACK, RED, GREEN, BLUE, ORANGE, PURPLE, GRAY, YELLOW, MAGENTA, CYAN 
 }
+export type ShowBuyAlertOption = {
+  /**
+   * 구매창에 표시할 텍스트를 설정 할 수 있습니다.
+   */
+  message?: string,
+  /**
+   * 구매창을 표시할 시간(ms)을 설정할 수 있습니다.
+   */
+  timer?: number
+}
+
+export type BuyAlertResult = {
+  Refund: () => {}
+}
 
 export class ScriptPlayer {
   /**
@@ -231,6 +245,30 @@ export class ScriptPlayer {
    * @param price 아이템의 가격 (화폐단위: ZEM)
    * @param callback 구매 성공시 동작할 콜백함수 
    * @param payToSpaceOwner false인 경우 앱 소유자에게 수익이 전달되고, true인 경우 맵 소유자에게 수익이 전달됩니다. (default: false)
+   * @param option message : 구매창에 표시할 텍스트를 설정 할 수 있습니다. / timer : 구매창을 표시할 시간(ms)을 설정할 수 있습니다.
    */
-  showBuyAlert(itemName:string,price:number,callback:(result: number)=>void, payToSpaceOwner?:boolean): void;
+  showBuyAlert(itemName:string,price:number,callback:(result: number,buyAlertResult: BuyAlertResult )=>void, payToSpaceOwner?:boolean, option?: ShowBuyAlertOption): void;
+  
+  /**
+   * 플레이어의 구매 위젯을 닫습니다.
+   */
+  hideByAlert(): void;
+
+  /**
+   * 플레이어에게 웹 URL을 새 창이나 팝업 창으로 표시합니다.
+   * @param link 연결할 웹 url 주소
+   * @param popup true 인 경우, url 창을 팝업 형태로 표시합니다.
+   */
+  openWebLink(link: string, popup?: boolean): void;
+
+  /**
+   * 해당 플레이어에게 지정된 align의 위치에 url 임베드  화면을 표시하는 함수입니다.
+   * @param url 웹 url 주소
+   * @param align 임베드를 표시할 위치
+   * @param width 임베드 가로 크기(px)
+   * @param height 임베드 세로 크기(px)
+   * @param hasBackdrop true일 경우 임베드의 바깥 배경에 그림자를 표시합니다.
+   */
+  showEmbed(url: string, align: string, width: number, height: number, hasBackdrop?: boolean): void;
+  
 }

@@ -185,6 +185,15 @@ declare global {
     }
 
     /**
+     * 플레이어가 공격 키(Z)로 키 값을 가진 오브젝트를 공격할 때 동작합니다.
+     */
+    namespace onAppObjectAttacked {
+      function Add(
+          callback: (sender: ScriptPlayer, x: number, y: number,layer: number, key: string) => void
+      ): void;
+    }
+
+    /**
      * 플레이어가 사이드바 앱을 클릭(터치) 했을 때 호출 되는 이벤트
      */
     namespace onSidebarTouched {
@@ -418,6 +427,11 @@ declare global {
     function stopSound(): void;
 
     /**
+     * 찌르기(Z키) 공격 효과음을 변경하는 함수입니다.
+     */
+    function changeAttackSound(fileName:string): void;
+
+    /**
      * ==========================================
      *           Communication Methods
      * ==========================================
@@ -488,6 +502,16 @@ declare global {
      * 모든 채팅 내용을 삭제하는 함수
      */
     function clearChat(): void;
-		
+    
+    /**
+     * id 에 해당하는 플레이어를 반환하는 함수입니다.
+     */
+    function getPlayerByID(playerID: string): ScriptPlayer;
+
+    /**
+     * 로드한 이미지로 펀치 버튼을 만들어 추가합니다.
+     */
+    function putMobilePunchWithIcon(icon: ScriptDynamicResource): void;
+
   }
 }
