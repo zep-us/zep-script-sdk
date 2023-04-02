@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "noEmit": true,
+    "isolatedModules": true
+  },
+  "include": ["src"]
+}

@@ -15,20 +15,22 @@
   ],
   "scripts": {
     "build": "zep-script build",
+    "build:widget": "tsc && vite build",
     "archive": "zep-script archive",
     "deploy": "zep-script publish"
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/node": "^18.0.1",
     "@types/react": "^18.0.31",
     "@types/react-dom": "^18.0.11",
+    "@vitejs/plugin-react-swc": "^3.0.0",
     "eslint": "^8.37.0",
     "typescript": "^5.0.3",
+    "vite": "^4.2.0",
     "zep-script": "0.9.8"
   }
 }

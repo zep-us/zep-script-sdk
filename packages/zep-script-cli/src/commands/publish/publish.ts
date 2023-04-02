@@ -6,12 +6,13 @@ import ora, { Ora } from "ora";
 import os from "os";
 import path from "path";
 import logger from "../../tools/logger";
+import execa from "execa";
 
 type Options = {
   projectRoot?: string;
 };
 
-const auth = async (loader: Ora, sessionFilePath: string) => {
+async function auth(loader: Ora, sessionFilePath: string) {
   prompt.start();
 
   const { email } = await prompt.get({
@@ -51,7 +52,19 @@ const auth = async (loader: Ora, sessionFilePath: string) => {
   await fs.writeFile(sessionFilePath, sessionCookie);
 
   loader.succeed();
-};
+}
+
+async function findArchiveFile(root: string) {
+  const archiveFiles = fs
+    .readdirSync(root)
+    .filter((file) => file.endsWith(".zepapp.zip"));
+
+  if (archiveFiles.length === 0) {
+    throw new Error("No archive file found.");
+  }
+
+  return archiveFiles[0];
+}
 
 export default (async function publish([]: Array<string>, options: Options) {
   const cwd = process.cwd();
@@ -73,14 +86,11 @@ export default (async function publish([]: Array<string>, options: Options) {
 
     const sessionCookie = (await fs.readFile(sessionFilePath)).toString();
 
-    const archiveFiles = fs
-      .readdirSync(root)
-      .filter((file) => file.endsWith(".zepapp.zip"));
-
-    const archiveFile = fs.createReadStream(archiveFiles[0]);
+    const archiveFilePath = await findArchiveFile(root);
+    const archiveFile = fs.createReadStream(archiveFilePath);
 
     const formData = new FormData();
-    formData.append("file", archiveFile, archiveFiles[0]);
+    formData.append("file", archiveFile, archiveFilePath);
     formData.append("name", configJsonObject.name);
     formData.append("desc", configJsonObject.description);
 
@@ -102,13 +112,29 @@ export default (async function publish([]: Array<string>, options: Options) {
       formData.getLength((e, l) => resolve(l))
     );
 
-    await axios.post(`https://zep.us/iframe/me/apps/${appId}`, formData, {
+    const response = await axios.post(`https://zep.us/iframe/me/apps/${appId}`, formData, {
       headers: {
         cookie: sessionCookie,
         "Content-Length": length,
         ...formData.getHeaders(),
       },
     });
+    const resAppId = response.request.path.split("/iframe/me/apps/")[1];
+    if (resAppId && (appId !== resAppId)) {
+      configJsonObject.appId = resAppId;
+
+      await fs.writeFile(configJsonPath, JSON.stringify(configJsonObject, null, 4));
+
+      await execa(
+        "yarn",
+        ["zep-script", "build"]
+      );
+      await execa(
+        "yarn",
+        ["zep-script", "archive"]
+      );
+      await publish([], options);
+    }
 
     loader.succeed();
   } catch (e) {

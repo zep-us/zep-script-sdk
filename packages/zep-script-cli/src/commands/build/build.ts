@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import execa from "execa";
 import fs from "fs-extra";
-import ora from "ora";
+import ora, {Ora} from "ora";
 import path from "path";
 import logger from "../../tools/logger";
 
@@ -21,6 +21,30 @@ function checkMainFile(root: string) {
   throw new Error("No entry source file found. Tried to find index.ts or index.js in src folder.");
 }
 
+async function buildWidget(loader: Ora, root: string) {
+  let widgetDirPath = path.join(root, "widget");
+  if (fs.existsSync(widgetDirPath)) {
+    loader.start("Widget detected. Building widget with vite...");
+    await execa(
+      "tsc",
+      [],
+      {
+        stdio: !logger.isVerbose() ? "pipe" : "inherit",
+        cwd: root,
+      }
+    );
+    await execa(
+      "vite",
+      ["build"],
+      {
+        stdio: !logger.isVerbose() ? "pipe" : "inherit",
+        cwd: root,
+      }
+    );
+    loader.succeed();
+  }
+}
+
 export default (async function archive([]: Array<string>, options: Options) {
   const cwd = process.cwd();
   const root = options.projectRoot || cwd;
@@ -34,6 +58,9 @@ export default (async function archive([]: Array<string>, options: Options) {
     const projectLanguage = checkMainFile(root);
 
     loader.succeed();
+
+    await buildWidget(loader, root);
+
     loader.start("Building project");
 
     await execa(

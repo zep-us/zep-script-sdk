@@ -1,0 +1,13 @@
+/**
+ * Copyright (c) 2023 ZEP Co., LTD
+ */
+
+import "zep-script";
+import {add} from "./utils/add";
+
+ScriptApp.showCenterLabel("Hello World");
+ScriptApp.showCenterLabel(`1 + 2 = ${add(1, 2)}`);
+
+ScriptApp.onDestroy.Add(function () {
+  ScriptMap.clearAllObjects();
+});
