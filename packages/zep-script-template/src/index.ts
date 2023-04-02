@@ -1,10 +1,12 @@
 /**
- * Copyright (c) 2022 ZEP Co., LTD
+ * Copyright (c) 2023 ZEP Co., LTD
  */
 
 import "zep-script";
+import {add} from "./utils/add";
 
 ScriptApp.showCenterLabel("Hello World");
+ScriptApp.showCenterLabel(`1 + 2 = ${add(1, 2)}`);
 
 let zepLogo = ScriptApp.loadSpritesheet("zep_logo.png");
 

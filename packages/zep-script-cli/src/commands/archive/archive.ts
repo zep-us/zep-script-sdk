@@ -10,7 +10,7 @@ type Options = {
 };
 
 function checkMainFile(root: string) {
-  let mainFilePath = path.join(root, "main.ts");
+  let mainFilePath = path.join(root, "src/index.ts");
   if (fs.existsSync(mainFilePath)) {
     const distDirPath = path.join(root, "dist/");
     if (fs.existsSync(distDirPath)) {
@@ -21,7 +21,7 @@ function checkMainFile(root: string) {
       );
     }
   }
-  mainFilePath = path.join(root, "main.js");
+  mainFilePath = path.join(root, "src/index.js");
   if (fs.existsSync(mainFilePath)) {
     return "javascript";
   }

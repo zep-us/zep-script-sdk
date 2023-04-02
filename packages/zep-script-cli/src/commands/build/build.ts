@@ -10,15 +10,15 @@ type Options = {
 };
 
 function checkMainFile(root: string) {
-  let mainFilePath = path.join(root, "main.ts");
+  let mainFilePath = path.join(root, "src/index.ts");
   if (fs.existsSync(mainFilePath)) {
     return "typescript";
   }
-  mainFilePath = path.join(root, "main.js");
+  mainFilePath = path.join(root, "src/index.js");
   if (fs.existsSync(mainFilePath)) {
     return "javascript";
   }
-  throw new Error("No main file found.");
+  throw new Error("No entry source file found. Tried to find index.ts or index.js in src folder.");
 }
 
 export default (async function archive([]: Array<string>, options: Options) {
@@ -36,16 +36,9 @@ export default (async function archive([]: Array<string>, options: Options) {
     loader.succeed();
     loader.start("Building project");
 
-    if (projectLanguage === "typescript") {
-      await execa("npx", ["tsc", "-p", ".", "--noEmit"], {
-        stdio: !logger.isVerbose() ? "pipe" : "inherit",
-        cwd: root,
-      });
-    }
-
     await execa(
       "npx",
-      ["babel", "main.ts", "--out-dir", "dist", "--extensions", ".ts"],
+      ["rollup", "--config", "node:@zep.us/rollup-config-zep-script", "--bundleConfigAsCjs"],
       {
         stdio: !logger.isVerbose() ? "pipe" : "inherit",
         cwd: root,
