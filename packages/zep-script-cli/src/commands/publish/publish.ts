@@ -5,7 +5,7 @@ import fs from "fs-extra";
 import ora, { Ora } from "ora";
 import os from "os";
 import path from "path";
-import logger from "../../tools/logger";
+import logger from "../../utils/logger";
 import execa from "execa";
 
 type Options = {

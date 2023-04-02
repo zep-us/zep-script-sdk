@@ -1,51 +1,45 @@
 import chalk from "chalk";
 import execa from "execa";
-import fs from "fs-extra";
-import ora, {Ora} from "ora";
+import ora from "ora";
 import path from "path";
-import logger from "../../tools/logger";
+import logger from "../../utils/logger";
+import {getScriptLanguage, isWidgetDirExists} from "../../utils/fileCheckers";
 
 type Options = {
   projectRoot?: string;
 };
 
-function checkMainFile(root: string) {
-  let mainFilePath = path.join(root, "src/index.ts");
-  if (fs.existsSync(mainFilePath)) {
-    return "typescript";
-  }
-  mainFilePath = path.join(root, "src/index.js");
-  if (fs.existsSync(mainFilePath)) {
-    return "javascript";
-  }
-  throw new Error("No entry source file found. Tried to find index.ts or index.js in src folder.");
+async function buildWidget(root: string) {
+  await execa(
+    "tsc",
+    [],
+    {
+      stdio: !logger.isVerbose() ? "pipe" : "inherit",
+      cwd: root,
+    }
+  );
+  await execa(
+    "vite",
+    ["build"],
+    {
+      stdio: !logger.isVerbose() ? "pipe" : "inherit",
+      cwd: root,
+    }
+  );
 }
 
-async function buildWidget(loader: Ora, root: string) {
-  let widgetDirPath = path.join(root, "widget");
-  if (fs.existsSync(widgetDirPath)) {
-    loader.start("Widget detected. Building widget with vite...");
-    await execa(
-      "tsc",
-      [],
-      {
-        stdio: !logger.isVerbose() ? "pipe" : "inherit",
-        cwd: root,
-      }
-    );
-    await execa(
-      "vite",
-      ["build"],
-      {
-        stdio: !logger.isVerbose() ? "pipe" : "inherit",
-        cwd: root,
-      }
-    );
-    loader.succeed();
-  }
+async function buildScript(root: string) {
+  await execa(
+    "npx",
+    ["rollup", "--config", "node:@zep.us/rollup-config-zep-script", "--bundleConfigAsCjs"],
+    {
+      stdio: !logger.isVerbose() ? "pipe" : "inherit",
+      cwd: root,
+    }
+  );
 }
 
-export default (async function archive([]: Array<string>, options: Options) {
+export default (async function build([]: Array<string>, options: Options) {
   const cwd = process.cwd();
   const root = options.projectRoot || cwd;
 
@@ -55,22 +49,22 @@ export default (async function archive([]: Array<string>, options: Options) {
     loader.start("Analyzing project");
 
     const projectName = path.basename(root);
-    const projectLanguage = checkMainFile(root);
+    const projectLanguage = getScriptLanguage(root);
+    const hasWidget = isWidgetDirExists(root);
 
     loader.succeed();
 
-    await buildWidget(loader, root);
+    if (hasWidget){
+      loader.start("Building widget");
+
+      await buildWidget(root);
+
+      loader.succeed();
+    }
 
     loader.start("Building project");
 
-    await execa(
-      "npx",
-      ["rollup", "--config", "node:@zep.us/rollup-config-zep-script", "--bundleConfigAsCjs"],
-      {
-        stdio: !logger.isVerbose() ? "pipe" : "inherit",
-        cwd: root,
-      }
-    );
+    await buildScript(root);
 
     loader.succeed();
 

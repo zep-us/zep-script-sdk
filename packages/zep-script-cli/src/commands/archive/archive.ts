@@ -1,31 +1,42 @@
-import archiver from "archiver";
+import Archiver from "archiver";
 import chalk from "chalk";
 import fs from "fs-extra";
 import ora from "ora";
 import path from "path";
-import logger from "../../tools/logger";
+import logger from "../../utils/logger";
+import {getScriptLanguage, isScriptBuildExists, isWidgetBuildExists} from "../../utils/fileCheckers";
+import execa from "execa";
 
 type Options = {
   projectRoot?: string;
 };
 
-function checkMainFile(root: string) {
-  let mainFilePath = path.join(root, "src/index.ts");
-  if (fs.existsSync(mainFilePath)) {
-    const distDirPath = path.join(root, "dist/");
-    if (fs.existsSync(distDirPath)) {
-      return "typescript";
-    } else {
-      throw new Error(
-        "TypeScript project doesn't seem to be built. Please run `zep-script build` first."
-      );
-    }
+async function archiveScript(root: string, archive: Archiver.Archiver) {
+  if (!isScriptBuildExists(root)) {
+    logger.warn("Script build not found. Building script...");
+    await execa(
+      "yarn",
+      ["zep-script", "build"],
+      {
+        stdio: !logger.isVerbose() ? "pipe" : "inherit",
+        cwd: root,
+      }
+    );
   }
-  mainFilePath = path.join(root, "src/index.js");
-  if (fs.existsSync(mainFilePath)) {
-    return "javascript";
+  const scriptBuildPath = path.join(root, "dist");
+  archive.directory(scriptBuildPath, false);
+}
+
+async function archiveResource(root: string, archive: Archiver.Archiver) {
+  const resDirPath = path.join(root, "res");
+  archive.directory(resDirPath, false);
+}
+
+async function archiveWidget(root: string, archive: Archiver.Archiver) {
+  if (isWidgetBuildExists(root)) {
+    const widgetBuildPath = path.join(root, "widget/dist");
+    archive.directory(widgetBuildPath, "widget");
   }
-  throw new Error("No main file found.");
 }
 
 export default (async function archive([]: Array<string>, options: Options) {
@@ -33,44 +44,39 @@ export default (async function archive([]: Array<string>, options: Options) {
   const root = options.projectRoot || cwd;
 
   const loader = ora();
+  const archive = Archiver("zip");
 
   try {
-    // const configJsonPath = path.join(root, "zep-script.json");
-    // const configJsonObject = JSON.parse(
-    //   fs.readFileSync(configJsonPath).toString()
-    // );
-
     loader.start("Analyzing project");
 
     const projectName = path.basename(root);
-    const projectLanguage = checkMainFile(root);
+    const projectLanguage = getScriptLanguage(root);
 
     loader.succeed();
     loader.start("Archiving project");
 
     const archiveOutputPath = path.join(cwd, `${projectName}.zepapp.zip`);
     const output = fs.createWriteStream(archiveOutputPath);
-    const archive = archiver("zip");
-    archive.pipe(output);
-
-    if (projectLanguage === "typescript") {
-      const distDirPath = path.join(root, "dist/");
-      archive.directory(distDirPath, false);
-    } else {
-      archive.glob("**/*.js", { cwd: root });
-    }
-
-    const resDirPath = path.join(root, "res/");
-    archive.directory(resDirPath, false);
-
-    archive.finalize();
-
     output.on("close", function () {
       loader.succeed();
 
       logger.log(chalk.green(`Project ${projectName} archived successfully.`));
     });
+    output.on("error", function (err) {
+      archive.abort();
+      loader.fail();
+      logger.error(err.message);
+    });
+
+    archive.pipe(output);
+
+    await archiveScript(root, archive);
+    await archiveResource(root, archive);
+    await archiveWidget(root, archive);
+
+    await archive.finalize();
   } catch (e) {
+    archive.abort();
     loader.fail();
     if (e instanceof Error) {
       logger.error(e.message);

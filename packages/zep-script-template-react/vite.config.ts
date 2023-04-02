@@ -15,8 +15,8 @@ export default defineConfig({
       if (filename.startsWith('/')) {
         filename = filename.substring(1);
       }
-      filename = `https://zep.us/spaces/app/file?appHashId=${zepScriptConfig.appId}&filename=${filename}`;
+      filename = `/spaces/app/file?appHashId=${zepScriptConfig.appId}&fileName=widget/${filename}`;
       return filename;
     }
   }
-})
+});

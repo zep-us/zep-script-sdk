@@ -5,8 +5,8 @@ import fs from "fs-extra";
 import ora from "ora";
 import os from "os";
 import path from "path";
-import banner from "../../tools/banner";
-import logger from "../../tools/logger";
+import banner from "../../utils/banner";
+import logger from "../../utils/logger";
 
 type Options = {
   npm?: boolean;
