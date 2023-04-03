@@ -19,7 +19,7 @@
     "deploy": "zep-script publish"
   },
   "devDependencies": {
-    "@types/node": "^18.0.1",
+    "@types/node": "^18.15.11",
     "eslint": "^8.37.0",
     "typescript": "^5.0.3",
     "zep-script": "0.9.9"
