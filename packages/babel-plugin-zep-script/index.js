@@ -12,7 +12,7 @@ module.exports = function({ types: t }) {
       MemberExpression(path) {
         if (t.isIdentifier(path.node.object)) {
           if (path.node.object.name === 'ScriptApp') {
-            // Replaces `ScriptApp` with `Script`
+            // Replaces `ScriptApp` with `App`
             path.replaceWith(
               t.memberExpression(
                 t.identifier('App'),
