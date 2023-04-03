@@ -2,7 +2,6 @@
  * Copyright (c) 2023 ZEP Co., LTD
  */
 
-import "zep-script";
 import {add} from "./utils/add";
 
 ScriptApp.showCenterLabel("Hello World");

@@ -2,7 +2,8 @@
   "compilerOptions": {
     "composite": true,
     "noEmit": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "types": ["zep-script"]
   },
   "include": ["src"]
 }
