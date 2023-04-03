@@ -6,11 +6,13 @@
   },
   "files": [
     "res",
+    "src",
+    "widget",
     ".gitignore",
-    "babel.config.js",
-    "main.ts",
     "README.md",
     "tsconfig.json",
+    "tsconfig.*.json",
+    "vite.config.js",
     "zep-script.json"
   ],
   "scripts": {
@@ -30,6 +32,6 @@
     "eslint": "^8.37.0",
     "typescript": "^5.0.3",
     "vite": "^4.2.0",
-    "zep-script": "0.9.9"
+    "zep-script": "0.9.8"
   }
 }

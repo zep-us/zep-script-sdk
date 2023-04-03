@@ -13,9 +13,6 @@
   "scripts": {
     "build": "tsc -p ."
   },
-  "peerDependencies": {
-    "vite": "^4.2.0"
-  },
   "dependencies": {
     "@vitejs/plugin-react-swc": "^3.0.0"
   },
