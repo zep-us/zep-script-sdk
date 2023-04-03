@@ -11,7 +11,7 @@ type Options = {
   projectRoot?: string;
 };
 
-async function archiveScript(root: string, archive: Archiver.Archiver) {
+async function archiveScript(root: string, archiver: Archiver.Archiver) {
   if (!isScriptBuildExists(root)) {
     logger.warn("Script build not found. Building script...");
     await execa(
@@ -24,18 +24,18 @@ async function archiveScript(root: string, archive: Archiver.Archiver) {
     );
   }
   const scriptBuildPath = path.join(root, "dist");
-  archive.directory(scriptBuildPath, false);
+  archiver.directory(scriptBuildPath, false);
 }
 
-async function archiveResource(root: string, archive: Archiver.Archiver) {
+async function archiveResource(root: string, archiver: Archiver.Archiver) {
   const resDirPath = path.join(root, "res");
-  archive.directory(resDirPath, false);
+  archiver.directory(resDirPath, false);
 }
 
-async function archiveWidget(root: string, archive: Archiver.Archiver) {
+async function archiveWidget(root: string, archiver: Archiver.Archiver) {
   if (isWidgetBuildExists(root)) {
     const widgetBuildPath = path.join(root, "widget/dist");
-    archive.directory(widgetBuildPath, "widget");
+    archiver.directory(widgetBuildPath, "widget");
   }
 }
 
@@ -44,7 +44,7 @@ export default (async function archive([]: Array<string>, options: Options) {
   const root = options.projectRoot || cwd;
 
   const loader = ora();
-  const archive = Archiver("zip");
+  const archiver = Archiver("zip");
 
   try {
     loader.start("Analyzing project");
@@ -63,20 +63,20 @@ export default (async function archive([]: Array<string>, options: Options) {
       logger.log(chalk.green(`Project ${projectName} archived successfully.`));
     });
     output.on("error", function (err) {
-      archive.abort();
+      archiver.abort();
       loader.fail();
       logger.error(err.message);
     });
 
-    archive.pipe(output);
+    archiver.pipe(output);
 
-    await archiveScript(root, archive);
-    await archiveResource(root, archive);
-    await archiveWidget(root, archive);
+    await archiveScript(root, archiver);
+    await archiveResource(root, archiver);
+    await archiveWidget(root, archiver);
 
-    await archive.finalize();
+    await archiver.finalize();
   } catch (e) {
-    archive.abort();
+    archiver.abort();
     loader.fail();
     if (e instanceof Error) {
       logger.error(e.message);
