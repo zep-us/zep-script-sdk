@@ -21,7 +21,7 @@ export enum TileEffectType {
 export type AppKeyObjectData = {
   
   key?: string,
-  userDirAnim?: boolean,
+  useDirAnim?: boolean,
   movespeed?: number,
   overlap?: boolean,
   collide?: boolean,
