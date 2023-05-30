@@ -221,6 +221,19 @@ declare global {
     }
 
     /**
+     * 오브젝트와 F 상호작용 시 동작하는 함수를 작성할 수 있습니다.
+     * 맵에디터로 설치한 오브젝트와 상호작용 시 동작합니다.
+     * 오브젝트인 경우 layerId = 3
+     * 상단 오브젝트인 경우 layerId = 5
+     */
+    namespace onTriggerObject {
+      function Add(
+        callback: (player: ScriptPlayer, layerId: number, x: number, y: number) => void
+      ): void;
+    }
+
+
+    /**
      * time(초) 후에 callback 함수를 실행
      * @param callback
      * @param time
@@ -238,6 +251,19 @@ declare global {
       y: number,
       callback: (player: ScriptPlayer) => void
     ): void;
+
+    /**
+     * App.getStorage 함수는 앱이 실행중인 같은 스페이스 내 다른 맵의  App storage 데이터 변경 여부를 체크하여 
+     * 같은 데이터를 가지도록 동기화 해주는 함수입니다.
+     * @param callback 
+     */
+    function getStorage(callback: () => void): void;
+
+    /**
+     * App.setStorage 함수는 기존 App storage 데이터 저장 방식을 보완한 데이터 저장 함수입니다.
+     * @param string 
+     */
+    function setStorage(string: string): void;
 
     /**
      * 플레이어가 지정한 위치와 부딪혔을 때 실행
