@@ -237,7 +237,7 @@ export class ScriptPlayer {
    * @param message 라벨에 출력할 텍스트
    * @param color 출력할 글씨의 색을 지정합니다. (HexCode), 값을 입력하지 않을 경우, 흰색(0xFFFFFF)으로 적용됩니다.
    */
-  sendMessage(message:string , color:number): void;
+  sendMessage(message: string , color: number): void;
 
   /**
    * 플레이어 개인에게 채팅 메시지를 보냅니다.
@@ -247,7 +247,7 @@ export class ScriptPlayer {
    * @param payToSpaceOwner false인 경우 앱 소유자에게 수익이 전달되고, true인 경우 맵 소유자에게 수익이 전달됩니다. (default: false)
    * @param option message : 구매창에 표시할 텍스트를 설정 할 수 있습니다. / timer : 구매창을 표시할 시간(ms)을 설정할 수 있습니다.
    */
-  showBuyAlert(itemName:string,price:number,callback:(result: number,buyAlertResult: BuyAlertResult )=>void, payToSpaceOwner?:boolean, option?: ShowBuyAlertOption): void;
+  showBuyAlert(itemName: string, price: number,callback: (result: number, buyAlertResult: BuyAlertResult) => void, payToSpaceOwner?: boolean, option?: ShowBuyAlertOption): void;
   
   /**
    * 플레이어의 구매 위젯을 닫습니다.
@@ -270,5 +270,35 @@ export class ScriptPlayer {
    * @param hasBackdrop true일 경우 임베드의 바깥 배경에 그림자를 표시합니다.
    */
   showEmbed(url: string, align: string, width: number, height: number, hasBackdrop?: boolean): void;
+
+  /**
+   * 플레이어에게 입력창을 보여주고, 플레이어의 응답에 따라 동작하는 callback 함수를 작성할 수 있습니다.
+   * @param text 
+   * @param callback 
+   */
+  showPrompt(text: string, callback: (inputText: string) => {
+
+  });
+
+  /**
+   * 플레이어에게 확인창을 보여주고, 플레이어가 OK를 눌렀을 때 동작하는 callback 함수를 작성할 수 있습니다. 
+   * cancel을 누를 경우에는 callback 함수가 동작하지 않습니다.
+   * @param text 
+   * @param callback 
+   */
+  showConfirm(text: string, callback: (res: boolean) => {
+
+  });
+
+  /**
+   * 플레이어에게 경고창을 보여주고, 플레이어가 OK를 눌렀을 때 동작하는 callback 함수를 작성할 수 있습니다.
+   * @param text 
+   * @param callback 
+   */
+  showAlert(text: string, callback: (res: boolean) => {
+
+  });
+
+  
   
 }
