@@ -32,8 +32,8 @@ declare global {
 
     /**
      * App을 실행한 플레이어의 ID 값 (Read Only)
-    */
-    const creatorID: number;
+     */
+    const creatorID: string;
 
     /**
      * 화면의 줌을 컨트롤 하는 값 (기본 값: 1)
@@ -62,12 +62,12 @@ declare global {
     let followPlayer: boolean;
 
     /**
-     * App의 HashId 
+     * App의 HashId
      */
     let appHashID: string;
 
     /**
-     * 플레이어 닉네임 숨김 여부 
+     * 플레이어 닉네임 숨김 여부
      */
     let showName: boolean;
 
@@ -189,7 +189,13 @@ declare global {
      */
     namespace onAppObjectAttacked {
       function Add(
-          callback: (sender: ScriptPlayer, x: number, y: number,layer: number, key: string) => void
+        callback: (
+          sender: ScriptPlayer,
+          x: number,
+          y: number,
+          layer: number,
+          key: string
+        ) => void
       ): void;
     }
 
@@ -197,9 +203,7 @@ declare global {
      * 플레이어가 사이드바 앱을 클릭(터치) 했을 때 호출 되는 이벤트
      */
     namespace onSidebarTouched {
-      function Add(
-        callback: (sender: ScriptPlayer) => void
-      ): void;
+      function Add(callback: (sender: ScriptPlayer) => void): void;
     }
 
     /**
@@ -207,7 +211,12 @@ declare global {
      */
     namespace onAppObjectTouched {
       function Add(
-        callback: (sender: ScriptPlayer, key: string, x: number, y: number) => void
+        callback: (
+          sender: ScriptPlayer,
+          key: string,
+          x: number,
+          y: number
+        ) => void
       ): void;
     }
 
@@ -228,10 +237,14 @@ declare global {
      */
     namespace onTriggerObject {
       function Add(
-        callback: (player: ScriptPlayer, layerId: number, x: number, y: number) => void
+        callback: (
+          player: ScriptPlayer,
+          layerId: number,
+          x: number,
+          y: number
+        ) => void
       ): void;
     }
-
 
     /**
      * time(초) 후에 callback 함수를 실행
@@ -253,15 +266,15 @@ declare global {
     ): void;
 
     /**
-     * App.getStorage 함수는 앱이 실행중인 같은 스페이스 내 다른 맵의  App storage 데이터 변경 여부를 체크하여 
+     * App.getStorage 함수는 앱이 실행중인 같은 스페이스 내 다른 맵의  App storage 데이터 변경 여부를 체크하여
      * 같은 데이터를 가지도록 동기화 해주는 함수입니다.
-     * @param callback 
+     * @param callback
      */
     function getStorage(callback: () => void): void;
 
     /**
      * App.setStorage 함수는 기존 App storage 데이터 저장 방식을 보완한 데이터 저장 함수입니다.
-     * @param string 
+     * @param string
      */
     function setStorage(string: string): void;
 
@@ -289,7 +302,7 @@ declare global {
      * enable이 true이면 모바일 환경에서 펀치 버튼이 추가
      * @param enabled
      */
-     function putMobilePunch(enabled: boolean): void;
+    function putMobilePunch(enabled?: boolean): void;
 
     /**
      * 모바일 환경에서 커스텀 모바일 버튼을 추가하고, 버튼을 눌렀을 때 동작하는 함수를 지정
@@ -324,7 +337,23 @@ declare global {
       fileName: string,
       frameWidth?: number,
       frameHeight?: number,
-      anims?: number[] | {"left"?: number[], "up"?: number[], "down"?: number[], "right"?: number[], "dance"?: number[], "down_jump"?: number[], "left_jump"?: number[], "right_jump"?: number[], "up_jump"?: number[]},
+      anims?:
+        | number[]
+        | {
+            left?: number[];
+            up?: number[];
+            down?: number[];
+            right?: number[];
+            dance?: number[];
+            down_idle?: number[];
+            left_idle?: number[];
+            right_idle?: number[];
+            up_idle?: number[];
+            down_jump?: number[];
+            left_jump?: number[];
+            right_jump?: number[];
+            up_jump?: number[];
+          },
       frameRate?: number
     ): ScriptDynamicResource;
 
@@ -354,7 +383,7 @@ declare global {
      * @param opacity 라벨 배경색 투명도 (0 ~ 1)
      * @param time 라벨 표시 시간 (default 3000)
      */
-     function showCustomLabel(
+    function showCustomLabel(
       text: string,
       color?: number,
       bgColor?: number,
@@ -438,7 +467,11 @@ declare global {
      * @param loop
      * @param overlap 사운드 오버랩(겹침) 재생 가능 여부
      */
-    function playSound(fileName: string, loop?: boolean, overlap?: boolean): void;
+    function playSound(
+      fileName: string,
+      loop?: boolean,
+      overlap?: boolean
+    ): void;
 
     /**
      * 모든 플레이어에게 링크에 해당하는 사운드를 재생
@@ -455,7 +488,7 @@ declare global {
     /**
      * 찌르기(Z키) 공격 효과음을 변경하는 함수입니다.
      */
-    function changeAttackSound(fileName:string): void;
+    function changeAttackSound(fileName: string): void;
 
     /**
      * ==========================================
@@ -496,7 +529,7 @@ declare global {
      * @param body
      * @param callback
      */
-     function httpPostJson(
+    function httpPostJson(
       url: string,
       headers: object,
       body: object,
@@ -528,7 +561,7 @@ declare global {
      * 모든 채팅 내용을 삭제하는 함수
      */
     function clearChat(): void;
-    
+
     /**
      * id 에 해당하는 플레이어를 반환하는 함수입니다.
      */
@@ -538,6 +571,5 @@ declare global {
      * 로드한 이미지로 펀치 버튼을 만들어 추가합니다.
      */
     function putMobilePunchWithIcon(icon: ScriptDynamicResource): void;
-
   }
 }
