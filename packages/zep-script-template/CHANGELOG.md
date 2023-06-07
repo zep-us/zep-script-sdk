@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.0](https://github.com/zep-us/zep-script-sdk/compare/v0.10.1...v1.0.0-alpha.0) (2023-06-07)
+
+
+### Bug Fixes
+
+* update package.json files ([51edb11](https://github.com/zep-us/zep-script-sdk/commit/51edb1167335e3fcc83074c716bf3a9e401a4ef9))
+
+
+### Features
+
+* [wip] implement react template ([024455f](https://github.com/zep-us/zep-script-sdk/commit/024455f48cf237159d582f0bc43eb874fbdf00a2))
+* [wip] implement rollup template ([f180213](https://github.com/zep-us/zep-script-sdk/commit/f18021357796eab67d6ccad4812325d74bf7c940))
+
+
+
+
+
 ## [0.10.1](https://github.com/zep-us/zep-script-sdk/compare/v0.10.0...v0.10.1) (2023-06-07)
 
 **Note:** Version bump only for package @zep.us/zep-script-template

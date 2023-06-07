@@ -1,6 +1,6 @@
 {
   "name": "zep-script",
-  "version": "0.10.1",
+  "version": "1.0.0-alpha.0",
   "description": "ZEP Script API for ZEP app",
   "author": "ZEP",
   "homepage": "https://zep.us",
@@ -12,9 +12,9 @@
     "src/**/*.d.ts"
   ],
   "dependencies": {
-    "@zep.us/babel-plugin-zep-script": "0.10.0",
-    "@zep.us/rollup-config-zep-script": "0.10.0",
-    "@zep.us/vite-plugin-zep-script": "0.10.0",
-    "@zep.us/zep-script-cli": "0.10.0"
+    "@zep.us/babel-plugin-zep-script": "1.0.0-alpha.0",
+    "@zep.us/rollup-config-zep-script": "1.0.0-alpha.0",
+    "@zep.us/vite-plugin-zep-script": "1.0.0-alpha.0",
+    "@zep.us/zep-script-cli": "1.0.0-alpha.0"
   }
 }
