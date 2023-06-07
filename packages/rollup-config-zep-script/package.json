@@ -1,6 +1,6 @@
 {
   "name": "@zep.us/rollup-config-zep-script",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "license": "MIT",
   "repository": "https://github.com/zep-us/zep-script-sdk/tree/main/packages/rollup-config-zep-script",
   "publishConfig": {
