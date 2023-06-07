@@ -10,7 +10,7 @@ export class ScriptWidget {
    * 위젯에 리스너 콜백을 등록
    */
   onMessage: {
-    Add: (callback: () => void) => void;
+    Add: (callback: (sender: ScriptPlayer, data: any) => void) => void;
   };
 
   /**
