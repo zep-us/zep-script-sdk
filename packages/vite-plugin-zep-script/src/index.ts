@@ -7,8 +7,8 @@ const zepScriptPlugin = (): Plugin => ({
   name: "mutate-config",
   config(config) {
     const root = config.root ?? process.cwd();
-    const configJsonPath = path.join(root, "zep-script.json");
     const widgetPath = path.join(root, "widget");
+    const configJsonPath = path.join(root, "zep-script.json");
     const zepScriptConfig = JSON.parse(
       fs.readFileSync(configJsonPath).toString()
     );
