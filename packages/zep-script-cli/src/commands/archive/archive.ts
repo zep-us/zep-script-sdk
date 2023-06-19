@@ -16,9 +16,14 @@ function checkMainFile(root: string) {
     if (fs.existsSync(distDirPath)) {
       return "typescript";
     } else {
-      throw new Error(
-        "TypeScript project doesn't seem to be built. Please run `zep-script build` first."
-      );
+      const scriptResourceFilePath = path.join(root, "res/main.js");
+      if (fs.existsSync(scriptResourceFilePath)) {
+        return "typescript";
+      } else {
+        throw new Error(
+          "TypeScript project doesn't seem to be built. Please run `zep-script build` first."
+        );
+      }
     }
   }
   mainFilePath = path.join(root, "main.js");

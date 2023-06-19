@@ -15,6 +15,7 @@
   ],
   "scripts": {
     "build": "zep-script build",
+    "pack": "zep-script pack",
     "archive": "zep-script archive",
     "deploy": "zep-script publish"
   },
