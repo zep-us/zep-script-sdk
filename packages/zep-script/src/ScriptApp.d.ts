@@ -86,7 +86,7 @@ declare global {
     }
 
     /**
-     * 플레이어가 스페이스에서 나갈 때 호출 되는 이벤트
+     * 플레이어가 스페이스로 들어갈 때 호출 되는 이벤트
      */
     namespace onJoinPlayer {
       function Add(callback: (player: ScriptPlayer) => void): void;
