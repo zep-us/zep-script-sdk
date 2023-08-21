@@ -14,6 +14,48 @@ export enum ColorType {
   MAGENTA,
   CYAN,
 }
+
+export enum ButtonColorType {
+  primary,
+  alert,
+}
+
+export enum ButtonTextType {
+  text,
+  password,
+}
+
+export type PopupOption = {
+  /**
+   * 입력창 위에 출력할 텍스트 (Default: null)
+   */
+  content?: string;
+  /**
+   * confirm 버튼의 색상 (Default: "primary")
+   * - 'primary': 푸른색,
+   * - 'alert': 붉은색
+   */
+  confrimVariant?: ButtonColorType;
+  /**
+   * cancel 버튼의 텍스트 (Default: "취소")
+   */
+  cancelText?: string;
+  /**
+   * confirm 버튼의 텍스트 (Default: "확인")
+   */
+  confirmText?: string;
+  /**
+   * input placeholder 텍스트 (Default: null)
+   */
+  placeholder?: string;
+  /**
+   * 입력 타입 (Default: "text")
+   * - 'text': 입력 값을 텍스트로 표시
+   * - 'password': 입력 값을 *로 표시
+   */
+  textType?: ButtonTextType;
+}
+
 export type ShowBuyAlertOption = {
   /**
    * 구매창에 표시할 텍스트를 설정 할 수 있습니다.
@@ -298,7 +340,7 @@ export class ScriptPlayer {
    * @param text
    * @param callback
    */
-  showPrompt(text: string, callback: (inputText: string) => {}): void;
+  showPrompt(text: string, callback: (res: string) => void, option?: PopupOption): void;
 
   /**
    * 플레이어에게 확인창을 보여주고, 플레이어가 OK를 눌렀을 때 동작하는 callback 함수를 작성할 수 있습니다.
@@ -306,18 +348,54 @@ export class ScriptPlayer {
    * @param text
    * @param callback
    */
-  showConfirm(text: string, callback: (res: boolean) => {}): void;
+  showConfirm(text: string, callback: (res: boolean) => {}, option?: PopupOption): void;
 
   /**
    * 플레이어에게 경고창을 보여주고, 플레이어가 OK를 눌렀을 때 동작하는 callback 함수를 작성할 수 있습니다.
    * @param text
    * @param callback
    */
-  showAlert(text: string, callback: (res: boolean) => {}): void;
+  showAlert(text: string, callback: (res: boolean) => {}, option?: PopupOption): void;
 
   /**
    * @private
    * @param key
    */
   localize(key: string): string;
+
+  /**
+   * 플레이어에게 입력한 이미지 주소에 해당하는 이미지를 표시합니다.
+   * @param url 표시할이미지 url
+   */
+  showImageModal(url: string): void;
+
+  /**
+   * 플레이어에게 텍스트 창을 보여주는 함수입니다.
+   * @param url 표시할이미지 url
+   */
+  showNoteModal(url: string): void;  
+  
+  /**
+   * 플레이어의 배경 또는 전경 이미지를 설정 할 수 있습니다.
+   * @param resource 스크립트에 로드한 이미지 객체
+   * @param offsetX px 단위로 x 축 방향의 오프셋을 설정할 수 있는 속성
+   * @param offsetY px 단위로 y 축 방향의 오프셋을 설정할 수 있는 속성
+   * @param type 설정타입, 0: 배경 설정 , 1 : 전경 설정
+   */
+  setEffectSprite(resource: ScriptDynamicResource, offsetX: number, offsetY: number, type: number): void;
+
+  /**
+   * 플레이어의 시점을 지정된 좌표로 중심 이동시킵니다.
+   * @param tileX x좌표
+   * @param tileY y좌표
+   * @param time 시점이 목표 지점까지 이동하는데 걸리는 시간(초)
+   */
+  setCameraTarget(tileX: number, tileY: number, time: number): void;
+
+  /**
+   * 플레이어의 시점을 특정 오브젝트로 중심 이동시킵니다.
+   * @param key 오브젝트의 키 값
+   * @param time 시점이 목표 지점까지 이동하는데 걸리는 시간(초)
+   */
+  setCameraTarget(key: string, time: number): void;
 }
