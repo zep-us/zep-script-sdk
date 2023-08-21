@@ -331,7 +331,7 @@ export class ScriptPlayer {
    * @param text
    * @param callback
    */
-  showPrompt(text: string, callback: (res: string) => void, option?: PopupOption): void;
+  showPrompt(text: string, callback?: (res: string) => void, option?: PopupOption): void;
 
   /**
    * 플레이어에게 확인창을 보여주고, 플레이어가 OK를 눌렀을 때 동작하는 callback 함수를 작성할 수 있습니다.
@@ -339,14 +339,14 @@ export class ScriptPlayer {
    * @param text
    * @param callback
    */
-  showConfirm(text: string, callback: (res: boolean) => {}, option?: PopupOption): void;
+  showConfirm(text: string, callback?: (res: boolean) => {}, option?: PopupOption): void;
 
   /**
    * 플레이어에게 경고창을 보여주고, 플레이어가 OK를 눌렀을 때 동작하는 callback 함수를 작성할 수 있습니다.
    * @param text
    * @param callback
    */
-  showAlert(text: string, callback: (res: boolean) => {}, option?: PopupOption): void;
+  showAlert(text: string, callback?: (res: boolean) => {}, option?: PopupOption): void;
 
   /**
    * @private
