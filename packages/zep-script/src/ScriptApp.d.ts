@@ -106,7 +106,7 @@ declare global {
     namespace onUpdate {
       function Add(callback: (dt: number) => void): void;
     }
-
+    
     /**
      * 플레이어가 스페이스에서 나갈 때 호출 되는 이벤트
      */
@@ -571,5 +571,10 @@ declare global {
      * 로드한 이미지로 펀치 버튼을 만들어 추가합니다.
      */
     function putMobilePunchWithIcon(icon: ScriptDynamicResource): void;
+
+    /**
+     * Staff이상 권한의 유저 채팅창에 text 내용을 출력합니다.
+     */
+    function sayToStaffs(text: string, color?: number): void;
   }
 }

@@ -19,13 +19,14 @@ export enum TileEffectType {
 }
 
 export type AppKeyObjectData = {
-  
   key?: string,
   useDirAnim?: boolean,
   movespeed?: number,
   overlap?: boolean,
   collide?: boolean,
-  npcProperty?: NpcProperty
+  npcProperty?: NpcProperty,
+  offsetX?: number,
+  offsetY?: number
 }
 
 export type NpcProperty = {
