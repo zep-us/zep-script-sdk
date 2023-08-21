@@ -15,15 +15,6 @@ export enum ColorType {
   CYAN,
 }
 
-export enum ButtonColorType {
-  primary,
-  alert,
-}
-
-export enum ButtonTextType {
-  text,
-  password,
-}
 
 export type PopupOption = {
   /**
@@ -35,7 +26,7 @@ export type PopupOption = {
    * - 'primary': 푸른색,
    * - 'alert': 붉은색
    */
-  confrimVariant?: ButtonColorType;
+  confrimVariant?: "primary" | "alert" ;
   /**
    * cancel 버튼의 텍스트 (Default: "취소")
    */
@@ -53,7 +44,7 @@ export type PopupOption = {
    * - 'text': 입력 값을 텍스트로 표시
    * - 'password': 입력 값을 *로 표시
    */
-  textType?: ButtonTextType;
+  textType?: 'text' | 'password';
 }
 
 export type ShowBuyAlertOption = {
