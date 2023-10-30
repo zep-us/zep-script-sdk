@@ -36,16 +36,18 @@ const auth = async (loader: Ora, sessionFilePath: string) => {
     required: true,
   });
 
-  const confirmData = new FormData();
-  confirmData.append("email", email);
-  confirmData.append("t", code);
+  const confirmData = {
+    email,
+    t: code,
+  }
 
   loader.start("Authenticating...");
 
-  const { headers } = await axios.post(
-    "https://zep.us/api/v2/signin/confirm",
-    confirmData
-  );
+  const { headers } = await axios.post("https://zep.us/api/v2/signin/confirm", confirmData, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
   const sessionCookie = headers["set-cookie"]![0];
   await fs.writeFile(sessionFilePath, sessionCookie);
