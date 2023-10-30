@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.12.1](https://github.com/zep-us/zep-script-sdk/compare/v0.12.0...v0.12.1) (2023-10-30)
+
+
+### Bug Fixes
+
+* change email confirm requset url ([df38177](https://github.com/zep-us/zep-script-sdk/commit/df381774a0c06a4d599ba24386976922ceeb721c))
+
+
+
+
+
 # [0.12.0](https://github.com/zep-us/zep-script-sdk/compare/v0.11.0...v0.12.0) (2023-08-21)
 
 **Note:** Version bump only for package @zep.us/zep-script-cli
