@@ -43,7 +43,7 @@ const auth = async (loader: Ora, sessionFilePath: string) => {
   loader.start("Authenticating...");
 
   const { headers } = await axios.post(
-    "https://zep.us/api/me/signin/confirm",
+    "https://zep.us/api/v2/signin/confirm",
     confirmData
   );
 
