@@ -1,6 +1,6 @@
 {
   "name": "@zep.us/zep-script-template",
-  "version": "0.12.3",
+  "version": "0.12.4",
   "publishConfig": {
     "access": "public"
   },
@@ -26,6 +26,6 @@
     "@types/node": "^18.0.1",
     "eslint": "^8.10.0",
     "typescript": "^4.7.4",
-    "zep-script": "0.12.3"
+    "zep-script": "0.12.4"
   }
 }
