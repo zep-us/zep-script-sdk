@@ -36,21 +36,26 @@ const auth = async (loader: Ora, sessionFilePath: string) => {
     required: true,
   });
 
-  const confirmData = {
+  const confirmData: any = {
     email,
     t: code,
+    isApp: 'false'
   }
+
+  const queryParams = Object.keys(confirmData)
+      .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(confirmData[key]))
+      .join('&');
 
   loader.start("Authenticating...");
 
-  const { headers } = await axios.post("https://zep.us/api/v2/signin/confirm", confirmData, {
+  const { data } = await axios.post(`https://zep.us/api/v2/signin/confirm?${queryParams}`, confirmData, {
     headers: {
       "Content-Type": "application/json",
     },
   });
 
-  const sessionCookie = headers["set-cookie"]![0];
-  await fs.writeFile(sessionFilePath, sessionCookie);
+  const loginToken = data.loginToken;
+  await fs.writeFile(sessionFilePath, loginToken);
 
   loader.succeed();
 };
@@ -73,7 +78,7 @@ export default (async function publish([]: Array<string>, options: Options) {
       await auth(loader, sessionFilePath);
     }
 
-    const sessionCookie = (await fs.readFile(sessionFilePath)).toString();
+    const loginToken = (await fs.readFile(sessionFilePath)).toString();
 
     const archiveFiles = fs
       .readdirSync(root)
@@ -85,6 +90,7 @@ export default (async function publish([]: Array<string>, options: Options) {
     formData.append("file", archiveFile, archiveFiles[0]);
     formData.append("name", configJsonObject.name);
     formData.append("desc", configJsonObject.description);
+    formData.append("appHashId", configJsonObject.appId);
 
     let type = "1";
     switch (configJsonObject.type) {
@@ -96,17 +102,15 @@ export default (async function publish([]: Array<string>, options: Options) {
     }
     formData.append("type", type);
 
-    const appId = configJsonObject.appId || "create";
-
     loader.start("Publishing...");
 
     const length = await new Promise<number>((resolve) =>
       formData.getLength((e, l) => resolve(l))
     );
 
-    await axios.post(`https://zep.us/iframe/me/apps/${appId}`, formData, {
+    await axios.put(`https://zep.us/api/v2/me/apps`, formData, {
       headers: {
-        cookie: sessionCookie,
+        "X-Token": loginToken,
         "Content-Length": length,
         ...formData.getHeaders(),
       },
