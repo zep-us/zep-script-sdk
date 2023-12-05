@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [1.0.0-alpha.2](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2023-06-09)
+## [0.12.4](https://github.com/zep-us/zep-script-sdk/compare/v0.12.3...v0.12.4) (2023-11-20)
 
 **Note:** Version bump only for package zep-script
 
@@ -11,7 +11,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# [1.0.0-alpha.1](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2023-06-09)
+## [0.12.3](https://github.com/zep-us/zep-script-sdk/compare/v0.12.2...v0.12.3) (2023-10-30)
 
 **Note:** Version bump only for package zep-script
 
@@ -19,9 +19,47 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# [1.0.0-alpha.0](https://github.com/zep-us/zep-script-sdk/compare/v0.10.1...v1.0.0-alpha.0) (2023-06-07)
+## 0.12.2 (2023-10-30)
 
 **Note:** Version bump only for package zep-script
+
+
+
+
+
+## [0.12.1](https://github.com/zep-us/zep-script-sdk/compare/v0.12.0...v0.12.1) (2023-10-30)
+
+**Note:** Version bump only for package zep-script
+
+
+
+
+
+# [0.12.0](https://github.com/zep-us/zep-script-sdk/compare/v0.11.0...v0.12.0) (2023-08-21)
+
+
+### Features
+
+* add new type definitions ([cf7fe02](https://github.com/zep-us/zep-script-sdk/commit/cf7fe025b98c0c968d460081db942973b30f4e7c))
+
+
+
+
+
+# [0.11.0](https://github.com/zep-us/zep-script-sdk/compare/v0.10.2...v0.11.0) (2023-06-19)
+
+**Note:** Version bump only for package zep-script
+
+
+
+
+
+## [0.10.2](https://github.com/zep-us/zep-script-sdk/compare/v0.10.1...v0.10.2) (2023-06-07)
+
+
+### Bug Fixes
+
+* widget onMessage type ([#29](https://github.com/zep-us/zep-script-sdk/issues/29)) ([4e1f556](https://github.com/zep-us/zep-script-sdk/commit/4e1f556b78b917d1a21dbda1561a7427bc516af6))
 
 
 

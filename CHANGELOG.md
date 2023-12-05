@@ -3,43 +3,75 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [1.0.0-alpha.2](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2023-06-09)
+## [0.12.4](https://github.com/zep-us/zep-script-sdk/compare/v0.12.3...v0.12.4) (2023-11-20)
 
 
 ### Bug Fixes
 
-* get vite root from config ([3d1abb1](https://github.com/zep-us/zep-script-sdk/commit/3d1abb1af10bb8de664bdc0dfcc74dbb441a1088))
+* Update the upload URL to version 2 ([bd5caf3](https://github.com/zep-us/zep-script-sdk/commit/bd5caf336f26d30941dbbf4ef98c3cb59ae84cf1))
 
 
 
 
 
-# [1.0.0-alpha.1](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2023-06-09)
-
-
-### Bug Fixes
-
-* get vite root from config ([429fdf5](https://github.com/zep-us/zep-script-sdk/commit/429fdf588d885353e9729f601c9f741e3a573848))
-
-
-
-
-
-# [1.0.0-alpha.0](https://github.com/zep-us/zep-script-sdk/compare/v0.10.1...v1.0.0-alpha.0) (2023-06-07)
+## [0.12.3](https://github.com/zep-us/zep-script-sdk/compare/v0.12.2...v0.12.3) (2023-10-30)
 
 
 ### Bug Fixes
 
-* archive type error ([e9d6db6](https://github.com/zep-us/zep-script-sdk/commit/e9d6db69f04532f064d23081ea811e8372fc78f3))
-* package versions ([8c86c04](https://github.com/zep-us/zep-script-sdk/commit/8c86c04c2bc498760906ebe69751bf80e91d7a52))
-* update package.json files ([51edb11](https://github.com/zep-us/zep-script-sdk/commit/51edb1167335e3fcc83074c716bf3a9e401a4ef9))
+* Update auth to use JSON data for confirmation ([bcd1464](https://github.com/zep-us/zep-script-sdk/commit/bcd14648d350946e06525eeb75a057d642b7ef88))
+
+
+
+
+
+## 0.12.2 (2023-10-30)
+
+**Note:** Version bump only for package @zep.us/zep-script-sdk
+
+
+
+
+
+## [0.12.1](https://github.com/zep-us/zep-script-sdk/compare/v0.12.0...v0.12.1) (2023-10-30)
+
+
+### Bug Fixes
+
+* change email confirm requset url ([df38177](https://github.com/zep-us/zep-script-sdk/commit/df381774a0c06a4d599ba24386976922ceeb721c))
+
+
+
+
+
+# [0.12.0](https://github.com/zep-us/zep-script-sdk/compare/v0.11.0...v0.12.0) (2023-08-21)
 
 
 ### Features
 
-* [wip] implement react template ([024455f](https://github.com/zep-us/zep-script-sdk/commit/024455f48cf237159d582f0bc43eb874fbdf00a2))
-* [wip] implement rollup template ([f180213](https://github.com/zep-us/zep-script-sdk/commit/f18021357796eab67d6ccad4812325d74bf7c940))
-* [wip] widget archiver ([616e55f](https://github.com/zep-us/zep-script-sdk/commit/616e55f0884441ba93db77797cce385622714aa5))
+* add new type definitions ([cf7fe02](https://github.com/zep-us/zep-script-sdk/commit/cf7fe025b98c0c968d460081db942973b30f4e7c))
+
+
+
+
+
+# [0.11.0](https://github.com/zep-us/zep-script-sdk/compare/v0.10.2...v0.11.0) (2023-06-19)
+
+
+### Features
+
+* add command "pack" ([9e16b94](https://github.com/zep-us/zep-script-sdk/commit/9e16b94996c04051382d3ca366b3abd6c7c45bde))
+
+
+
+
+
+## [0.10.2](https://github.com/zep-us/zep-script-sdk/compare/v0.10.1...v0.10.2) (2023-06-07)
+
+
+### Bug Fixes
+
+* widget onMessage type ([#29](https://github.com/zep-us/zep-script-sdk/issues/29)) ([4e1f556](https://github.com/zep-us/zep-script-sdk/commit/4e1f556b78b917d1a21dbda1561a7427bc516af6))
 
 
 

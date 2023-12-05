@@ -3,19 +3,61 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [1.0.0-alpha.0](https://github.com/zep-us/zep-script-sdk/compare/v0.10.1...v1.0.0-alpha.0) (2023-06-07)
+## [0.12.4](https://github.com/zep-us/zep-script-sdk/compare/v0.12.3...v0.12.4) (2023-11-20)
 
 
 ### Bug Fixes
 
-* archive type error ([e9d6db6](https://github.com/zep-us/zep-script-sdk/commit/e9d6db69f04532f064d23081ea811e8372fc78f3))
+* Update the upload URL to version 2 ([bd5caf3](https://github.com/zep-us/zep-script-sdk/commit/bd5caf336f26d30941dbbf4ef98c3cb59ae84cf1))
+
+
+
+
+
+## [0.12.3](https://github.com/zep-us/zep-script-sdk/compare/v0.12.2...v0.12.3) (2023-10-30)
+
+
+### Bug Fixes
+
+* Update auth to use JSON data for confirmation ([bcd1464](https://github.com/zep-us/zep-script-sdk/commit/bcd14648d350946e06525eeb75a057d642b7ef88))
+
+
+
+
+
+## 0.12.2 (2023-10-30)
+
+**Note:** Version bump only for package @zep.us/zep-script-cli
+
+
+
+
+
+## [0.12.1](https://github.com/zep-us/zep-script-sdk/compare/v0.12.0...v0.12.1) (2023-10-30)
+
+
+### Bug Fixes
+
+* change email confirm requset url ([df38177](https://github.com/zep-us/zep-script-sdk/commit/df381774a0c06a4d599ba24386976922ceeb721c))
+
+
+
+
+
+# [0.12.0](https://github.com/zep-us/zep-script-sdk/compare/v0.11.0...v0.12.0) (2023-08-21)
+
+**Note:** Version bump only for package @zep.us/zep-script-cli
+
+
+
+
+
+# [0.11.0](https://github.com/zep-us/zep-script-sdk/compare/v0.10.2...v0.11.0) (2023-06-19)
 
 
 ### Features
 
-* [wip] implement react template ([024455f](https://github.com/zep-us/zep-script-sdk/commit/024455f48cf237159d582f0bc43eb874fbdf00a2))
-* [wip] implement rollup template ([f180213](https://github.com/zep-us/zep-script-sdk/commit/f18021357796eab67d6ccad4812325d74bf7c940))
-* [wip] widget archiver ([616e55f](https://github.com/zep-us/zep-script-sdk/commit/616e55f0884441ba93db77797cce385622714aa5))
+* add command "pack" ([9e16b94](https://github.com/zep-us/zep-script-sdk/commit/9e16b94996c04051382d3ca366b3abd6c7c45bde))
 
 
 

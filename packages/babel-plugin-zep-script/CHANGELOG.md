@@ -3,7 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [1.0.0-alpha.0](https://github.com/zep-us/zep-script-sdk/compare/v0.10.1...v1.0.0-alpha.0) (2023-06-07)
+## 0.12.2 (2023-10-30)
+
+**Note:** Version bump only for package @zep.us/babel-plugin-zep-script
+
+
+
+
+
+# [0.12.0](https://github.com/zep-us/zep-script-sdk/compare/v0.11.0...v0.12.0) (2023-08-21)
+
+**Note:** Version bump only for package @zep.us/babel-plugin-zep-script
+
+
+
+
+
+# [0.11.0](https://github.com/zep-us/zep-script-sdk/compare/v0.10.2...v0.11.0) (2023-06-19)
 
 **Note:** Version bump only for package @zep.us/babel-plugin-zep-script
 

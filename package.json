@@ -5,7 +5,7 @@
     "packages/*"
   ],
   "devDependencies": {
-    "lerna": "^5.1.6"
+    "lerna": "^7.4.2"
   },
   "resolutions": {
     "@types/react": "^18"

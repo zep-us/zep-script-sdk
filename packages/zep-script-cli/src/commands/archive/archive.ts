@@ -4,7 +4,11 @@ import fs from "fs-extra";
 import ora from "ora";
 import path from "path";
 import logger from "../../utils/logger";
-import {getScriptLanguage, isScriptBuildExists, isWidgetBuildExists} from "../../utils/fileCheckers";
+import {
+  getScriptLanguage,
+  isScriptBuildExists,
+  isWidgetBuildExists,
+} from "../../utils/fileCheckers";
 import execa from "execa";
 
 type Options = {
@@ -14,14 +18,10 @@ type Options = {
 async function archiveScript(root: string, archiver: Archiver.Archiver) {
   if (!isScriptBuildExists(root)) {
     logger.warn("Script build not found. Building script...");
-    await execa(
-      "yarn",
-      ["zep-script", "build"],
-      {
-        stdio: !logger.isVerbose() ? "pipe" : "inherit",
-        cwd: root,
-      }
-    );
+    await execa("yarn", ["zep-script", "build"], {
+      stdio: !logger.isVerbose() ? "pipe" : "inherit",
+      cwd: root,
+    });
   }
   const scriptBuildPath = path.join(root, "dist");
   archiver.directory(scriptBuildPath, false);

@@ -24,7 +24,7 @@ async function auth(loader: Ora, sessionFilePath: string) {
 
   loader.start("Sending login code to your email...");
 
-  const loginData = {email};
+  const loginData = { email };
 
   await axios.post("https://zep.us/api/v2/signin", loginData);
 
@@ -37,19 +37,33 @@ async function auth(loader: Ora, sessionFilePath: string) {
     required: true,
   });
 
-  const confirmData = new FormData();
-  confirmData.append("email", email);
-  confirmData.append("t", code);
+  const confirmData: any = {
+    email,
+    t: code,
+    isApp: "false",
+  };
+
+  const queryParams = Object.keys(confirmData)
+    .map(
+      (key) =>
+        encodeURIComponent(key) + "=" + encodeURIComponent(confirmData[key])
+    )
+    .join("&");
 
   loader.start("Authenticating...");
 
-  const { headers } = await axios.post(
-    "https://zep.us/api/me/signin/confirm",
-    confirmData
+  const { data } = await axios.post(
+    `https://zep.us/api/v2/signin/confirm?${queryParams}`,
+    confirmData,
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
   );
 
-  const sessionCookie = headers["set-cookie"]![0];
-  await fs.writeFile(sessionFilePath, sessionCookie);
+  const loginToken = data.loginToken;
+  await fs.writeFile(sessionFilePath, loginToken);
 
   loader.succeed();
 }
@@ -84,7 +98,7 @@ export default (async function publish([]: Array<string>, options: Options) {
       await auth(loader, sessionFilePath);
     }
 
-    const sessionCookie = (await fs.readFile(sessionFilePath)).toString();
+    const loginToken = (await fs.readFile(sessionFilePath)).toString();
 
     const archiveFilePath = await findArchiveFile(root);
     const archiveFile = fs.createReadStream(archiveFilePath);
@@ -93,6 +107,7 @@ export default (async function publish([]: Array<string>, options: Options) {
     formData.append("file", archiveFile, archiveFilePath);
     formData.append("name", configJsonObject.name);
     formData.append("desc", configJsonObject.description);
+    formData.append("appHashId", configJsonObject.appId);
 
     let type = "1";
     switch (configJsonObject.type) {
@@ -104,35 +119,34 @@ export default (async function publish([]: Array<string>, options: Options) {
     }
     formData.append("type", type);
 
-    const appId = configJsonObject.appId || "create";
-
     loader.start("Publishing...");
 
     const length = await new Promise<number>((resolve) =>
       formData.getLength((e, l) => resolve(l))
     );
 
-    const response = await axios.post(`https://zep.us/iframe/me/apps/${appId}`, formData, {
-      headers: {
-        cookie: sessionCookie,
-        "Content-Length": length,
-        ...formData.getHeaders(),
-      },
-    });
+    const response = await axios.put(
+      `https://zep.us/api/v2/me/apps`,
+      formData,
+      {
+        headers: {
+          "X-Token": loginToken,
+          "Content-Length": length,
+          ...formData.getHeaders(),
+        },
+      }
+    );
     const resAppId = response.request.path.split("/iframe/me/apps/")[1];
-    if (resAppId && (appId !== resAppId)) {
+    if (resAppId && configJsonObject.appId !== resAppId) {
       configJsonObject.appId = resAppId;
 
-      await fs.writeFile(configJsonPath, JSON.stringify(configJsonObject, null, 4));
+      await fs.writeFile(
+        configJsonPath,
+        JSON.stringify(configJsonObject, null, 4)
+      );
 
-      await execa(
-        "yarn",
-        ["zep-script", "build"]
-      );
-      await execa(
-        "yarn",
-        ["zep-script", "archive"]
-      );
+      await execa("yarn", ["zep-script", "build"]);
+      await execa("yarn", ["zep-script", "archive"]);
       await publish([], options);
     }
 

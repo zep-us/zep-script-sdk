@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [1.0.0-alpha.2](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2023-06-09)
+## [0.12.4](https://github.com/zep-us/zep-script-sdk/compare/v0.12.3...v0.12.4) (2023-11-20)
 
 **Note:** Version bump only for package @zep.us/zep-script-template
 
@@ -11,7 +11,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# [1.0.0-alpha.1](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2023-06-09)
+## [0.12.3](https://github.com/zep-us/zep-script-sdk/compare/v0.12.2...v0.12.3) (2023-10-30)
 
 **Note:** Version bump only for package @zep.us/zep-script-template
 
@@ -19,18 +19,44 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# [1.0.0-alpha.0](https://github.com/zep-us/zep-script-sdk/compare/v0.10.1...v1.0.0-alpha.0) (2023-06-07)
+## 0.12.2 (2023-10-30)
+
+**Note:** Version bump only for package @zep.us/zep-script-template
 
 
-### Bug Fixes
 
-* update package.json files ([51edb11](https://github.com/zep-us/zep-script-sdk/commit/51edb1167335e3fcc83074c716bf3a9e401a4ef9))
+
+
+## [0.12.1](https://github.com/zep-us/zep-script-sdk/compare/v0.12.0...v0.12.1) (2023-10-30)
+
+**Note:** Version bump only for package @zep.us/zep-script-template
+
+
+
+
+
+# [0.12.0](https://github.com/zep-us/zep-script-sdk/compare/v0.11.0...v0.12.0) (2023-08-21)
+
+**Note:** Version bump only for package @zep.us/zep-script-template
+
+
+
+
+
+# [0.11.0](https://github.com/zep-us/zep-script-sdk/compare/v0.10.2...v0.11.0) (2023-06-19)
 
 
 ### Features
 
-* [wip] implement react template ([024455f](https://github.com/zep-us/zep-script-sdk/commit/024455f48cf237159d582f0bc43eb874fbdf00a2))
-* [wip] implement rollup template ([f180213](https://github.com/zep-us/zep-script-sdk/commit/f18021357796eab67d6ccad4812325d74bf7c940))
+* add command "pack" ([9e16b94](https://github.com/zep-us/zep-script-sdk/commit/9e16b94996c04051382d3ca366b3abd6c7c45bde))
+
+
+
+
+
+## [0.10.2](https://github.com/zep-us/zep-script-sdk/compare/v0.10.1...v0.10.2) (2023-06-07)
+
+**Note:** Version bump only for package @zep.us/zep-script-template
 
 
 
