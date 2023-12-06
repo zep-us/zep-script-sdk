@@ -3,35 +3,32 @@ import execa from "execa";
 import ora from "ora";
 import path from "path";
 import logger from "../../utils/logger";
-import {getScriptLanguage, isWidgetDirExists} from "../../utils/fileCheckers";
+import { isWidgetDirExists } from "../../utils/fileCheckers";
 
 type Options = {
   projectRoot?: string;
 };
 
 async function buildWidget(root: string) {
-  await execa(
-    "tsc",
-    [],
-    {
-      stdio: !logger.isVerbose() ? "pipe" : "inherit",
-      cwd: root,
-    }
-  );
-  await execa(
-    "vite",
-    ["build"],
-    {
-      stdio: !logger.isVerbose() ? "pipe" : "inherit",
-      cwd: root,
-    }
-  );
+  await execa("tsc", [], {
+    stdio: !logger.isVerbose() ? "pipe" : "inherit",
+    cwd: root,
+  });
+  await execa("vite", ["build"], {
+    stdio: !logger.isVerbose() ? "pipe" : "inherit",
+    cwd: root,
+  });
 }
 
 async function buildScript(root: string) {
   await execa(
     "npx",
-    ["rollup", "--config", "node:@zep.us/rollup-config-zep-script", "--bundleConfigAsCjs"],
+    [
+      "rollup",
+      "--config",
+      "node:@zep.us/rollup-config-zep-script",
+      "--bundleConfigAsCjs",
+    ],
     {
       stdio: !logger.isVerbose() ? "pipe" : "inherit",
       cwd: root,
@@ -49,12 +46,11 @@ export default (async function build([]: Array<string>, options: Options) {
     loader.start("Analyzing project");
 
     const projectName = path.basename(root);
-    const projectLanguage = getScriptLanguage(root);
     const hasWidget = isWidgetDirExists(root);
 
     loader.succeed();
 
-    if (hasWidget){
+    if (hasWidget) {
       loader.start("Building widget");
 
       await buildWidget(root);

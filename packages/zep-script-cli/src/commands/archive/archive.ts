@@ -5,7 +5,6 @@ import ora from "ora";
 import path from "path";
 import logger from "../../utils/logger";
 import {
-  getScriptLanguage,
   isScriptBuildExists,
   isWidgetBuildExists,
 } from "../../utils/fileCheckers";
@@ -50,7 +49,6 @@ export default (async function archive([]: Array<string>, options: Options) {
     loader.start("Analyzing project");
 
     const projectName = path.basename(root);
-    const projectLanguage = getScriptLanguage(root);
 
     loader.succeed();
     loader.start("Archiving project");

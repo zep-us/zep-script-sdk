@@ -3,7 +3,7 @@ import execa from "execa";
 import fs from "fs-extra";
 import ora from "ora";
 import path from "path";
-import logger from "../../tools/logger";
+import logger from "../../utils/logger";
 
 type Options = {
   projectRoot?: string;
