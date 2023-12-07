@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.4](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2023-12-07)
+
+
+### Bug Fixes
+
+* exit process after archive ([08fa783](https://github.com/zep-us/zep-script-sdk/commit/08fa78395dc993cc8ad8b07b9d269709d2038789))
+
+
+
+
+
 # [1.0.0-alpha.3](https://github.com/zep-us/zep-script-sdk/compare/v0.12.4...v1.0.0-alpha.3) (2023-12-07)
 
 
