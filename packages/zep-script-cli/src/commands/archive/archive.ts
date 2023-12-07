@@ -59,11 +59,15 @@ export default (async function archive([]: Array<string>, options: Options) {
       loader.succeed();
 
       logger.log(chalk.green(`Project ${projectName} archived successfully.`));
+
+      process.exit(0);
     });
     output.on("error", function (err) {
       archiver.abort();
       loader.fail();
       logger.error(err.message);
+
+      process.exit(1);
     });
 
     archiver.pipe(output);
