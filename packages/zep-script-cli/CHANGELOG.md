@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.3](https://github.com/zep-us/zep-script-sdk/compare/v0.12.4...v1.0.0-alpha.3) (2023-12-07)
+
+
+### Bug Fixes
+
+* cleanup package ([399b9a3](https://github.com/zep-us/zep-script-sdk/commit/399b9a357a24af79df4b54e0e43f9e043d4b6711))
+
+
+
+# [1.0.0-alpha.0](https://github.com/zep-us/zep-script-sdk/compare/v0.10.2...v1.0.0-alpha.0) (2023-06-07)
+
+
+### Bug Fixes
+
+* archive type error ([e9d6db6](https://github.com/zep-us/zep-script-sdk/commit/e9d6db69f04532f064d23081ea811e8372fc78f3))
+
+
+### Features
+
+* [wip] implement react template ([024455f](https://github.com/zep-us/zep-script-sdk/commit/024455f48cf237159d582f0bc43eb874fbdf00a2))
+* [wip] implement rollup template ([f180213](https://github.com/zep-us/zep-script-sdk/commit/f18021357796eab67d6ccad4812325d74bf7c940))
+* [wip] widget archiver ([616e55f](https://github.com/zep-us/zep-script-sdk/commit/616e55f0884441ba93db77797cce385622714aa5))
+
+
+
+
+
 ## [0.12.4](https://github.com/zep-us/zep-script-sdk/compare/v0.12.3...v0.12.4) (2023-11-20)
 
 
