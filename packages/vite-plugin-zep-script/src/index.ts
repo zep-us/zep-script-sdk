@@ -4,7 +4,7 @@ import path from "path";
 import fs from "fs-extra";
 
 const zepScriptPlugin = (): Plugin => ({
-  name: "mutate-config",
+  name: "zep-script",
   config(config) {
     const root = config.root ?? process.cwd();
     const widgetPath = path.join(root, "widget");

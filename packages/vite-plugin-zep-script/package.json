@@ -15,10 +15,10 @@
     "build": "tsc -p ."
   },
   "dependencies": {
-    "@vitejs/plugin-react-swc": "^3.0.0"
+    "@vitejs/plugin-react-swc": "^3.5.0"
   },
   "devDependencies": {
-    "@types/node": "^18.15.11",
-    "vite": "^4.2.0"
+    "@types/node": "^18.19.3",
+    "vite": "^4.5.1"
   }
 }
