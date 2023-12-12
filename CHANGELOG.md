@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.11](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.10...v1.0.0-alpha.11) (2023-12-12)
+
+
+### Bug Fixes
+
+* encodeURI before replacing slash ([529e23a](https://github.com/zep-us/zep-script-sdk/commit/529e23a9e27f05aabe84d615f7c75c9393cd18d8))
+
+
+
+
+
 # [1.0.0-alpha.10](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.9...v1.0.0-alpha.10) (2023-12-12)
 
 
