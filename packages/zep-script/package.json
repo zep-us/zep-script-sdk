@@ -1,6 +1,6 @@
 {
   "name": "zep-script",
-  "version": "1.0.0-alpha.4",
+  "version": "1.0.0-alpha.5",
   "description": "ZEP Script API for ZEP app",
   "author": "ZEP",
   "homepage": "https://zep.us",
@@ -15,6 +15,6 @@
     "@zep.us/babel-plugin-zep-script": "1.0.0-alpha.3",
     "@zep.us/rollup-config-zep-script": "1.0.0-alpha.0",
     "@zep.us/vite-plugin-zep-script": "1.0.0-alpha.2",
-    "@zep.us/zep-script-cli": "1.0.0-alpha.4"
+    "@zep.us/zep-script-cli": "1.0.0-alpha.5"
   }
 }

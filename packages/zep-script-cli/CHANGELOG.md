@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.5](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2023-12-12)
+
+
+### Features
+
+* add outputPath option to archive command ([04b6a1e](https://github.com/zep-us/zep-script-sdk/commit/04b6a1e105a4eee0d074bd2b7f06c5047b173751))
+
+
+
+
+
 # [1.0.0-alpha.4](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2023-12-07)
 
 
