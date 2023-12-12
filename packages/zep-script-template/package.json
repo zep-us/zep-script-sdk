@@ -1,6 +1,6 @@
 {
   "name": "@zep.us/zep-script-template",
-  "version": "1.0.0-alpha.8",
+  "version": "1.0.0-alpha.9",
   "license": "UNLICENSED",
   "repository": "https://github.com/zep-us/zep-script-sdk/tree/main/packages/zep-script-template",
   "publishConfig": {
@@ -27,6 +27,6 @@
     "@types/node": "^18.19.3",
     "eslint": "^8.55.0",
     "typescript": "^5.3.3",
-    "zep-script": "1.0.0-alpha.8"
+    "zep-script": "1.0.0-alpha.9"
   }
 }
