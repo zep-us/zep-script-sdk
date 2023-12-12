@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.10](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.9...v1.0.0-alpha.10) (2023-12-12)
+
+
+### Bug Fixes
+
+* use replaceAll instead of replace ([89f7edb](https://github.com/zep-us/zep-script-sdk/commit/89f7edb0618713c85417f824ef8ce47bc95ff764))
+
+
+
+
+
 # [1.0.0-alpha.9](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.8...v1.0.0-alpha.9) (2023-12-12)
 
 
