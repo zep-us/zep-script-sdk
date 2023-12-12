@@ -26,8 +26,11 @@ const zepScriptPlugin = (): Plugin => ({
           if (filename.startsWith("/")) {
             filename = filename.substring(1);
           }
-          const encodedFileName = `widget/${filename}`.replaceAll("/", "%2F");
-          return encodeURI(`/app/${zepScriptConfig.appId}/${encodedFileName}`);
+          const encodedFileName = encodeURI(`widget/${filename}`).replaceAll(
+            "/",
+            "%2F"
+          );
+          return `/app/${zepScriptConfig.appId}/${encodedFileName}`;
         },
       },
     };
