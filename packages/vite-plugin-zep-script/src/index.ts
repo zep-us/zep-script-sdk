@@ -26,8 +26,8 @@ const zepScriptPlugin = (): Plugin => ({
           if (filename.startsWith("/")) {
             filename = filename.substring(1);
           }
-          filename = `/spaces/app/file?appHashId=${zepScriptConfig.appId}&fileName=widget/${filename}`;
-          return filename;
+          const encodedFileName = encodeURI(`widget/${filename}`);
+          return `/app/${zepScriptConfig.appId}/${encodedFileName}`;
         },
       },
     };
