@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.8](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.7...v1.0.0-alpha.8) (2023-12-12)
+
+
+### Features
+
+* update file api path ([ef77a68](https://github.com/zep-us/zep-script-sdk/commit/ef77a682c53a637e447c9981508d4f028b50817f))
+
+
+
+
+
 # [1.0.0-alpha.7](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2023-12-12)
 
 **Note:** Version bump only for package @zep.us/zep-script-sdk
