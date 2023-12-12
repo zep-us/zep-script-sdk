@@ -12,6 +12,7 @@ import execa from "execa";
 
 type Options = {
   projectRoot?: string;
+  outputPath?: string;
 };
 
 async function archiveScript(root: string, archiver: Archiver.Archiver) {
@@ -41,6 +42,7 @@ async function archiveWidget(root: string, archiver: Archiver.Archiver) {
 export default (async function archive([]: Array<string>, options: Options) {
   const cwd = process.cwd();
   const root = options.projectRoot || cwd;
+  const outputPath = options.outputPath || cwd;
 
   const loader = ora();
   const archiver = Archiver("zip");
@@ -53,21 +55,20 @@ export default (async function archive([]: Array<string>, options: Options) {
     loader.succeed();
     loader.start("Archiving project");
 
-    const archiveOutputPath = path.join(cwd, `${projectName}.zepapp.zip`);
+    const archiveOutputPath = path.join(
+      outputPath,
+      `${projectName}.zepapp.zip`
+    );
     const output = fs.createWriteStream(archiveOutputPath);
     output.on("close", function () {
       loader.succeed();
 
       logger.log(chalk.green(`Project ${projectName} archived successfully.`));
-
-      process.exit(0);
     });
     output.on("error", function (err) {
       archiver.abort();
       loader.fail();
       logger.error(err.message);
-
-      process.exit(1);
     });
 
     archiver.pipe(output);
