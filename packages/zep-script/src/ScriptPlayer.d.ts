@@ -15,6 +15,27 @@ export enum ColorType {
   CYAN,
 }
 
+export type CustomCenterLabelOption = {
+  /**
+   * 라벨에 키 값을 할당하여, 서로 다른 키 값을 가진 라벨은 동시에 표시할 수 있습니다.
+   */
+  key?: string;
+  /**
+   * 라벨의 모서리에 둥글기를 설정할 수 있습니다.
+   *  ex) borderRadius: "8px"
+   */
+  borderRadius?: string;
+  /**
+   * false로 설정시 폰트에 투명도가 적용되지 않습니다.
+   */
+  fontOpacity?: boolean;
+  /**
+   * 라벨 내부에 padding 값을 지정 할 수 있습니다.
+   * ex) padding: "8px"
+   */
+  padding?: string;
+}
+
 
 export type PopupOption = {
   /**
@@ -182,6 +203,16 @@ export class ScriptPlayer {
   readonly isGuest: boolean;
 
   /**
+   * 플레이어의 브라우저에서 사용하는 언어 설정 값
+   */
+  readonly language: string;
+
+  /**
+   * 5분 이상 비활성화된 유저인 경우 true값을 가집니다.
+   */
+  readonly away: boolean;
+
+  /**
    * 플레이어에게 지정된 위치에 해당 text를 3초간 표시
    * @param text 출력할 텍스트 값
    * @param color 텍스트 색상
@@ -206,6 +237,7 @@ export class ScriptPlayer {
    * @param width 라벨의 너비 n% (0 ~ 100)
    * @param opacity 라벨 배경색 투명도 (0 ~ 1)
    * @param time 라벨 표시 시간 (default 3000)
+   * @param option
    */
   showCustomLabel(
     text: string,
@@ -214,7 +246,8 @@ export class ScriptPlayer {
     offset?: number,
     width?: number,
     opacity?: number,
-    time?: number
+    time?: number,
+    option?: CustomCenterLabelOption,
   ): void;
 
   /**
@@ -257,8 +290,10 @@ export class ScriptPlayer {
    * @param fileName
    * @param loop
    * @param overlap 사운드 오버랩(겹침) 재생 가능 여부
+   * @param key 사운드 오버랩(겹침) 재생
+   * @param volume 사운드의 볼륨을 조절하는 데 사용되는 숫자입니다. 값의 범위는 0에서 1까지이며, 0은 소리가 없음을 나타내고, 1은 최대 볼륨을 나타냅니다.
    */
-  playSound(fileName: string, loop?: boolean, overlap?: boolean): void;
+  playSound(fileName: string, loop?: boolean, overlap?: boolean, key?: string, volume?: number): void;
 
   /**
    * 플레이어에게 링크에 해당하는 사운드를 재생

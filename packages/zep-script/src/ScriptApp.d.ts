@@ -1,5 +1,5 @@
 import { ScriptDynamicResource } from "./ScriptDynamicResource";
-import { ScriptPlayer } from "./ScriptPlayer";
+import {CustomCenterLabelOption, ScriptPlayer} from "./ScriptPlayer";
 import { ScriptWidget } from "./ScriptWidget";
 
 declare global {
@@ -382,6 +382,7 @@ declare global {
      * @param width 라벨의 너비 n% (0 ~ 100)
      * @param opacity 라벨 배경색 투명도 (0 ~ 1)
      * @param time 라벨 표시 시간 (default 3000)
+     * @param option
      */
     function showCustomLabel(
       text: string,
@@ -390,7 +391,8 @@ declare global {
       offset?: number,
       width?: number,
       opacity?: number,
-      time?: number
+      time?: number,
+      option? : CustomCenterLabelOption
     ): void;
 
     /**
