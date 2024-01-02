@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.1](https://github.com/zep-us/zep-script-sdk/compare/v0.13.0...v0.13.1) (2024-01-02)
+
+
+### Bug Fixes
+
+* export module ([#45](https://github.com/zep-us/zep-script-sdk/issues/45)) ([dc1da58](https://github.com/zep-us/zep-script-sdk/commit/dc1da58c5f30a1b643c7ab2f07529a9ebacd2996))
+
+
+
+
+
 # [0.13.0](https://github.com/zep-us/zep-script-sdk/compare/v0.12.4...v0.13.0) (2024-01-02)
 
 
