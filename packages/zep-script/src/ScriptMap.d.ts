@@ -208,6 +208,22 @@ declare global {
     function sayObjectWithKey(
         key: string, message: string 
     ) : void
+
+    /**
+     *  파라미터로 전달한 로케이션이 존재하는 경우, 로케이션 설치 좌표를 리턴합니다.
+     *  @param locationName 로케이션 이름
+     */
+    function getLocation(
+        locationName: string
+    ) : { x: number, y: number }
+
+    /**
+     *  파라미터로 전달한 로케이션이 2개이상 존재하는 경우,무작위로 선택하여 해당 로케이션의 설치 좌표를 리턴합니다.
+     *  @param locationName 로케이션 이름
+     */
+    function getLocationRandom(
+        locationName: string
+    ) : { x: number, y: number }
   }
 }
 
