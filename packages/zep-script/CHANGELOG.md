@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.13.0](https://github.com/zep-us/zep-script-sdk/compare/v0.12.4...v0.13.0) (2024-01-02)
+
+
+### Features
+
+* add new type definitions ([#44](https://github.com/zep-us/zep-script-sdk/issues/44)) ([a6fe8e9](https://github.com/zep-us/zep-script-sdk/commit/a6fe8e9823fde38430880e884360bb56755f06bc))
+
+
+
+
+
 ## [0.12.4](https://github.com/zep-us/zep-script-sdk/compare/v0.12.3...v0.12.4) (2023-11-20)
 
 **Note:** Version bump only for package zep-script
