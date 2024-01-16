@@ -1,6 +1,6 @@
 {
   "name": "zep-script",
-  "version": "0.13.1",
+  "version": "0.13.2",
   "description": "ZEP Script API for ZEP app",
   "author": "ZEP",
   "homepage": "",
@@ -14,6 +14,6 @@
   ],
   "dependencies": {
     "@zep.us/babel-plugin-zep-script": "0.13.0",
-    "@zep.us/zep-script-cli": "0.13.0"
+    "@zep.us/zep-script-cli": "0.13.2"
   }
 }
