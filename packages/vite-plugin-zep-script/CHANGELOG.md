@@ -3,6 +3,85 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.12](https://github.com/zep-us/zep-script-sdk/compare/v0.13.2...v1.0.0-alpha.12) (2024-01-22)
+
+
+### Features
+
+* upgrade rollup, vite and update template ([f14df5d](https://github.com/zep-us/zep-script-sdk/commit/f14df5dcb5a03058ab1fcfbf66d5cf8dae1e4ae1))
+
+
+
+# [1.0.0-alpha.11](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.10...v1.0.0-alpha.11) (2023-12-12)
+
+
+### Bug Fixes
+
+* encodeURI before replacing slash ([529e23a](https://github.com/zep-us/zep-script-sdk/commit/529e23a9e27f05aabe84d615f7c75c9393cd18d8))
+
+
+
+# [1.0.0-alpha.10](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.9...v1.0.0-alpha.10) (2023-12-12)
+
+
+### Bug Fixes
+
+* use replaceAll instead of replace ([89f7edb](https://github.com/zep-us/zep-script-sdk/commit/89f7edb0618713c85417f824ef8ce47bc95ff764))
+
+
+
+# [1.0.0-alpha.9](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.8...v1.0.0-alpha.9) (2023-12-12)
+
+
+### Bug Fixes
+
+* replace slash with encoded format in filename ([0da0669](https://github.com/zep-us/zep-script-sdk/commit/0da0669160f0d9a803e957d7dbc17774fb230fcb))
+
+
+
+# [1.0.0-alpha.8](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.7...v1.0.0-alpha.8) (2023-12-12)
+
+
+### Features
+
+* update file api path ([ef77a68](https://github.com/zep-us/zep-script-sdk/commit/ef77a682c53a637e447c9981508d4f028b50817f))
+
+
+
+# [1.0.0-alpha.7](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2023-12-12)
+
+
+
+# [1.0.0-alpha.2](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2023-06-09)
+
+
+### Bug Fixes
+
+* get vite root from config ([3d1abb1](https://github.com/zep-us/zep-script-sdk/commit/3d1abb1af10bb8de664bdc0dfcc74dbb441a1088))
+
+
+
+# [1.0.0-alpha.1](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2023-06-09)
+
+
+### Bug Fixes
+
+* get vite root from config ([429fdf5](https://github.com/zep-us/zep-script-sdk/commit/429fdf588d885353e9729f601c9f741e3a573848))
+
+
+
+# [1.0.0-alpha.0](https://github.com/zep-us/zep-script-sdk/compare/v0.10.2...v1.0.0-alpha.0) (2023-06-07)
+
+
+### Bug Fixes
+
+* package versions ([8c86c04](https://github.com/zep-us/zep-script-sdk/commit/8c86c04c2bc498760906ebe69751bf80e91d7a52))
+* update package.json files ([51edb11](https://github.com/zep-us/zep-script-sdk/commit/51edb1167335e3fcc83074c716bf3a9e401a4ef9))
+
+
+
+
+
 # [1.0.0-alpha.11](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.10...v1.0.0-alpha.11) (2023-12-12)
 
 

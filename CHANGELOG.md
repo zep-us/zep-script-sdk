@@ -3,6 +3,129 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.12](https://github.com/zep-us/zep-script-sdk/compare/v0.13.2...v1.0.0-alpha.12) (2024-01-22)
+
+
+### Features
+
+* upgrade rollup, vite and update template ([f14df5d](https://github.com/zep-us/zep-script-sdk/commit/f14df5dcb5a03058ab1fcfbf66d5cf8dae1e4ae1))
+
+
+
+# [1.0.0-alpha.11](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.10...v1.0.0-alpha.11) (2023-12-12)
+
+
+### Bug Fixes
+
+* encodeURI before replacing slash ([529e23a](https://github.com/zep-us/zep-script-sdk/commit/529e23a9e27f05aabe84d615f7c75c9393cd18d8))
+
+
+
+# [1.0.0-alpha.10](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.9...v1.0.0-alpha.10) (2023-12-12)
+
+
+### Bug Fixes
+
+* use replaceAll instead of replace ([89f7edb](https://github.com/zep-us/zep-script-sdk/commit/89f7edb0618713c85417f824ef8ce47bc95ff764))
+
+
+
+# [1.0.0-alpha.9](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.8...v1.0.0-alpha.9) (2023-12-12)
+
+
+### Bug Fixes
+
+* replace slash with encoded format in filename ([0da0669](https://github.com/zep-us/zep-script-sdk/commit/0da0669160f0d9a803e957d7dbc17774fb230fcb))
+
+
+
+# [1.0.0-alpha.8](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.7...v1.0.0-alpha.8) (2023-12-12)
+
+
+### Features
+
+* update file api path ([ef77a68](https://github.com/zep-us/zep-script-sdk/commit/ef77a682c53a637e447c9981508d4f028b50817f))
+
+
+
+# [1.0.0-alpha.7](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2023-12-12)
+
+
+
+# [1.0.0-alpha.6](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2023-12-12)
+
+
+### Features
+
+* exit process after archive ([9e328a9](https://github.com/zep-us/zep-script-sdk/commit/9e328a973b2ca5fca3083598595fcb7d8645bd79))
+
+
+
+# [1.0.0-alpha.5](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2023-12-12)
+
+
+### Features
+
+* add outputPath option to archive command ([04b6a1e](https://github.com/zep-us/zep-script-sdk/commit/04b6a1e105a4eee0d074bd2b7f06c5047b173751))
+
+
+
+# [1.0.0-alpha.4](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2023-12-07)
+
+
+### Bug Fixes
+
+* exit process after archive ([08fa783](https://github.com/zep-us/zep-script-sdk/commit/08fa78395dc993cc8ad8b07b9d269709d2038789))
+
+
+
+# [1.0.0-alpha.3](https://github.com/zep-us/zep-script-sdk/compare/v0.12.4...v1.0.0-alpha.3) (2023-12-07)
+
+
+### Bug Fixes
+
+* cleanup package ([399b9a3](https://github.com/zep-us/zep-script-sdk/commit/399b9a357a24af79df4b54e0e43f9e043d4b6711))
+
+
+
+# [1.0.0-alpha.2](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2023-06-09)
+
+
+### Bug Fixes
+
+* get vite root from config ([3d1abb1](https://github.com/zep-us/zep-script-sdk/commit/3d1abb1af10bb8de664bdc0dfcc74dbb441a1088))
+
+
+
+# [1.0.0-alpha.1](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2023-06-09)
+
+
+### Bug Fixes
+
+* get vite root from config ([429fdf5](https://github.com/zep-us/zep-script-sdk/commit/429fdf588d885353e9729f601c9f741e3a573848))
+
+
+
+# [1.0.0-alpha.0](https://github.com/zep-us/zep-script-sdk/compare/v0.10.2...v1.0.0-alpha.0) (2023-06-07)
+
+
+### Bug Fixes
+
+* archive type error ([e9d6db6](https://github.com/zep-us/zep-script-sdk/commit/e9d6db69f04532f064d23081ea811e8372fc78f3))
+* package versions ([8c86c04](https://github.com/zep-us/zep-script-sdk/commit/8c86c04c2bc498760906ebe69751bf80e91d7a52))
+* update package.json files ([51edb11](https://github.com/zep-us/zep-script-sdk/commit/51edb1167335e3fcc83074c716bf3a9e401a4ef9))
+
+
+### Features
+
+* [wip] implement react template ([024455f](https://github.com/zep-us/zep-script-sdk/commit/024455f48cf237159d582f0bc43eb874fbdf00a2))
+* [wip] implement rollup template ([f180213](https://github.com/zep-us/zep-script-sdk/commit/f18021357796eab67d6ccad4812325d74bf7c940))
+* [wip] widget archiver ([616e55f](https://github.com/zep-us/zep-script-sdk/commit/616e55f0884441ba93db77797cce385622714aa5))
+
+
+
+
+
 ## [0.13.2](https://github.com/zep-us/zep-script-sdk/compare/v0.13.1...v0.13.2) (2024-01-16)
 
 

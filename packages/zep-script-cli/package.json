@@ -1,6 +1,6 @@
 {
   "name": "@zep.us/zep-script-cli",
-  "version": "1.0.0-alpha.7",
+  "version": "1.0.0-alpha.12",
   "description": "Command Line Interface for ZEP Script",
   "author": "ZEP",
   "license": "MIT",
