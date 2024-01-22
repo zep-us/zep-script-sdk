@@ -19,7 +19,6 @@
   ],
   "scripts": {
     "build": "zep-script build",
-    "build:widget": "vite build",
     "archive": "zep-script archive",
     "deploy": "zep-script publish"
   },
@@ -28,7 +27,6 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/node": "^18.19.3",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@zep.us/vite-plugin-zep-script": "1.0.0-alpha.12",
