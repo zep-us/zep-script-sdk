@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.15](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.14...v1.0.0-alpha.15) (2024-01-22)
+
+
+### Features
+
+* update normal template ([e7ffff6](https://github.com/zep-us/zep-script-sdk/commit/e7ffff6f34011ced918b7afb93f008ac4192c1ba))
+
+
+
+
+
 # [1.0.0-alpha.14](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.13...v1.0.0-alpha.14) (2024-01-22)
 
 **Note:** Version bump only for package @zep.us/zep-script-template
