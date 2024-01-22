@@ -40,20 +40,13 @@ async function auth(loader: Ora, sessionFilePath: string) {
   const confirmData: any = {
     email,
     t: code,
-    isApp: "false",
+    isApp: false,
   };
-
-  const queryParams = Object.keys(confirmData)
-    .map(
-      (key) =>
-        encodeURIComponent(key) + "=" + encodeURIComponent(confirmData[key])
-    )
-    .join("&");
 
   loader.start("Authenticating...");
 
   const { data } = await axios.post(
-    `https://zep.us/api/v2/signin/confirm?${queryParams}`,
+    `https://zep.us/api/v2/signin/confirm`,
     confirmData,
     {
       headers: {
@@ -106,7 +99,7 @@ export default (async function publish([]: Array<string>, options: Options) {
     const formData = new FormData();
     formData.append("file", archiveFile, archiveFilePath);
     formData.append("name", configJsonObject.name);
-    formData.append("desc", configJsonObject.description);
+    formData.append("description", configJsonObject.description);
     formData.append("appHashId", configJsonObject.appId);
 
     let type = "1";

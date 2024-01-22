@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [1.0.0-alpha.11](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.10...v1.0.0-alpha.11) (2023-12-12)
+## [0.13.2](https://github.com/zep-us/zep-script-sdk/compare/v0.13.1...v0.13.2) (2024-01-16)
 
 **Note:** Version bump only for package @zep.us/zep-script-template
 
@@ -11,7 +11,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# [1.0.0-alpha.10](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.9...v1.0.0-alpha.10) (2023-12-12)
+## [0.13.1](https://github.com/zep-us/zep-script-sdk/compare/v0.13.0...v0.13.1) (2024-01-02)
 
 **Note:** Version bump only for package @zep.us/zep-script-template
 
@@ -19,78 +19,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# [1.0.0-alpha.9](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.8...v1.0.0-alpha.9) (2023-12-12)
+# [0.13.0](https://github.com/zep-us/zep-script-sdk/compare/v0.12.4...v0.13.0) (2024-01-02)
 
 **Note:** Version bump only for package @zep.us/zep-script-template
-
-
-
-
-
-# [1.0.0-alpha.8](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.7...v1.0.0-alpha.8) (2023-12-12)
-
-**Note:** Version bump only for package @zep.us/zep-script-template
-
-
-
-
-
-# [1.0.0-alpha.7](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2023-12-12)
-
-**Note:** Version bump only for package @zep.us/zep-script-template
-
-
-
-
-
-# [1.0.0-alpha.6](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2023-12-12)
-
-**Note:** Version bump only for package @zep.us/zep-script-template
-
-
-
-
-
-# [1.0.0-alpha.5](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2023-12-12)
-
-**Note:** Version bump only for package @zep.us/zep-script-template
-
-
-
-
-
-# [1.0.0-alpha.4](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2023-12-07)
-
-**Note:** Version bump only for package @zep.us/zep-script-template
-
-
-
-
-
-# [1.0.0-alpha.3](https://github.com/zep-us/zep-script-sdk/compare/v0.12.4...v1.0.0-alpha.3) (2023-12-07)
-
-
-
-# [1.0.0-alpha.2](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2023-06-09)
-
-
-
-# [1.0.0-alpha.1](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2023-06-09)
-
-
-
-# [1.0.0-alpha.0](https://github.com/zep-us/zep-script-sdk/compare/v0.10.2...v1.0.0-alpha.0) (2023-06-07)
-
-
-### Bug Fixes
-
-* update package.json files ([51edb11](https://github.com/zep-us/zep-script-sdk/commit/51edb1167335e3fcc83074c716bf3a9e401a4ef9))
-
-
-### Features
-
-* [wip] implement react template ([024455f](https://github.com/zep-us/zep-script-sdk/commit/024455f48cf237159d582f0bc43eb874fbdf00a2))
-* [wip] implement rollup template ([f180213](https://github.com/zep-us/zep-script-sdk/commit/f18021357796eab67d6ccad4812325d74bf7c940))
 
 
 

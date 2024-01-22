@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [1.0.0-alpha.11](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.10...v1.0.0-alpha.11) (2023-12-12)
+## [0.13.2](https://github.com/zep-us/zep-script-sdk/compare/v0.13.1...v0.13.2) (2024-01-16)
 
 **Note:** Version bump only for package zep-script
 
@@ -11,77 +11,23 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# [1.0.0-alpha.10](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.9...v1.0.0-alpha.10) (2023-12-12)
-
-**Note:** Version bump only for package zep-script
+## [0.13.1](https://github.com/zep-us/zep-script-sdk/compare/v0.13.0...v0.13.1) (2024-01-02)
 
 
+### Bug Fixes
 
-
-
-# [1.0.0-alpha.9](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.8...v1.0.0-alpha.9) (2023-12-12)
-
-**Note:** Version bump only for package zep-script
+* export module ([#45](https://github.com/zep-us/zep-script-sdk/issues/45)) ([dc1da58](https://github.com/zep-us/zep-script-sdk/commit/dc1da58c5f30a1b643c7ab2f07529a9ebacd2996))
 
 
 
 
 
-# [1.0.0-alpha.8](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.7...v1.0.0-alpha.8) (2023-12-12)
-
-**Note:** Version bump only for package zep-script
+# [0.13.0](https://github.com/zep-us/zep-script-sdk/compare/v0.12.4...v0.13.0) (2024-01-02)
 
 
+### Features
 
-
-
-# [1.0.0-alpha.7](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2023-12-12)
-
-**Note:** Version bump only for package zep-script
-
-
-
-
-
-# [1.0.0-alpha.6](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2023-12-12)
-
-**Note:** Version bump only for package zep-script
-
-
-
-
-
-# [1.0.0-alpha.5](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2023-12-12)
-
-**Note:** Version bump only for package zep-script
-
-
-
-
-
-# [1.0.0-alpha.4](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2023-12-07)
-
-**Note:** Version bump only for package zep-script
-
-
-
-
-
-# [1.0.0-alpha.3](https://github.com/zep-us/zep-script-sdk/compare/v0.12.4...v1.0.0-alpha.3) (2023-12-07)
-
-
-
-# [1.0.0-alpha.2](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2023-06-09)
-
-
-
-# [1.0.0-alpha.1](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2023-06-09)
-
-
-
-# [1.0.0-alpha.0](https://github.com/zep-us/zep-script-sdk/compare/v0.10.2...v1.0.0-alpha.0) (2023-06-07)
-
-**Note:** Version bump only for package zep-script
+* add new type definitions ([#44](https://github.com/zep-us/zep-script-sdk/issues/44)) ([a6fe8e9](https://github.com/zep-us/zep-script-sdk/commit/a6fe8e9823fde38430880e884360bb56755f06bc))
 
 
 

@@ -3,69 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [1.0.0-alpha.7](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2023-12-12)
+## [0.13.2](https://github.com/zep-us/zep-script-sdk/compare/v0.13.1...v0.13.2) (2024-01-16)
+
+
+### Bug Fixes
+
+* Resolve issue where publishing is not occurring ([8c4b747](https://github.com/zep-us/zep-script-sdk/commit/8c4b74700edd55af87993370dd14d0702aeb521d))
+
+
+
+
+
+# [0.13.0](https://github.com/zep-us/zep-script-sdk/compare/v0.12.4...v0.13.0) (2024-01-02)
 
 **Note:** Version bump only for package @zep.us/zep-script-cli
-
-
-
-
-
-# [1.0.0-alpha.6](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2023-12-12)
-
-
-### Features
-
-* exit process after archive ([9e328a9](https://github.com/zep-us/zep-script-sdk/commit/9e328a973b2ca5fca3083598595fcb7d8645bd79))
-
-
-
-
-
-# [1.0.0-alpha.5](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2023-12-12)
-
-
-### Features
-
-* add outputPath option to archive command ([04b6a1e](https://github.com/zep-us/zep-script-sdk/commit/04b6a1e105a4eee0d074bd2b7f06c5047b173751))
-
-
-
-
-
-# [1.0.0-alpha.4](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2023-12-07)
-
-
-### Bug Fixes
-
-* exit process after archive ([08fa783](https://github.com/zep-us/zep-script-sdk/commit/08fa78395dc993cc8ad8b07b9d269709d2038789))
-
-
-
-
-
-# [1.0.0-alpha.3](https://github.com/zep-us/zep-script-sdk/compare/v0.12.4...v1.0.0-alpha.3) (2023-12-07)
-
-
-### Bug Fixes
-
-* cleanup package ([399b9a3](https://github.com/zep-us/zep-script-sdk/commit/399b9a357a24af79df4b54e0e43f9e043d4b6711))
-
-
-
-# [1.0.0-alpha.0](https://github.com/zep-us/zep-script-sdk/compare/v0.10.2...v1.0.0-alpha.0) (2023-06-07)
-
-
-### Bug Fixes
-
-* archive type error ([e9d6db6](https://github.com/zep-us/zep-script-sdk/commit/e9d6db69f04532f064d23081ea811e8372fc78f3))
-
-
-### Features
-
-* [wip] implement react template ([024455f](https://github.com/zep-us/zep-script-sdk/commit/024455f48cf237159d582f0bc43eb874fbdf00a2))
-* [wip] implement rollup template ([f180213](https://github.com/zep-us/zep-script-sdk/commit/f18021357796eab67d6ccad4812325d74bf7c940))
-* [wip] widget archiver ([616e55f](https://github.com/zep-us/zep-script-sdk/commit/616e55f0884441ba93db77797cce385622714aa5))
 
 
 
