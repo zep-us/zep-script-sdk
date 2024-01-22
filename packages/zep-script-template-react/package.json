@@ -19,7 +19,7 @@
   ],
   "scripts": {
     "build": "zep-script build",
-    "build:widget": "tsc && vite build",
+    "build:widget": "vite build",
     "archive": "zep-script archive",
     "deploy": "zep-script publish"
   },
@@ -33,7 +33,10 @@
     "@types/react-dom": "^18.2.17",
     "eslint": "^8.55.0",
     "typescript": "^5.3.3",
-    "vite": "^4.5.1",
+    "vite": "^5.0.12",
     "zep-script": "1.0.0-alpha.11"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

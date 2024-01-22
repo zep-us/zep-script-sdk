@@ -1,12 +1,12 @@
 // @ts-check
-import typescript from 'rollup-plugin-typescript2';
 import commonjs from '@rollup/plugin-commonjs';
-import { nodeResolve } from '@rollup/plugin-node-resolve';
 import { babel } from '@rollup/plugin-babel';
 import json from '@rollup/plugin-json';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import filesize from 'rollup-plugin-filesize';
 import del from 'rollup-plugin-delete';
+import typescript from 'rollup-plugin-typescript2';
 
 export default {
   input: 'src/index.ts',
@@ -21,8 +21,15 @@ export default {
   ],
   plugins: [
     del({ targets: 'dist/*' }),
-    nodeResolve({ browser: true, preferBuiltins: false }),
-    typescript({ tsconfig: './tsconfig.json' }),
+    nodeResolve(),
+    typescript({ 
+      tsconfig: './tsconfig.zep.json', 
+      tsconfigOverride: {
+        compilerOptions: {
+          sourceMap: true,
+        }
+      }
+    }),
     commonjs(),
     json(),
     babel({

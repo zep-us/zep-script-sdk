@@ -1,9 +1,10 @@
 {
+  "extends": "./tsconfig.json",
   "compilerOptions": {
     "composite": true,
-    "noEmit": true,
-    "isolatedModules": true,
+    "target": "ES5",
+    "lib": ["ESNext"],
     "types": ["zep-script"]
   },
-  "include": ["src"]
+  "include": ["src/**/*"]
 }

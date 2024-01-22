@@ -11,10 +11,10 @@
   "files": [
     "src/**/*.d.ts"
   ],
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
-    "@zep.us/babel-plugin-zep-script": "1.0.0-alpha.3",
-    "@zep.us/rollup-config-zep-script": "1.0.0-alpha.7",
-    "@zep.us/vite-plugin-zep-script": "1.0.0-alpha.11",
     "@zep.us/zep-script-cli": "1.0.0-alpha.7"
   }
 }
