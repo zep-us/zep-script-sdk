@@ -6,6 +6,7 @@ import os from "os";
 import path from "path";
 import logger from "../../utils/logger";
 import execa from "execa";
+import chalk from "chalk";
 
 type Options = {
   projectRoot?: string;
@@ -20,7 +21,7 @@ async function findArchiveFile(root: string) {
     throw new Error("No archive file found.");
   }
 
-  return path.join(root, archiveFiles[0]);
+  return archiveFiles[0];
 }
 
 export default (async function publish([]: Array<string>, options: Options) {
@@ -46,11 +47,12 @@ export default (async function publish([]: Array<string>, options: Options) {
 
     const loginToken = (await fs.readFile(sessionFilePath)).toString();
 
-    const archiveFilePath = await findArchiveFile(root);
+    const archiveFileName = await findArchiveFile(root);
+    const archiveFilePath = path.join(root, archiveFileName);
     const archiveFile = fs.createReadStream(archiveFilePath);
 
     const formData = new FormData();
-    formData.append("file", archiveFile, archiveFilePath);
+    formData.append("file", archiveFile, archiveFileName);
     formData.append("name", configJsonObject.name);
     formData.append("description", configJsonObject.description);
 
@@ -71,7 +73,7 @@ export default (async function publish([]: Array<string>, options: Options) {
     }
     formData.append("type", type);
 
-    loader.start("Publishing...");
+    loader.start(`Publishing ${configJsonObject.name}...`);
 
     const length = await new Promise<number>((resolve) =>
       formData.getLength((e, l) => resolve(l))
@@ -92,12 +94,12 @@ export default (async function publish([]: Array<string>, options: Options) {
         JSON.stringify(configJsonObject, null, 4)
       );
 
-      await execa("yarn", ["zep-script", "build"]);
-      await execa("yarn", ["zep-script", "archive"]);
+      await execa("zep-script", ["build"]);
       await publish([], options);
     }
 
     loader.succeed();
+    logger.log(chalk.green(`${configJsonObject.name} published successfully.`));
   } catch (e) {
     loader.fail();
     if (e instanceof AxiosError) {
