@@ -16,8 +16,7 @@
   ],
   "scripts": {
     "build": "zep-script build",
-    "archive": "zep-script archive",
-    "deploy": "zep-script publish"
+    "publish": "zep-script publish"
   },
   "devDependencies": {
     "eslint": "^8.55.0",

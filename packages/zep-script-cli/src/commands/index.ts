@@ -1,4 +1,3 @@
-import archive from "./archive";
 import build from "./build";
 import publish from "./publish";
 import init from "./init";
@@ -25,4 +24,4 @@ export type Command = {
   func: CommandFunction<Object>;
 };
 
-export const commands = [init, build, publish, archive, pack] as Command[];
+export const commands = [init, build, publish, pack] as Command[];
