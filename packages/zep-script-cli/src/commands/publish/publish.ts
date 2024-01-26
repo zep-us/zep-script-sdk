@@ -26,6 +26,7 @@ async function findArchiveFile(root: string) {
 export default (async function publish([]: Array<string>, options: Options) {
   const cwd = process.cwd();
   const root = options.projectRoot || cwd;
+  const BASE_URL = process.env.BASE_URL || "https://zep.us";
 
   const loader = ora();
 
@@ -76,17 +77,13 @@ export default (async function publish([]: Array<string>, options: Options) {
       formData.getLength((e, l) => resolve(l))
     );
 
-    const { data } = await axios.put(
-      `https://zep.us/api/v2/me/apps`,
-      formData,
-      {
-        headers: {
-          "X-Token": loginToken,
-          "Content-Length": length,
-          ...formData.getHeaders(),
-        },
-      }
-    );
+    const { data } = await axios.put(`${BASE_URL}/api/v2/me/apps`, formData, {
+      headers: {
+        "X-Token": loginToken,
+        "Content-Length": length,
+        ...formData.getHeaders(),
+      },
+    });
     if (configJsonObject.appId !== data.hashId) {
       configJsonObject.appId = data.hashId;
 

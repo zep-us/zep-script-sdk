@@ -13,6 +13,8 @@ type Options = {
 async function auth(loader: Ora, sessionFilePath: string) {
   await fs.remove(sessionFilePath);
 
+  const BASE_URL = process.env.BASE_URL || "https://zep.us";
+
   prompt.start();
 
   const { email } = await prompt.get({
@@ -26,7 +28,7 @@ async function auth(loader: Ora, sessionFilePath: string) {
 
   const loginData = { email };
 
-  await axios.post("https://zep.us/api/v2/signin", loginData);
+  await axios.post(`${BASE_URL}/api/v2/signin`, loginData);
 
   loader.succeed();
 
@@ -46,7 +48,7 @@ async function auth(loader: Ora, sessionFilePath: string) {
   loader.start("Authenticating...");
 
   const { data } = await axios.post(
-    `https://zep.us/api/v2/signin/confirm`,
+    `${BASE_URL}/api/v2/signin/confirm`,
     confirmData,
     {
       headers: {
