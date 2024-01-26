@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.20](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.19...v1.0.0-alpha.20) (2024-01-26)
+
+
+### Bug Fixes
+
+* update vite plugin tsconfig ([74115f4](https://github.com/zep-us/zep-script-sdk/commit/74115f473a5b27134a35f5cd4532f9467c8cc800))
+
+
+
+
+
 # [1.0.0-alpha.19](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.18...v1.0.0-alpha.19) (2024-01-26)
 
 
