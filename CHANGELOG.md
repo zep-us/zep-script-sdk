@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.23](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.22...v1.0.0-alpha.23) (2024-01-26)
+
+
+### Features
+
+* apply base url from env ([f3165cf](https://github.com/zep-us/zep-script-sdk/commit/f3165cf8346e79aa651dc5669f2f1a70b02ba88b))
+
+
+
+
+
 # [1.0.0-alpha.22](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.21...v1.0.0-alpha.22) (2024-01-26)
 
 
