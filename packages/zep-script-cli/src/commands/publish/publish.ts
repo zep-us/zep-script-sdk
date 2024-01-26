@@ -20,7 +20,7 @@ async function findArchiveFile(root: string) {
     throw new Error("No archive file found.");
   }
 
-  return archiveFiles[0];
+  return path.join(root, archiveFiles[0]);
 }
 
 export default (async function publish([]: Array<string>, options: Options) {
