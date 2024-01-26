@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.17](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.16...v1.0.0-alpha.17) (2024-01-26)
+
+
+### Bug Fixes
+
+* add base path ([cec3c5e](https://github.com/zep-us/zep-script-sdk/commit/cec3c5e9dace9f5eeea0cb1b2cf42f30ad8ab93b))
+
+
+
+
+
 # [1.0.0-alpha.16](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.15...v1.0.0-alpha.16) (2024-01-22)
 
 **Note:** Version bump only for package @zep.us/zep-script-sdk
