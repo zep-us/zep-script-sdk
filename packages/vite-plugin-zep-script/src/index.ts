@@ -13,25 +13,13 @@ const zepScriptPlugin = (): Plugin => ({
       fs.readFileSync(configJsonPath).toString()
     );
     const pluginConfig: UserConfig = {
+      base: `/app/${zepScriptConfig.appId}/widget`,
       plugins: [...(config.plugins || []), react()],
       root: widgetPath,
       publicDir: false,
       build: {
         ...config.build,
         cssCodeSplit: false,
-      },
-      experimental: {
-        ...config.experimental,
-        renderBuiltUrl(filename) {
-          if (filename.startsWith("/")) {
-            filename = filename.substring(1);
-          }
-          const encodedFileName = encodeURI(`widget/${filename}`).replaceAll(
-            "/",
-            "%2F"
-          );
-          return `/app/${zepScriptConfig.appId}/${encodedFileName}`;
-        },
       },
     };
     Object.assign(config, pluginConfig);
