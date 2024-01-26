@@ -55,12 +55,8 @@ export default (async function publish([]: Array<string>, options: Options) {
     formData.append("file", archiveFile, archiveFileName);
     formData.append("name", configJsonObject.name);
     formData.append("description", configJsonObject.description);
-
     if (configJsonObject.appId) {
       formData.append("appHashId", configJsonObject.appId);
-      formData.append("isUpdated", true);
-    } else {
-      formData.append("isUpdated", false);
     }
 
     let type = "1";
@@ -75,13 +71,14 @@ export default (async function publish([]: Array<string>, options: Options) {
 
     loader.start(`Publishing ${configJsonObject.name}...`);
 
-    const method = configJsonObject.appId ? "putForm" : "postForm";
+    const method = configJsonObject.appId ? "put" : "post";
     const { data } = await axios[method](
       `${BASE_URL}/api/v2/me/apps`,
       formData,
       {
         headers: {
           "X-Token": loginToken,
+          ...formData.getHeaders(),
         },
       }
     );
