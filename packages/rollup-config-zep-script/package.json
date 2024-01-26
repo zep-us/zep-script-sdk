@@ -1,6 +1,6 @@
 {
   "name": "@zep.us/rollup-config-zep-script",
-  "version": "1.0.0-alpha.20",
+  "version": "1.0.0-alpha.21",
   "license": "MIT",
   "repository": "https://github.com/zep-us/zep-script-sdk/tree/main/packages/rollup-config-zep-script",
   "publishConfig": {
@@ -18,7 +18,7 @@
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
-    "@zep.us/babel-plugin-zep-script": "1.0.0-alpha.20",
+    "@zep.us/babel-plugin-zep-script": "1.0.0-alpha.21",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-filesize": "^10.0.0",
     "rollup-plugin-typescript2": "0.36.0"
