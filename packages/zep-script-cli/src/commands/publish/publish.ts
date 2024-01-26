@@ -1,8 +1,7 @@
-import axios from "axios";
-import prompt from "prompt";
+import axios, { AxiosError } from "axios";
 import FormData from "form-data";
 import fs from "fs-extra";
-import ora, { Ora } from "ora";
+import ora from "ora";
 import os from "os";
 import path from "path";
 import logger from "../../utils/logger";
@@ -11,55 +10,6 @@ import execa from "execa";
 type Options = {
   projectRoot?: string;
 };
-
-async function auth(loader: Ora, sessionFilePath: string) {
-  prompt.start();
-
-  const { email } = await prompt.get({
-    name: "email",
-    description: "Enter your email",
-    type: "string",
-    required: true,
-  });
-
-  loader.start("Sending login code to your email...");
-
-  const loginData = { email };
-
-  await axios.post("https://zep.us/api/v2/signin", loginData);
-
-  loader.succeed();
-
-  const { code } = await prompt.get({
-    name: "code",
-    description: "Enter code sent to your email",
-    type: "string",
-    required: true,
-  });
-
-  const confirmData: any = {
-    email,
-    t: code,
-    isApp: false,
-  };
-
-  loader.start("Authenticating...");
-
-  const { data } = await axios.post(
-    `https://zep.us/api/v2/signin/confirm`,
-    confirmData,
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
-
-  const loginToken = data.loginToken;
-  await fs.writeFile(sessionFilePath, loginToken);
-
-  loader.succeed();
-}
 
 async function findArchiveFile(root: string) {
   const archiveFiles = fs
@@ -88,7 +38,9 @@ export default (async function publish([]: Array<string>, options: Options) {
     const sessionFilePath = path.join(os.homedir(), ".zscsession");
 
     if (!fs.existsSync(sessionFilePath)) {
-      await auth(loader, sessionFilePath);
+      throw new Error(
+        "You are not logged in to ZEP. Run `zep-script login` first."
+      );
     }
 
     const loginToken = (await fs.readFile(sessionFilePath)).toString();
@@ -100,7 +52,13 @@ export default (async function publish([]: Array<string>, options: Options) {
     formData.append("file", archiveFile, archiveFilePath);
     formData.append("name", configJsonObject.name);
     formData.append("description", configJsonObject.description);
-    formData.append("appHashId", configJsonObject.appId);
+
+    if (configJsonObject.appId) {
+      formData.append("appHashId", configJsonObject.appId);
+      formData.append("isUpdated", true);
+    } else {
+      formData.append("isUpdated", false);
+    }
 
     let type = "1";
     switch (configJsonObject.type) {
@@ -118,7 +76,7 @@ export default (async function publish([]: Array<string>, options: Options) {
       formData.getLength((e, l) => resolve(l))
     );
 
-    const response = await axios.put(
+    const { data } = await axios.put(
       `https://zep.us/api/v2/me/apps`,
       formData,
       {
@@ -129,9 +87,8 @@ export default (async function publish([]: Array<string>, options: Options) {
         },
       }
     );
-    const resAppId = response.request.path.split("/iframe/me/apps/")[1];
-    if (resAppId && configJsonObject.appId !== resAppId) {
-      configJsonObject.appId = resAppId;
+    if (configJsonObject.appId !== data.hashId) {
+      configJsonObject.appId = data.hashId;
 
       await fs.writeFile(
         configJsonPath,
@@ -146,7 +103,16 @@ export default (async function publish([]: Array<string>, options: Options) {
     loader.succeed();
   } catch (e) {
     loader.fail();
-    if (e instanceof Error) {
+    if (e instanceof AxiosError) {
+      const statusCode = e.response?.status;
+      if (statusCode === 401 || statusCode === 403) {
+        logger.error(
+          "You are not logged in to ZEP. Run `zep-script login` first."
+        );
+      } else {
+        logger.error(e.message);
+      }
+    } else if (e instanceof Error) {
       logger.error(e.message);
     }
   }
