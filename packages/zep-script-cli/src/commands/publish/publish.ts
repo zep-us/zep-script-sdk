@@ -72,16 +72,14 @@ export default (async function publish([]: Array<string>, options: Options) {
     loader.start(`Publishing ${configJsonObject.name}...`);
 
     const method = configJsonObject.appId ? "put" : "post";
-    const { data } = await axios[method](
-      `${BASE_URL}/api/v2/me/apps`,
-      formData,
-      {
-        headers: {
-          "X-Token": loginToken,
-          ...formData.getHeaders(),
-        },
-      }
-    );
+    const {
+      data: { data },
+    } = await axios[method](`${BASE_URL}/api/v2/me/apps`, formData, {
+      headers: {
+        "X-Token": loginToken,
+        ...formData.getHeaders(),
+      },
+    });
     if (configJsonObject.appId !== data.hashId) {
       configJsonObject.appId = data.hashId;
 
