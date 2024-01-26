@@ -5,6 +5,7 @@
     "lib": ["ESNext"],
     "module": "CommonJS",
     "moduleResolution": "Node",
+    "declaration": true,
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true
