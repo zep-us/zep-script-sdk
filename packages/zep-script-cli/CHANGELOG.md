@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.22](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.21...v1.0.0-alpha.22) (2024-01-26)
+
+
+### Features
+
+* add login command ([27028ed](https://github.com/zep-us/zep-script-sdk/commit/27028edd94afbaa1fc93c9b55bf3e879e49cb18c))
+
+
+
+
+
 # [1.0.0-alpha.21](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.20...v1.0.0-alpha.21) (2024-01-26)
 
 **Note:** Version bump only for package @zep.us/zep-script-cli
