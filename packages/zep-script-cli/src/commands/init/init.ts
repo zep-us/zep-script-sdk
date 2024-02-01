@@ -5,8 +5,8 @@ import fs from "fs-extra";
 import ora from "ora";
 import os from "os";
 import path from "path";
-import banner from "../../tools/banner";
-import logger from "../../tools/logger";
+import banner from "../../utils/banner";
+import logger from "../../utils/logger";
 
 type Options = {
   npm?: boolean;
@@ -77,9 +77,11 @@ async function renameProjectName(projectRoot: string, projectName: string) {
   const packageJson = path.join(projectRoot, "package.json");
   const packageJsonObject = JSON.parse(fs.readFileSync(packageJson).toString());
   packageJsonObject.name = projectName;
+  packageJsonObject.version = "0.0.1";
   delete packageJsonObject.publishConfig;
   delete packageJsonObject.files;
   delete packageJsonObject.gitHead;
+  delete packageJsonObject.repository;
   fs.writeFileSync(packageJson, JSON.stringify(packageJsonObject, null, 2));
 }
 

@@ -16,7 +16,6 @@ npx zep-script init MyZepApp
 
 - [`init`](#init)
 - [`build`](#build)
-- [`archive`](#archive)
 
 ### `init`
 
@@ -59,20 +58,3 @@ npx zep-script build
 ##### `--projectRoot <string>`
 
 Use this option to sets root directory of project to be built instead of cli's current working directory.
-
-### `archive`
-
-Archive ZEP Script project to be ready for uploading. Project must have been built first before executing this command.
-
-#### Usage
-
-```bash
-# zep-script build [options]
-npx zep-script archive
-```
-
-#### Options
-  
-##### `--projectRoot <string>`
-
-Use this option to sets root directory of project to be archived instead of cli's current working directory.

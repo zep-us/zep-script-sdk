@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import { program } from "commander";
 import { Command, commands } from "./commands";
-import logger from "./tools/logger";
+import logger from "./utils/logger";
 
 const handleError = (err: Error) => {
   logger.enable();

@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "target": "ES5",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "jsx": "react"
+  },
+  "include": ["widget/src/**/*"]
+}

@@ -1,31 +1,29 @@
 {
   "name": "@zep.us/zep-script-template",
-  "version": "0.13.2",
+  "version": "1.0.0-alpha.32",
+  "license": "UNLICENSED",
+  "repository": "https://github.com/zep-us/zep-script-sdk/tree/main/packages/zep-script-template",
   "publishConfig": {
     "access": "public"
   },
   "files": [
     "res",
+    "src",
     ".gitignore",
-    "babel.config.js",
-    "main.ts",
     "README.md",
     "tsconfig.json",
     "zep-script.json"
   ],
   "scripts": {
     "build": "zep-script build",
-    "pack": "zep-script pack",
-    "archive": "zep-script archive",
     "deploy": "zep-script publish"
   },
   "devDependencies": {
-    "@babel/cli": "^7.18.6",
-    "@babel/core": "^7.18.6",
-    "@babel/preset-typescript": "^7.18.6",
-    "@types/node": "^18.0.1",
-    "eslint": "^8.10.0",
-    "typescript": "^4.7.4",
-    "zep-script": "0.13.2"
+    "eslint": "^8.55.0",
+    "typescript": "^5.3.3",
+    "zep-script": "1.0.0-alpha.32"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

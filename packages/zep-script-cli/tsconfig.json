@@ -2,10 +2,7 @@
   "compilerOptions": {
     "target": "es2017",
     "module": "commonjs",
-    "lib": [
-      "es2017",
-      "dom"
-    ],
+    "lib": ["es2017"],
     "rootDir": "src",
     "outDir": "dist",
     "declaration": true,
@@ -23,7 +20,6 @@
     "resolveJsonModule": true,
   },
   "exclude": [
-    "dist",
-    "template"
+    "dist"
   ]
 }

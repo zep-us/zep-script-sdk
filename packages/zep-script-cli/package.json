@@ -1,9 +1,10 @@
 {
   "name": "@zep.us/zep-script-cli",
-  "version": "0.13.2",
+  "version": "1.0.0-alpha.32",
   "description": "Command Line Interface for ZEP Script",
   "author": "ZEP",
   "license": "MIT",
+  "repository": "https://github.com/zep-us/zep-script-sdk/tree/main/packages/zep-script-cli",
   "publishConfig": {
     "access": "public"
   },
@@ -12,19 +13,16 @@
   },
   "main": "dist/index.js",
   "files": [
-    "dist",
-    "template",
-    "!template/yarn.lock"
+    "dist"
   ],
   "scripts": {
     "start": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/bin.ts",
     "build": "tsc -p ."
   },
   "dependencies": {
-    "@types/fs-extra": "^9.0.13",
-    "@types/graceful-fs": "^4.1.5",
+    "@zep.us/rollup-config-zep-script": "1.0.0-alpha.32",
     "archiver": "^5.3.1",
-    "axios": "^0.27.2",
+    "axios": "^1.6.5",
     "chalk": "^4.1.2",
     "clear": "^0.1.0",
     "commander": "^9.3.0",
@@ -32,19 +30,20 @@
     "figlet": "^1.5.2",
     "form-data": "^4.0.0",
     "fs-extra": "^10.1.0",
-    "graceful-fs": "^4.2.10",
+    "graceful-fs": "^4.2.11",
     "ora": "^5.4.1",
-    "path": "^0.12.7",
     "prompt": "^1.3.0"
   },
   "devDependencies": {
-    "@types/archiver": "^5.3.1",
-    "@types/clear": "^0.1.2",
-    "@types/figlet": "^1.5.4",
-    "@types/node": "^18.0.1",
-    "@types/prompt": "^1.1.2",
-    "nodemon": "^2.0.18",
-    "ts-node": "^10.8.2",
-    "typescript": "^4.7.4"
+    "@types/archiver": "^5.3.2",
+    "@types/clear": "^0.1.4",
+    "@types/figlet": "^1.5.8",
+    "@types/fs-extra": "^11.0.4",
+    "@types/graceful-fs": "^4.1.9",
+    "@types/node": "^18.19.3",
+    "@types/prompt": "^1.1.8",
+    "nodemon": "^2.0.22",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
   }
 }
