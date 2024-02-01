@@ -51,22 +51,6 @@ Then you will be able to use ZEP Script's namespaces in global scope.
 ScriptApp.showCenterLabel("Hello world");
 ```
 
-### Transpiling
-
-As some APIs of ZEP Script conflicts with TypeScript's namespaces, you need to use babel to transpile your code.
-
-Add plugin to your babel config:
-
-```js
-module.exports = {
-  // ...
-  plugins: [
-    // ...
-    '@zep.us/zep-script',
-  ],
-};
-```
-
 ## ZEP Script API Documentation
 
 Refer to official documentation page:
