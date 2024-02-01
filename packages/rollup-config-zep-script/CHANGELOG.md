@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.31](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.30...v1.0.0-alpha.31) (2024-02-01)
+
+
+### Features
+
+* change entry file name to main.ts ([51e646f](https://github.com/zep-us/zep-script-sdk/commit/51e646f0ee9d4f540561bc61d3d76e6a32450036))
+
+
+
+
+
 # [1.0.0-alpha.30](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.29...v1.0.0-alpha.30) (2024-01-26)
 
 **Note:** Version bump only for package @zep.us/rollup-config-zep-script

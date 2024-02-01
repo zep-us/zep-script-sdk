@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.31](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.30...v1.0.0-alpha.31) (2024-02-01)
+
+**Note:** Version bump only for package zep-script
+
+
+
+
+
 ## [0.13.2](https://github.com/zep-us/zep-script-sdk/compare/v0.13.1...v0.13.2) (2024-01-16)
 
 **Note:** Version bump only for package zep-script
