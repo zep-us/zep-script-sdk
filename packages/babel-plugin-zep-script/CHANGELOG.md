@@ -3,25 +3,6 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [1.0.0-alpha.32](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.31...v1.0.0-alpha.32) (2024-02-01)
-
-**Note:** Version bump only for package @zep.us/babel-plugin-zep-script
-
-
-
-
-
-# [1.0.0-alpha.31](https://github.com/zep-us/zep-script-sdk/compare/v1.0.0-alpha.30...v1.0.0-alpha.31) (2024-02-01)
-
-
-### Features
-
-* change entry file name to main.ts ([51e646f](https://github.com/zep-us/zep-script-sdk/commit/51e646f0ee9d4f540561bc61d3d76e6a32450036))
-
-
-
-
-
 # [0.13.0](https://github.com/zep-us/zep-script-sdk/compare/v0.12.4...v0.13.0) (2024-01-02)
 
 **Note:** Version bump only for package @zep.us/babel-plugin-zep-script
