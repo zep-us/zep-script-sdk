@@ -9,16 +9,14 @@ import del from 'rollup-plugin-delete';
 import typescript from 'rollup-plugin-typescript2';
 
 export default {
-  input: 'src/index.ts',
-  output: [
-    {
-      file: `dist/main.js`,
-      format: 'cjs',
-      strict: true,
-      sourcemap: true,
-      plugins: [terser()],
-    }
-  ],
+  input: 'src/main.ts',
+  output: {
+    file: `dist/main.js`,
+    format: 'cjs',
+    strict: true,
+    sourcemap: true,
+    plugins: [terser()],
+  },
   plugins: [
     del({ targets: 'dist/*' }),
     nodeResolve(),
