@@ -122,7 +122,7 @@ async function createFromTemplate({
     const { useWidget } = await prompt<{ useWidget: boolean }>({
       type: "confirm",
       name: "useWidget",
-      message: "Do you want to add a react widget to your project?",
+      message: "Do you want to add a React widget to your project?",
     });
 
     loader.start("Downloading template");
