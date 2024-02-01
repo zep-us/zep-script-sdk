@@ -1,5 +1,6 @@
 import chalk from "chalk";
 import clear from "clear";
+import { prompt } from "enquirer";
 import execa from "execa";
 import fs from "fs-extra";
 import ora from "ora";
@@ -118,9 +119,18 @@ async function createFromTemplate({
   );
 
   try {
+    const { useWidget } = await prompt<{ useWidget: boolean }>({
+      type: "confirm",
+      name: "useWidget",
+      message: "Do you want to add a react widget to your project?",
+    });
+
     loader.start("Downloading template");
 
-    const templateName = "@zep.us/zep-script-template";
+    let templateName = "@zep.us/zep-script-template";
+    if (useWidget) {
+      templateName = "@zep.us/zep-script-template-react";
+    }
     await installTemplate({ npm, root: templateSourceDir, name: templateName });
 
     loader.succeed();

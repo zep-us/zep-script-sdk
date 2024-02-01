@@ -1,5 +1,5 @@
 import axios from "axios";
-import prompt from "prompt";
+import { prompt } from "enquirer";
 import fs from "fs-extra";
 import ora, { Ora } from "ora";
 import os from "os";
@@ -15,13 +15,10 @@ async function auth(loader: Ora, sessionFilePath: string) {
 
   const BASE_URL = process.env.BASE_URL || "https://zep.us";
 
-  prompt.start();
-
-  const { email } = await prompt.get({
+  const { email } = await prompt<{ email: string }>({
+    type: "input",
     name: "email",
-    description: "Enter your email",
-    type: "string",
-    required: true,
+    message: "Enter your email",
   });
 
   loader.start("Sending login code to your email...");
@@ -32,14 +29,13 @@ async function auth(loader: Ora, sessionFilePath: string) {
 
   loader.succeed();
 
-  const { code } = await prompt.get({
+  const { code } = await prompt<{ code: string }>({
+    type: "input",
     name: "code",
-    description: "Enter code sent to your email",
-    type: "string",
-    required: true,
+    message: "Enter code sent to your email",
   });
 
-  const confirmData: any = {
+  const confirmData = {
     email,
     t: code,
     isApp: false,
