@@ -1,13 +1,13 @@
 import chalk from "chalk";
 import clear from "clear";
 import { prompt } from "enquirer";
+import execa from "execa";
 import fs from "fs-extra";
 import ora from "ora";
 import os from "os";
 import path from "path";
 import banner from "../../utils/banner";
 import logger from "../../utils/logger";
-import { loadExeca } from "../../utils/loadEsm";
 
 type Options = {
   npm?: boolean;
@@ -52,7 +52,6 @@ async function installTemplate({
   logger.debug(`Installing template to ${root}`);
 
   const packageManager = npm ? "npm" : "yarn";
-  const { execa } = await loadExeca();
   await execa(packageManager, ["init", "--yes"], {
     stdio: !logger.isVerbose() ? "pipe" : "inherit",
     cwd: root,
@@ -97,7 +96,6 @@ async function installDependencies({
   logger.debug(`Installing dependencies in ${root}`);
 
   const packageManager = npm ? "npm" : "yarn";
-  const { execa } = await loadExeca();
   await execa(packageManager, ["install"], {
     stdio: !logger.isVerbose() ? "pipe" : "inherit",
     cwd: root,

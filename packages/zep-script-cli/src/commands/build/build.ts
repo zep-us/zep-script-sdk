@@ -1,5 +1,6 @@
 import Archiver from "archiver";
 import chalk from "chalk";
+import execa from "execa";
 import fs from "fs-extra";
 import ora from "ora";
 import path from "path";
@@ -9,7 +10,6 @@ import {
   isWidgetBuildExists,
   isWidgetDirExists,
 } from "../../utils/fileCheckers";
-import { loadExeca } from "../../utils/loadEsm";
 
 type Options = {
   projectRoot?: string;
@@ -17,7 +17,6 @@ type Options = {
 };
 
 async function buildWidget(root: string) {
-  const { execa } = await loadExeca();
   await execa("vite", ["build"], {
     stdio: !logger.isVerbose() ? "pipe" : "inherit",
     cwd: root,
@@ -25,7 +24,6 @@ async function buildWidget(root: string) {
 }
 
 async function buildScript(root: string) {
-  const { execa } = await loadExeca();
   await execa(
     "rollup",
     [

@@ -1,12 +1,12 @@
 import axios, { AxiosError } from "axios";
-import chalk from "chalk";
 import FormData from "form-data";
 import fs from "fs-extra";
 import ora from "ora";
 import os from "os";
 import path from "path";
 import logger from "../../utils/logger";
-import { loadExeca } from "../../utils/loadEsm";
+import execa from "execa";
+import chalk from "chalk";
 
 type Options = {
   projectRoot?: string;
@@ -88,7 +88,6 @@ export default (async function publish([]: Array<string>, options: Options) {
         JSON.stringify(configJsonObject, null, 4)
       );
 
-      const { execa } = await loadExeca();
       await execa("zep-script", ["build"]);
       await publish([], options);
     }
