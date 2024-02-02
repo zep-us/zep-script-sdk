@@ -17,7 +17,7 @@ type Options = {
 };
 
 async function buildWidget(root: string) {
-  await execa("vite", ["build"], {
+  await execa("npx", ["vite", "build"], {
     stdio: !logger.isVerbose() ? "pipe" : "inherit",
     cwd: root,
   });
@@ -25,8 +25,9 @@ async function buildWidget(root: string) {
 
 async function buildScript(root: string) {
   await execa(
-    "rollup",
+    "npx",
     [
+      "rollup",
       "--config",
       "node:@zep.us/rollup-config-zep-script",
       "--bundleConfigAsCjs",
