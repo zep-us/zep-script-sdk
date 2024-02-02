@@ -1,6 +1,6 @@
 {
   "name": "@zep.us/zep-script-cli",
-  "version": "1.0.0-alpha.35",
+  "version": "1.0.0-alpha.36",
   "description": "Command Line Interface for ZEP Script",
   "author": "ZEP",
   "license": "MIT",
@@ -20,14 +20,14 @@
     "build": "tsc -p ."
   },
   "dependencies": {
-    "@zep.us/rollup-config-zep-script": "1.0.0-alpha.35",
+    "@zep.us/rollup-config-zep-script": "1.0.0-alpha.36",
     "archiver": "^5.3.1",
     "axios": "^1.6.5",
     "chalk": "^4.1.2",
     "clear": "^0.1.0",
     "commander": "^9.3.0",
     "enquirer": "^2.4.1",
-    "execa": "^5.1.1",
+    "execa": "^8.0.1",
     "figlet": "^1.5.2",
     "form-data": "^4.0.0",
     "fs-extra": "^10.1.0",
