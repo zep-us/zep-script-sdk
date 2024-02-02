@@ -10,6 +10,7 @@ import chalk from "chalk";
 
 type Options = {
   projectRoot?: string;
+  config?: string;
 };
 
 async function findArchiveFile(root: string) {
@@ -27,15 +28,14 @@ async function findArchiveFile(root: string) {
 export default (async function publish([]: Array<string>, options: Options) {
   const cwd = process.cwd();
   const root = options.projectRoot || cwd;
+  const configPath = path.join(root, options.config || "zep-script.json");
+
   const BASE_URL = process.env.BASE_URL || "https://zep.us";
 
   const loader = ora();
 
   try {
-    const configJsonPath = path.join(root, "zep-script.json");
-    const configJsonObject = JSON.parse(
-      fs.readFileSync(configJsonPath).toString()
-    );
+    const configJsonObject = JSON.parse(fs.readFileSync(configPath).toString());
 
     const sessionFilePath = path.join(os.homedir(), ".zscsession");
 
@@ -83,10 +83,7 @@ export default (async function publish([]: Array<string>, options: Options) {
     if (configJsonObject.appId !== data.hashId) {
       configJsonObject.appId = data.hashId;
 
-      await fs.writeFile(
-        configJsonPath,
-        JSON.stringify(configJsonObject, null, 4)
-      );
+      await fs.writeFile(configPath, JSON.stringify(configJsonObject, null, 4));
 
       await execa("npx", [
         "zep-script",

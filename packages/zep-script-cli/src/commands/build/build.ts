@@ -14,6 +14,7 @@ import {
 type Options = {
   projectRoot?: string;
   outputPath?: string;
+  config?: string;
 };
 
 async function buildWidget(root: string) {
@@ -63,6 +64,9 @@ export default (async function build([]: Array<string>, options: Options) {
   const cwd = process.cwd();
   const root = options.projectRoot || cwd;
   const outputPath = options.outputPath || cwd;
+  const configPath = path.join(root, options.config || "zep-script.json");
+
+  process.env.ZEP_SCRIPT_CONFIG_PATH = configPath;
 
   const loader = ora();
   const archiver = Archiver("zip");

@@ -13,5 +13,10 @@ export default {
       name: "--outputPath <string>",
       description: "Sets output path of the archive.",
     },
+    {
+      name: "--config <string>",
+      description:
+        "Sets path to zep-script.json config file. Must be relative to projectRoot.",
+    },
   ],
 };

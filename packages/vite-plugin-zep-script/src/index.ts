@@ -8,7 +8,8 @@ const zepScriptPlugin = (): Plugin => ({
   config(config) {
     const root = config.root ?? process.cwd();
     const widgetPath = path.join(root, "widget");
-    const configJsonPath = path.join(root, "zep-script.json");
+    const configJsonPath =
+      process.env.ZEP_SCRIPT_CONFIG_PATH || path.join(root, "zep-script.json");
     const zepScriptConfig = JSON.parse(
       fs.readFileSync(configJsonPath).toString()
     );
