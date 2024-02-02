@@ -64,7 +64,7 @@ export default (async function build([]: Array<string>, options: Options) {
   const cwd = process.cwd();
   const root = options.projectRoot || cwd;
   const outputPath = options.outputPath || cwd;
-  const configPath = path.join(root, options.config || "zep-script.json");
+  const configPath = options.config || path.join(root, "zep-script.json");
 
   process.env.ZEP_SCRIPT_CONFIG_PATH = configPath;
 

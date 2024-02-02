@@ -11,8 +11,7 @@ export default {
     },
     {
       name: "--config <string>",
-      description:
-        "Sets path to zep-script.json config file.  Must be relative to projectRoot.",
+      description: "Sets path to zep-script.json config file.",
     },
   ],
 };
