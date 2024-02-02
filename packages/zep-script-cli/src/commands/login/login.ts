@@ -71,5 +71,6 @@ export default (async function login([]: Array<string>, options: Options) {
     if (e instanceof Error) {
       logger.error(e.message);
     }
+    process.exit(1);
   }
 });

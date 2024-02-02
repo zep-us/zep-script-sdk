@@ -10,6 +10,7 @@ import {
   isWidgetBuildExists,
   isWidgetDirExists,
 } from "../../utils/fileCheckers";
+import { loadViteDynamicImport } from "../../utils/load-vite";
 
 type Options = {
   projectRoot?: string;
@@ -17,15 +18,13 @@ type Options = {
 };
 
 async function buildWidget(root: string) {
-  await execa("vite", ["build"], {
-    stdio: !logger.isVerbose() ? "pipe" : "inherit",
-    cwd: root,
-  });
+  const { build } = await loadViteDynamicImport();
+  await build({ root });
 }
 
 async function buildScript(root: string) {
   await execa(
-    "rollup",
+    require.resolve("rollup/dist/bin/rollup"),
     [
       "--config",
       "node:@zep.us/rollup-config-zep-script",
@@ -115,5 +114,6 @@ export default (async function build([]: Array<string>, options: Options) {
     if (e instanceof Error) {
       logger.error(e.message);
     }
+    process.exit(1);
   }
 });

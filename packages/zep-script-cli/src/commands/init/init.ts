@@ -209,5 +209,6 @@ export default (async function initialize(
     if (e instanceof Error) {
       logger.error(e.message);
     }
+    process.exit(1);
   }
 });

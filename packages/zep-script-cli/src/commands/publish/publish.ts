@@ -108,5 +108,6 @@ export default (async function publish([]: Array<string>, options: Options) {
     } else if (e instanceof Error) {
       logger.error(e.message);
     }
+    process.exit(1);
   }
 });
