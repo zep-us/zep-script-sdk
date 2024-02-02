@@ -88,7 +88,14 @@ export default (async function publish([]: Array<string>, options: Options) {
         JSON.stringify(configJsonObject, null, 4)
       );
 
-      await execa("npx", ["zep-script", "build"]);
+      await execa("npx", [
+        "zep-script",
+        "build",
+        "--projectRoot",
+        root,
+        "--outputPath",
+        root,
+      ]);
       await publish([], options);
     }
 
