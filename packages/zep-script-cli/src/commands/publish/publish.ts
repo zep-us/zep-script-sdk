@@ -13,6 +13,39 @@ type Options = {
   config?: string;
 };
 
+function getAppId(config: Record<string, any>) {
+  if (typeof config.appId === "string") {
+    return { appId: config.appId };
+  } else if (typeof config.appId === "object") {
+    const baseUrl = process.env.BASE_URL;
+    let environment = "dev";
+    if (baseUrl) {
+      try {
+        const url = new URL(baseUrl);
+        if (url.hostname === "zep.us") {
+          environment = "live";
+        } else if (url.hostname.endsWith(".zep.us")) {
+          environment = url.hostname.replace(".zep.us", "");
+        } else {
+          console.error("Invalid BASE_URL");
+        }
+      } catch (error) {
+        console.error("Invalid BASE_URL");
+      }
+    }
+    const appIdForEnvironment = config.appId[environment];
+    if (typeof appIdForEnvironment !== "string") {
+      throw new Error(`appId for environment ${environment} not found`);
+    }
+    return {
+      appId: appIdForEnvironment,
+      environment,
+    };
+  } else {
+    throw new Error("Invalid appId");
+  }
+}
+
 async function findArchiveFile(root: string) {
   const archiveFiles = fs
     .readdirSync(root)
@@ -36,6 +69,7 @@ export default (async function publish([]: Array<string>, options: Options) {
 
   try {
     const configJsonObject = JSON.parse(fs.readFileSync(configPath).toString());
+    const { appId, environment } = getAppId(configJsonObject);
 
     const sessionFilePath = path.join(os.homedir(), ".zscsession");
 
@@ -55,8 +89,8 @@ export default (async function publish([]: Array<string>, options: Options) {
     formData.append("file", archiveFile, archiveFileName);
     formData.append("name", configJsonObject.name);
     formData.append("description", configJsonObject.description);
-    if (configJsonObject.appId) {
-      formData.append("appHashId", configJsonObject.appId);
+    if (appId) {
+      formData.append("appHashId", appId);
     }
 
     let type = "1";
@@ -71,7 +105,7 @@ export default (async function publish([]: Array<string>, options: Options) {
 
     loader.start(`Publishing ${configJsonObject.name}...`);
 
-    const method = configJsonObject.appId ? "put" : "post";
+    const method = appId ? "put" : "post";
     const {
       data: { data },
     } = await axios[method](`${BASE_URL}/api/v2/me/apps`, formData, {
@@ -80,8 +114,12 @@ export default (async function publish([]: Array<string>, options: Options) {
         ...formData.getHeaders(),
       },
     });
-    if (configJsonObject.appId !== data.hashId) {
-      configJsonObject.appId = data.hashId;
+    if (appId !== data.hashId) {
+      if (environment) {
+        configJsonObject.appId[environment] = data.hashId;
+      } else {
+        configJsonObject.appId = data.hashId;
+      }
 
       await fs.writeFile(configPath, JSON.stringify(configJsonObject, null, 4));
 
