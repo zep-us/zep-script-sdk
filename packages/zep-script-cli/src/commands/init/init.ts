@@ -1,12 +1,13 @@
 import chalk from "chalk";
 import clear from "clear";
+import { prompt } from "enquirer";
 import execa from "execa";
 import fs from "fs-extra";
 import ora from "ora";
 import os from "os";
 import path from "path";
-import banner from "../../tools/banner";
-import logger from "../../tools/logger";
+import banner from "../../utils/banner";
+import logger from "../../utils/logger";
 
 type Options = {
   npm?: boolean;
@@ -77,9 +78,11 @@ async function renameProjectName(projectRoot: string, projectName: string) {
   const packageJson = path.join(projectRoot, "package.json");
   const packageJsonObject = JSON.parse(fs.readFileSync(packageJson).toString());
   packageJsonObject.name = projectName;
+  packageJsonObject.version = "0.0.1";
   delete packageJsonObject.publishConfig;
   delete packageJsonObject.files;
   delete packageJsonObject.gitHead;
+  delete packageJsonObject.repository;
   fs.writeFileSync(packageJson, JSON.stringify(packageJsonObject, null, 2));
 }
 
@@ -116,9 +119,18 @@ async function createFromTemplate({
   );
 
   try {
+    const { useWidget } = await prompt<{ useWidget: boolean }>({
+      type: "confirm",
+      name: "useWidget",
+      message: "Do you want to add a React widget to your project?",
+    });
+
     loader.start("Downloading template");
 
-    const templateName = "@zep.us/zep-script-template";
+    let templateName = "@zep.us/zep-script-template";
+    if (useWidget) {
+      templateName = "@zep.us/zep-script-template-react";
+    }
     await installTemplate({ npm, root: templateSourceDir, name: templateName });
 
     loader.succeed();
@@ -197,5 +209,6 @@ export default (async function initialize(
     if (e instanceof Error) {
       logger.error(e.message);
     }
+    process.exit(1);
   }
 });

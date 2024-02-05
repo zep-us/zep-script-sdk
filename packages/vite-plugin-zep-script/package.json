@@ -1,0 +1,27 @@
+{
+  "name": "@zep.us/vite-plugin-zep-script",
+  "version": "1.0.0-alpha.44",
+  "license": "MIT",
+  "repository": "https://github.com/zep-us/zep-script-sdk/tree/main/packages/vite-plugin-zep-script",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p ."
+  },
+  "dependencies": {
+    "@vitejs/plugin-react-swc": "^3.5.0"
+  },
+  "peerDependencies": {
+    "vite": "^5"
+  },
+  "devDependencies": {
+    "@types/node": "^18.19.3",
+    "vite": "^5.0.12"
+  }
+}

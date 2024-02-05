@@ -1,6 +1,19 @@
 {
+  "files": [],
+  "include": [],
   "compilerOptions": {
+    "strict": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "noEmit": true,
-    "isolatedModules": true
-  }
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": false,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+  },
+  "references": [
+    { "path": "./tsconfig.zep.json" }
+  ]
 }

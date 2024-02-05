@@ -1,64 +1,125 @@
+import Archiver from "archiver";
 import chalk from "chalk";
 import execa from "execa";
 import fs from "fs-extra";
 import ora from "ora";
 import path from "path";
-import logger from "../../tools/logger";
+import logger from "../../utils/logger";
+import {
+  isScriptBuildExists,
+  isWidgetBuildExists,
+  isWidgetDirExists,
+} from "../../utils/fileCheckers";
 
 type Options = {
   projectRoot?: string;
+  outputPath?: string;
+  config?: string;
 };
 
-function checkMainFile(root: string) {
-  let mainFilePath = path.join(root, "main.ts");
-  if (fs.existsSync(mainFilePath)) {
-    return "typescript";
-  }
-  mainFilePath = path.join(root, "main.js");
-  if (fs.existsSync(mainFilePath)) {
-    return "javascript";
-  }
-  throw new Error("No main file found.");
+async function buildWidget(root: string) {
+  await execa("npx", ["vite", "build"], {
+    stdio: !logger.isVerbose() ? "pipe" : "inherit",
+    cwd: root,
+  });
 }
 
-export default (async function archive([]: Array<string>, options: Options) {
+async function buildScript(root: string) {
+  await execa(
+    "npx",
+    [
+      "rollup",
+      "--config",
+      "node:@zep.us/rollup-config-zep-script",
+      "--bundleConfigAsCjs",
+    ],
+    {
+      stdio: !logger.isVerbose() ? "pipe" : "inherit",
+      cwd: root,
+    }
+  );
+}
+
+async function archiveScript(root: string, archiver: Archiver.Archiver) {
+  if (!isScriptBuildExists(root)) {
+    throw new Error("Script build not found.");
+  }
+  const scriptBuildPath = path.join(root, "dist");
+  archiver.directory(scriptBuildPath, false);
+}
+
+async function archiveResource(root: string, archiver: Archiver.Archiver) {
+  const resDirPath = path.join(root, "res");
+  archiver.directory(resDirPath, false);
+}
+
+async function archiveWidget(root: string, archiver: Archiver.Archiver) {
+  if (isWidgetBuildExists(root)) {
+    const widgetBuildPath = path.join(root, "widget/dist");
+    archiver.directory(widgetBuildPath, "widget");
+  }
+}
+
+export default (async function build([]: Array<string>, options: Options) {
   const cwd = process.cwd();
   const root = options.projectRoot || cwd;
+  const outputPath = options.outputPath || cwd;
+  const configPath = options.config || path.join(root, "zep-script.json");
+
+  process.env.ZEP_SCRIPT_CONFIG_PATH = configPath;
 
   const loader = ora();
+  const archiver = Archiver("zip");
 
   try {
-    loader.start("Analyzing project");
-
     const projectName = path.basename(root);
-    const projectLanguage = checkMainFile(root);
+    const hasWidget = isWidgetDirExists(root);
 
-    loader.succeed();
-    loader.start("Building project");
-
-    if (projectLanguage === "typescript") {
-      await execa("npx", ["tsc", "-p", ".", "--noEmit"], {
-        stdio: !logger.isVerbose() ? "pipe" : "inherit",
-        cwd: root,
-      });
+    if (hasWidget) {
+      loader.start("Building widget");
+      await buildWidget(root);
+      loader.succeed();
     }
 
-    await execa(
-      "npx",
-      ["babel", "main.ts", "--out-dir", "dist", "--extensions", ".ts"],
-      {
-        stdio: !logger.isVerbose() ? "pipe" : "inherit",
-        cwd: root,
-      }
-    );
-
+    loader.start("Building project");
+    await buildScript(root);
     loader.succeed();
 
-    logger.log(chalk.green(`Project ${projectName} built successfully.`));
+    loader.start("Archiving project");
+
+    const archiveOutputPath = path.join(
+      outputPath,
+      `${projectName}.zepapp.zip`
+    );
+    const output = fs.createWriteStream(archiveOutputPath);
+    output.on("close", function () {
+      loader.succeed();
+
+      logger.log(chalk.green(`Project ${projectName} built successfully.`));
+
+      process.exit(0);
+    });
+    output.on("error", function (err) {
+      archiver.abort();
+      loader.fail();
+      logger.error(err.message);
+
+      process.exit(1);
+    });
+
+    archiver.pipe(output);
+
+    await archiveScript(root, archiver);
+    await archiveResource(root, archiver);
+    await archiveWidget(root, archiver);
+
+    await archiver.finalize();
   } catch (e) {
+    archiver.abort();
     loader.fail();
     if (e instanceof Error) {
       logger.error(e.message);
     }
+    process.exit(1);
   }
 });

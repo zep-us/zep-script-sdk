@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import "./tools/gracefulifyFs";
+import "./utils/gracefulifyFs";
 
 import { run } from "./";
 
