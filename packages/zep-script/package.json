@@ -1,6 +1,6 @@
 {
   "name": "zep-script",
-  "version": "1.0.0-alpha.46",
+  "version": "1.0.0-alpha.47",
   "description": "ZEP Script API for ZEP app",
   "author": "ZEP",
   "homepage": "https://zep.us",
@@ -15,6 +15,6 @@
     "node": ">=18"
   },
   "dependencies": {
-    "@zep.us/zep-script-cli": "1.0.0-alpha.46"
+    "@zep.us/zep-script-cli": "1.0.0-alpha.47"
   }
 }
