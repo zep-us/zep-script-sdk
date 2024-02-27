@@ -7,6 +7,7 @@ import path from "path";
 import logger from "../../utils/logger";
 import {
   isScriptBuildExists,
+  isViteConfigExists,
   isWidgetBuildExists,
   isWidgetDirExists,
 } from "../../utils/fileCheckers";
@@ -18,10 +19,12 @@ type Options = {
 };
 
 async function buildWidget(root: string) {
-  await execa("npx", ["vite", "build"], {
-    stdio: !logger.isVerbose() ? "pipe" : "inherit",
-    cwd: root,
-  });
+  if (isViteConfigExists(root)) {
+    await execa("npx", ["vite", "build"], {
+      stdio: !logger.isVerbose() ? "pipe" : "inherit",
+      cwd: root,
+    });
+  }
 }
 
 async function buildScript(root: string) {

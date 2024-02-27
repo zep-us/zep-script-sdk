@@ -10,12 +10,14 @@ export function getScriptLanguage(root: string) {
   if (fs.existsSync(scriptFilePath)) {
     return "javascript";
   }
-  throw new Error("No script source file found. Tried to find index.ts or index.js in src folder.");
+  throw new Error(
+    "No script source file found. Tried to find index.ts or index.js in src folder."
+  );
 }
 
 export function isScriptBuildExists(root: string) {
   let scriptDistFilePath = path.join(root, "dist/main.js");
-  return fs.existsSync(scriptDistFilePath)
+  return fs.existsSync(scriptDistFilePath);
 }
 
 export function isWidgetDirExists(root: string) {
@@ -23,7 +25,12 @@ export function isWidgetDirExists(root: string) {
   return fs.existsSync(widgetDirPath);
 }
 
+export function isViteConfigExists(root: string) {
+  let viteConfigFilePath = path.join(root, "vite.config.ts");
+  return fs.existsSync(viteConfigFilePath);
+}
+
 export function isWidgetBuildExists(root: string) {
   let widgetDistFilePath = path.join(root, "widget/dist/index.html");
-  return fs.existsSync(widgetDistFilePath)
+  return fs.existsSync(widgetDistFilePath);
 }
