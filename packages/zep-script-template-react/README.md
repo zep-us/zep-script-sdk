@@ -9,7 +9,7 @@ Template for ZEP Script app.
 ┣ 📂res
 ┣ 📂src
 ┃ ┗ main.ts
-┣ 📂widget
+┣ 📂zep-script-widget
 ┃ ┣ 📂src
 ┃ ┃ ┗ main.tsx
 ┃ ┗ index.html

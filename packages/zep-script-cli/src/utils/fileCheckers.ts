@@ -21,7 +21,7 @@ export function isScriptBuildExists(root: string) {
 }
 
 export function isWidgetDirExists(root: string) {
-  let widgetDirPath = path.join(root, "widget");
+  let widgetDirPath = path.join(root, "zep-script-widget");
   return fs.existsSync(widgetDirPath);
 }
 
@@ -31,6 +31,6 @@ export function isViteConfigExists(root: string) {
 }
 
 export function isWidgetBuildExists(root: string) {
-  let widgetDistFilePath = path.join(root, "widget/dist/index.html");
+  let widgetDistFilePath = path.join(root, "zep-script-widget/dist/index.html");
   return fs.existsSync(widgetDistFilePath);
 }

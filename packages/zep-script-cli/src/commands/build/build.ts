@@ -58,8 +58,8 @@ async function archiveResource(root: string, archiver: Archiver.Archiver) {
 
 async function archiveWidget(root: string, archiver: Archiver.Archiver) {
   if (isWidgetBuildExists(root)) {
-    const widgetBuildPath = path.join(root, "widget/dist");
-    archiver.directory(widgetBuildPath, "widget");
+    const widgetBuildPath = path.join(root, "zep-script-widget/dist");
+    archiver.directory(widgetBuildPath, "zep-script-widget");
   }
 }
 

@@ -9,7 +9,7 @@
   "files": [
     "res",
     "src",
-    "widget",
+    "zep-script-widget",
     ".gitignore",
     "README.md",
     "tsconfig.json",

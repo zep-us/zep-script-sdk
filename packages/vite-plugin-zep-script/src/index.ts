@@ -35,14 +35,14 @@ const zepScriptPlugin = (): Plugin => ({
   name: "zep-script",
   config(config) {
     const root = config.root ?? process.cwd();
-    const widgetPath = path.join(root, "widget");
+    const widgetPath = path.join(root, "zep-script-widget");
     const configJsonPath = path.join(root, "zep-script.json");
     const zepScriptConfig = JSON.parse(
       fs.readFileSync(configJsonPath).toString()
     );
     const appId = getAppId(zepScriptConfig);
     const pluginConfig: UserConfig = {
-      base: `/app/${appId}/widget`,
+      base: `/app/${appId}/zep-script-widget`,
       plugins: [...(config.plugins || []), react()],
       root: widgetPath,
       publicDir: false,
