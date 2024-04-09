@@ -1,6 +1,6 @@
 {
   "name": "@zep.us/zep-script-template-react",
-  "version": "1.0.0-alpha.49",
+  "version": "1.0.0-alpha.50",
   "license": "UNLICENSED",
   "repository": "https://github.com/zep-us/zep-script-sdk/tree/main/packages/zep-script-template-react",
   "publishConfig": {
@@ -28,11 +28,11 @@
   "devDependencies": {
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
-    "@zep.us/vite-plugin-zep-script": "1.0.0-alpha.49",
+    "@zep.us/vite-plugin-zep-script": "1.0.0-alpha.50",
     "eslint": "^8.55.0",
     "typescript": "^5.3.3",
     "vite": "^5.0.12",
-    "zep-script": "1.0.0-alpha.49"
+    "zep-script": "1.0.0-alpha.50"
   },
   "engines": {
     "node": ">=18"
