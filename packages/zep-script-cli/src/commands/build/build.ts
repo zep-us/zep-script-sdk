@@ -6,6 +6,7 @@ import ora from "ora";
 import path from "path";
 import logger from "../../utils/logger";
 import {
+  isLegacyScriptBuildExists,
   isScriptBuildExists,
   isViteConfigExists,
   isWidgetBuildExists,
@@ -16,6 +17,7 @@ type Options = {
   projectRoot?: string;
   outputPath?: string;
   config?: string;
+  legacy?: boolean;
 };
 
 async function buildWidget(root: string) {
@@ -51,6 +53,15 @@ async function archiveScript(root: string, archiver: Archiver.Archiver) {
   archiver.directory(scriptBuildPath, false);
 }
 
+async function archiveLegacyApp(root: string, archiveFileName: string, archiver: Archiver.Archiver) {
+  if (!isLegacyScriptBuildExists(root)) {
+    throw new Error("Script(main.js) not found.");
+  }
+
+  const ignoreStrings = [`**/${archiveFileName}`, 'zep-script.json'];
+  archiver.glob('**/*', { cwd: root, ignore: ignoreStrings});
+}
+
 async function archiveResource(root: string, archiver: Archiver.Archiver) {
   const resDirPath = path.join(root, "res");
   archiver.directory(resDirPath, false);
@@ -68,6 +79,7 @@ export default (async function build([]: Array<string>, options: Options) {
   const root = options.projectRoot || cwd;
   const outputPath = options.outputPath || cwd;
   const configPath = options.config || path.join(root, "zep-script.json");
+  const isLegacyBuild = options.legacy || false;
 
   process.env.ZEP_SCRIPT_CONFIG_PATH = configPath;
 
@@ -78,21 +90,24 @@ export default (async function build([]: Array<string>, options: Options) {
     const projectName = path.basename(root);
     const hasWidget = isWidgetDirExists(root);
 
-    if (hasWidget) {
-      loader.start("Building widget");
-      await buildWidget(root);
+    if (!isLegacyBuild) {
+      if (hasWidget) {
+        loader.start("Building widget");
+        await buildWidget(root);
+        loader.succeed();
+      }
+
+      loader.start("Building project");
+      await buildScript(root);
       loader.succeed();
     }
 
-    loader.start("Building project");
-    await buildScript(root);
-    loader.succeed();
+    loader.start("Archiving project!!!!!!!!!");
 
-    loader.start("Archiving project");
-
+    const archiveFileName = `${projectName}.zepapp.zip`;
     const archiveOutputPath = path.join(
-      outputPath,
-      `${projectName}.zepapp.zip`
+      isLegacyBuild ? root : outputPath,
+      archiveFileName
     );
     const output = fs.createWriteStream(archiveOutputPath);
     output.on("close", function () {
@@ -112,9 +127,13 @@ export default (async function build([]: Array<string>, options: Options) {
 
     archiver.pipe(output);
 
-    await archiveScript(root, archiver);
-    await archiveResource(root, archiver);
-    await archiveWidget(root, archiver);
+    if (isLegacyBuild) {
+      await archiveLegacyApp(root, archiveFileName, archiver);
+    } else {
+      await archiveScript(root, archiver);
+      await archiveResource(root, archiver);
+      await archiveWidget(root, archiver);
+    }
 
     await archiver.finalize();
   } catch (e) {

@@ -20,6 +20,11 @@ export function isScriptBuildExists(root: string) {
   return fs.existsSync(scriptDistFilePath);
 }
 
+export function isLegacyScriptBuildExists(root: string) {
+  let scriptFilePath = path.join(root, "main.js");
+  return fs.existsSync(scriptFilePath);
+}
+
 export function isWidgetDirExists(root: string) {
   let widgetDirPath = path.join(root, "zep-script-widget");
   return fs.existsSync(widgetDirPath);

@@ -17,5 +17,9 @@ export default {
       name: "--config <string>",
       description: "Sets path to zep-script.json config file.",
     },
+    {
+      name: "--legacy <boolean>",
+      description: "Set mode to build Zep-script legacy app(.js)"
+    }
   ],
 };
