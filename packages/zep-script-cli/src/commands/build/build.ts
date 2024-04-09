@@ -58,7 +58,7 @@ async function archiveLegacyApp(root: string, archiveFileName: string, archiver:
     throw new Error("Script(main.js) not found.");
   }
 
-  const ignoreStrings = [`**/${archiveFileName}`, 'zep-script.json'];
+  const ignoreStrings = [`**/${archiveFileName}`, 'zep-script.json', 'project.json'];
   archiver.glob('**/*', { cwd: root, ignore: ignoreStrings});
 }
 
