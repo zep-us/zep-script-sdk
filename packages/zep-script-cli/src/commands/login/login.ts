@@ -8,12 +8,13 @@ import logger from "../../utils/logger";
 
 type Options = {
   projectRoot?: string;
+  target?: string;
 };
 
-async function auth(loader: Ora, sessionFilePath: string) {
+async function auth(loader: Ora, sessionFilePath: string, options :Options) {
   await fs.remove(sessionFilePath);
 
-  const BASE_URL = process.env.BASE_URL || "https://zep.us";
+  const BASE_URL = options.target || process.env.BASE_URL || "https://zep.us";
 
   const { email } = await prompt<{ email: string }>({
     type: "input",
@@ -24,6 +25,8 @@ async function auth(loader: Ora, sessionFilePath: string) {
   loader.start("Sending login code to your email...");
 
   const loginData = { email };
+
+  loader.info(`BASE_URL: ${BASE_URL}`);
 
   await axios.post(`${BASE_URL}/api/v2/signin`, loginData);
 
@@ -65,7 +68,7 @@ export default (async function login([]: Array<string>, options: Options) {
   try {
     const sessionFilePath = path.join(os.homedir(), ".zscsession");
 
-    await auth(loader, sessionFilePath);
+    await auth(loader, sessionFilePath, options);
   } catch (e) {
     loader.fail();
     if (e instanceof Error) {
