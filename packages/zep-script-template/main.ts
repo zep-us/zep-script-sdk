@@ -4,7 +4,9 @@
 
 import "zep-script";
 
-ScriptApp.showCenterLabel("Hello World");
+import { add } from "./src/add";
+
+ScriptApp.showCenterLabel(`Hello World ${add(1, 1)}`);
 
 let zepLogo = ScriptApp.loadSpritesheet("zep_logo.png");
 

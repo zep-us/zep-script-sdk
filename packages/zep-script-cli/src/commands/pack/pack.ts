@@ -43,14 +43,10 @@ export default (async function archive([]: Array<string>, options: Options) {
       });
     }
 
-    await execa(
-      "npx",
-      ["babel", "main.ts", "--out-dir", "res", "--extensions", ".ts"],
-      {
-        stdio: !logger.isVerbose() ? "pipe" : "inherit",
-        cwd: root,
-      }
-    );
+    await execa("npx", ["webpack","--output-path","./res"], {
+      stdio: !logger.isVerbose() ? "pipe" : "inherit",
+      cwd: root,
+    });
 
     loader.succeed();
 
