@@ -11,12 +11,12 @@ declare global {
      */
 
     /**
-     * App이 설치된 스페이스의 해쉬값 (Read Only)
+     * App이 설치된 스페이스의 해시값 (Read Only)
      */
     const spaceHashID: string;
 
     /**
-     * App이 설치된 맵의 해쉬값 (Read Only)
+     * App이 설치된 맵의 해시값 (Read Only)
      */
     const mapHashID: string;
 
@@ -31,9 +31,15 @@ declare global {
     const playerCount: number;
 
     /**
-     * App을 실행한 플레이어의 ID 값 (Read Only)
+     * (미니 게임을 실행 한 경우 유효)
+     * 미니게임을 실행한 플레이어의 ID 값 (Read Only)
      */
-    const creatorID: string;
+    const creatorID: string | undefined;
+
+    /**
+     * 실행한 App의 Id 해시값
+     */
+    const appHashID: string;
 
     /**
      * 화면의 줌을 컨트롤 하는 값 (기본 값: 1)
@@ -62,14 +68,14 @@ declare global {
     let followPlayer: boolean;
 
     /**
-     * App의 HashId
-     */
-    let appHashID: string;
-
-    /**
      * 플레이어 닉네임 숨김 여부
      */
     let showName: boolean;
+
+    /**
+     * 앱이 설치된 맵의 둘러보기 허용 여부
+     */
+    let enableFreeView: boolean;
 
     /**
      * ==========================================
@@ -241,7 +247,8 @@ declare global {
           player: ScriptPlayer,
           layerId: number,
           x: number,
-          y: number
+          y: number,
+          key: string,
         ) => void
       ): void;
     }
@@ -270,7 +277,7 @@ declare global {
      * 같은 데이터를 가지도록 동기화 해주는 함수입니다.
      * @param callback
      */
-    function getStorage(callback: () => void): void;
+    function getStorage(callback: (storage: string) => void): void;
 
     /**
      * App.setStorage 함수는 기존 App storage 데이터 저장 방식을 보완한 데이터 저장 함수입니다.
@@ -353,6 +360,15 @@ declare global {
             left_jump?: number[];
             right_jump?: number[];
             up_jump?: number[];
+            down_sit?: number[];
+            left_sit?: number[];
+            right_sit?: number[];
+            up_sit?: number[];
+            down_attack?: number[];
+            left_attack?: number[];
+            right_attack?: number[];
+            up_attack?: number[];
+            [key: string]: number[] | undefined;
           },
       frameRate?: number
     ): ScriptDynamicResource;
@@ -478,7 +494,7 @@ declare global {
     /**
      * 모든 플레이어에게 링크에 해당하는 사운드를 재생
      * @param link
-     * @param loop
+     * @param loop 반복 재생 여부
      */
     function playSoundLink(link: string, loop?: boolean): void;
 

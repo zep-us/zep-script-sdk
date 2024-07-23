@@ -103,15 +103,15 @@ export class ScriptPlayer {
   /**
    * 타일 X 좌표
    */
-  tileX: number;
+  readonly tileX: number;
   /**
    * 타일 Y 좌표
    */
-  tileY: number;
+  readonly tileY: number;
   /**
    * 바라보는 방향
    */
-  dir: number;
+  readonly dir: number;
   /**
    * 움직이는 속도(기본 80)
    */
@@ -135,11 +135,11 @@ export class ScriptPlayer {
   /**
    * 화상비디오 가능 여부
    */
-  disableVideo: boolean;
+  readonly disableVideo: boolean;
   /**
    * 화상오디오 가능 여부
    */
-  disableAudio: boolean;
+  readonly disableAudio: boolean;
   /**
    * 어택 타입(기본 : 0, 원거리공격 : 2)
    */
@@ -160,7 +160,7 @@ export class ScriptPlayer {
   /**
    * 전자지갑 주소(Read Only)
    */
-  walletAddress: string;
+  readonly walletAddress: string;
   /**
    * 스페이스 내의 플레이어 값 저장공간(스페이스 한정)
    */
@@ -178,22 +178,27 @@ export class ScriptPlayer {
   displayRatio: number;
 
   /**
-   * 플레이어의 이메일해쉬
+   * 플레이어의 이메일 해시값
    */
-  emailHash: string;
+  readonly emailHash: string;
 
   /**
-   * 플레이어의 모바일 접속 여부를 true/false 로 출력
+   * 플레이어의 모바일 접속 여부
    */
   readonly isMobile: boolean;
 
   /**
-   * 플레이어가 움직이고 있으면 True, 아니면 False를 반환
+   * 플레이어의 태블릿 접속 여부
+   */
+  readonly isTablet: boolean;
+
+  /**
+   * 플레이어가 움직이고 있으면 true, 아니면 false를 반환
    */
   readonly isMoving: boolean;
 
   /**
-   * 플레이어가 점프하고 있으면 True, 아니면 False를 반환
+   * 플레이어가 점프하고 있으면 true, 아니면 false를 반환
    */
   readonly isJumping: boolean;
 
@@ -211,6 +216,11 @@ export class ScriptPlayer {
    * 5분 이상 비활성화된 유저인 경우 true값을 가집니다.
    */
   readonly away: boolean;
+
+  /**
+   * 플레이어의 맵 둘러보기 허용 여부를 설정할 수 있습니다.
+   */
+  enableFreeView: boolean;
 
   /**
    * 플레이어에게 지정된 위치에 해당 text를 3초간 표시
@@ -273,12 +283,12 @@ export class ScriptPlayer {
   /**
    * 플레이어를 해당 좌표로 소환
    */
-  spawnAt(tileX: number, tileY: number, dir: number): void;
+  spawnAt(tileX: number, tileY: number, dir?: number): void;
 
   /**
    * 플레이어를 해당 구역으로 소환
    */
-  spawnAtLocation(name: string, dir: number): void;
+  spawnAtLocation(name: string, dir?: number): void;
 
   /**
    * 플레이어를 해당 스페이스 해당 맵으로 이동시키기
@@ -301,7 +311,7 @@ export class ScriptPlayer {
   playSoundLink(link: string, loop: boolean): void;
 
   /**
-   * 플레이어 필드값을 수정한 후 업데이트
+   * 변경된 플레이어 필드 값 반영
    */
   sendUpdated(): void;
 
@@ -374,14 +384,15 @@ export class ScriptPlayer {
    * @param text
    * @param callback
    */
-  showConfirm(text: string, callback?: (res: boolean) => {}, option?: PopupOption): void;
+  showConfirm(text: string, callback?: (res: boolean) => void, option?: PopupOption): void;
 
   /**
    * 플레이어에게 경고창을 보여주고, 플레이어가 OK를 눌렀을 때 동작하는 callback 함수를 작성할 수 있습니다.
    * @param text
    * @param callback
+   * @param option
    */
-  showAlert(text: string, callback?: (res: boolean) => {}, option?: PopupOption): void;
+  showAlert(text: string, callback?: (res: boolean) => void, option?: PopupOption): void;
 
   /**
    * @private
@@ -391,24 +402,15 @@ export class ScriptPlayer {
 
   /**
    * 플레이어에게 입력한 이미지 주소에 해당하는 이미지를 표시합니다.
-   * @param url 표시할이미지 url
+   * @param url 이미지 url
    */
   showImageModal(url: string): void;
 
   /**
    * 플레이어에게 텍스트 창을 보여주는 함수입니다.
-   * @param url 표시할이미지 url
+   * @param text
    */
-  showNoteModal(url: string): void;  
-  
-  /**
-   * 플레이어의 배경 또는 전경 이미지를 설정 할 수 있습니다.
-   * @param resource 스크립트에 로드한 이미지 객체
-   * @param offsetX px 단위로 x 축 방향의 오프셋을 설정할 수 있는 속성
-   * @param offsetY px 단위로 y 축 방향의 오프셋을 설정할 수 있는 속성
-   * @param type 설정타입, 0: 배경 설정 , 1 : 전경 설정
-   */
-  setEffectSprite(resource: ScriptDynamicResource, offsetX: number, offsetY: number, type: number): void;
+  showNoteModal(text: string): void;
 
   /**
    * 플레이어의 시점을 지정된 좌표로 중심 이동시킵니다.
@@ -417,11 +419,28 @@ export class ScriptPlayer {
    * @param time 시점이 목표 지점까지 이동하는데 걸리는 시간(초)
    */
   setCameraTarget(tileX: number, tileY: number, time: number): void;
+  
+  /**
+   * 플레이어의 배경 또는 전경 이미지를 설정 할 수 있습니다.
+   * @param resource 스크립트에 로드한 이미지 객체
+   * @param offsetX px 단위로 x 축 방향의 오프셋을 설정할 수 있는 속성
+   * @param offsetY px 단위로 y 축 방향의 오프셋을 설정할 수 있는 속성
+   * @param type 설정타입, 0: 배경 설정 , 1 : 전경 설정
+   */
+  setEffectSprite(resource: ScriptDynamicResource | null, offsetX: number, offsetY: number, type: number): void;
 
   /**
-   * 플레이어의 시점을 특정 오브젝트로 중심 이동시킵니다.
-   * @param key 오브젝트의 키 값
-   * @param time 시점이 목표 지점까지 이동하는데 걸리는 시간(초)
+   * 플레이어에게 효과 스프라이트를 재생합니다.
+   * @param resource 효과 스프라이트에 사용할 ScriptDynamicResource 객체
+   * @param repeatNum 효과 스프라이트의 반복 횟수
+   * @param offsetX 효과 스프라이트의 X 축 오프셋 값
+   * @param offsetY 효과 스프라이트의 Y 축 오프셋 값
    */
-  setCameraTarget(key: string, time: number): void;
+  playEffectSprite(resource: ScriptDynamicResource | null, repeatNum: number, offsetX: number, offsetY: number): void;
+
+  /**
+   * 특정 키 값을 가진 오브젝트를 사라지게 합니다.
+   * @param key 사라질 오브젝트의 키 값
+   */
+  disappearObject(key: String): void;
 }
