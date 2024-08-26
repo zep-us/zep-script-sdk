@@ -47,7 +47,7 @@ export type PopupOption = {
    * - 'primary': 푸른색,
    * - 'alert': 붉은색
    */
-  confrimVariant?: "primary" | "alert" ;
+  confirmVariant?: "primary" | "alert" ;
   /**
    * cancel 버튼의 텍스트 (Default: "취소")
    */
