@@ -222,6 +222,11 @@ export class ScriptPlayer {
    */
   enableFreeView: boolean;
 
+  /** 
+   * 플레이어의 찌르기 공격 허용 여부를 설정할 수 있습니다.
+  */
+  disableAttack: boolean;
+
   /**
    * 플레이어에게 지정된 위치에 해당 text를 3초간 표시
    * @param text 출력할 텍스트 값
