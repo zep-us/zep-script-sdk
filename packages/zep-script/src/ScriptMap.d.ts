@@ -446,7 +446,7 @@ declare global {
      */
     function getObjectWithKey(
       key: string,
-    ): MapDataTileAppObject;
+    ): NpcObject;
 
     /**
      * 해당하는 레이어의 x, y 좌표에 있는 타일의 타입 값을 리턴, 타일이 없으면 -1을 리턴합니다.
