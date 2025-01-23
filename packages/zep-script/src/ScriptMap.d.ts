@@ -21,6 +21,242 @@ export enum TileEffectType {
   SPACE_PORTAL = 11
 }
 
+export type TileEffectOption = {
+    [TileEffectType.NONE]: null;
+    [TileEffectType.IMPASSABLE]: null;
+    [TileEffectType.SPAWN]: null;
+    [TileEffectType.PORTAL]: TileEffectPortalOption;
+    [TileEffectType.PRIVATE_AREA]: TileEffectPrivateAreaOption;
+    [TileEffectType.SPOTLIGHT]: null;
+    [TileEffectType.EMBED]: TileEffectEmbedOption;
+    [TileEffectType.LOCATION]: TileEffectLocationOption;
+    [TileEffectType.AMBIENT_SOUND]: TileEffectAmbientSoundOption;
+    [TileEffectType.TILE_EMBED]: TileEffectTileEmbedOption;
+    [TileEffectType.WEB_PORTAL]: TileEffectWebPortalOption;
+    [TileEffectType.SPACE_PORTAL]: TileEffectSpacePortalOption;
+};
+
+/**
+ * 스페이스 내 다른 맵으로 이동 또는 맵 내 지정 영역으로 이동하는 타일 효과의 상세 옵션입니다.
+ */
+export type TileEffectPortalOption = {
+    /**
+     * 0이면 스페이스 내 다른 맵으로 이동하는 포털 타일로 설정됩니다.
+     * 1이면 맵 내 지정영역으로 이동하는 포털 타일을 설치합니다.
+     */
+    type: 0 | 1;
+
+    /**
+     * 이동할 맵의 ID값입니다.
+     */
+    targetMapID: string;
+
+    /**
+     * 포털 위에 표시할 텍스트 값
+     */
+    label?: string;
+
+    /** 
+     * true이면 플레이어가 포탈에 닿았을 때 바로 이동합니다.
+     * false이면 플레이어가 포탈에서 F키를 눌렀을 때 이동합니다.
+     * 기본 값 false
+     */
+    triggerByTouch?: boolean;
+
+    /** 
+     * true이면 기본 포털 이미지를 표시하지 않습니다.
+     * false이면 기본 포털 이미지를 표시합니다.
+     * 기본 값 true
+     */
+    invisible?: boolean;
+
+    /**
+     * 이동할 지정영역의 이름 값입니다.
+     * type이 1인 경우 필수값입니다.
+     */
+    locationName?: string;
+};
+
+/**
+ * 외부 스페이스의 특정 맵으로 이동하는 타일 효과의 상세 옵션입니다.
+ */
+export type TileEffectSpacePortalOption = {
+    /**
+     * 포털 위에 표시할 텍스트 값
+     */
+    label?: string;
+
+    /**
+     * 이동할 맵의 ID값입니다.
+     */
+    targetMapID: string;
+
+    /**
+     * 이동할 지정영역의 이름 값입니다.
+     */
+    locationName?: string;
+
+    /**
+     * true이면 플레이어가 포탈에 닿았을 때 바로 이동합니다.
+     * false이면 플레이어가 포탈에서 F키를 눌렀을 때 이동합니다.
+     * 기본 값 false
+     */
+    triggerByTouch?: boolean;
+
+    /**
+     * true이면 기본 포털 이미지를 표시하지 않습니다.
+     * false이면 기본 포털 이미지를 표시합니다.
+     * 기본 값 true
+     */
+    invisible?: boolean;
+};
+
+/**
+ * 팝업으로 웹 링크를 여는 타일 효과의 상세 옵션입니다.
+ */
+export type TileEffectEmbedOption = {
+    /**
+     * 팝업으로 열 웹페이지의 URL입니다.
+     */
+    link: string;
+
+    /**
+     * 팝업을 표시할 위치 값입니다.
+     */
+    align2: "popup" | "sidebar" | "top" | "topleft" | "topright" | "middle" | "middleleft" | "middleright" | "bottom" | "bottomleft" | "bottomright";
+
+    /**
+     * 포털 위에 표시할 텍스트 값입니다.
+     */
+    label?: string;
+
+    /**
+     * true이면 플레이어가 포탈에 닿았을 때 바로 실행됩니다.
+     * false이면 플레이어가 포탈에서 F키를 눌렀을 때 실행됩니다.
+     * 기본 값 false
+     */
+    triggerByTouch?: boolean;
+
+    /**
+     * true이면 기본 포털 이미지를 표시하지 않습니다.
+     * false이면 기본 포털 이미지를 표시합니다.
+     * 기본 값 true
+     */
+    invisible?: boolean;
+};
+
+/**
+ * 새 탭으로 웹 링크를 여는 타일 효과의 상세 옵션입니다.
+ */
+export type TileEffectWebPortalOption = {
+    /**
+     * 팝업으로 열 웹페이지의 URL입니다.
+     */
+    link: string;
+
+    /**
+     * 포털 위에 표시할 텍스트 값입니다.
+     */
+    label?: string;
+
+    /**
+     * true이면 기본 포털 이미지를 표시하지 않습니다.
+     * false이면 기본 포털 이미지를 표시합니다.
+     * 기본 값 false
+     */
+    invisible?: boolean;
+};
+
+/**
+ * 웹 화면을 고정 영역에 표시하는 타일 효과의 상세 옵션입니다.
+ */
+export type TileEffectTileEmbedOption = {
+    /**
+     * 웹 URL 값입니다.
+     */
+    link: string;
+
+    /**
+     * 고정 영역의 너비 (타일 수)입니다.
+     */
+    width: number;
+
+    /**
+     * 고정 영역의 높이 (타일 수)입니다.
+     */
+    height: number;
+};
+
+/**
+ * 프라이빗 영역 타일 효과의 상세 옵션입니다.
+ */
+export type TileEffectPrivateAreaOption = {
+    /**
+     * 프라이빗 영역의 ID 값입니다.
+     */
+    id: number;
+
+    /**
+     * true일 경우 프라이빗 영역을 통과 불가능하게 설정합니다.
+     * 기본 값 false
+     */
+    impassable?: boolean;
+
+    /**
+     * "true"일 경우 인원제한 프라이빗 영역이 설정됩니다.
+     * 기본 값 "false"
+     */
+    param1?: "true" | "false";
+};
+
+/**
+ * 지정영역 타일 효과의 상세 옵션입니다.
+ */
+export type TileEffectLocationOption = {
+    /**
+     * 타일 위에 표시할 텍스트 값입니다.
+     * 선택사항입니다.
+     */
+    label?: string;
+
+    /**
+     * 지정 영역의 이름입니다.
+     */
+    name: string;
+
+    /**
+     * 고정 영역의 너비 (타일 수)입니다.
+     */
+    width: number;
+
+    /**
+     * 고정 영역의 높이 (타일 수)입니다.
+     */
+    height: number;
+};
+
+/**
+ * 배경 음악 타일 효과의 상세 옵션입니다.
+ */
+export type TileEffectAmbientSoundOption = {
+    /**
+     * 재생할 음악 파일의 이름입니다. (압축 파일에 포함)
+     */
+    link: string;
+
+    /**
+     * 음악의 재생 범위 (타일 수)입니다.
+     */
+    activeDistance: number;
+
+    /**
+     * true인 경우, 플레이어가 타일에 닿았을 때 음악이 재생됩니다.
+     * false인 경우, 플레이어가 타일에서 F키를 눌렀을 때 음악이 재생됩니다.
+     */
+    triggerByTouch?: boolean;
+};
+
+
 /**
  * 애플리케이션 키 오브젝트 데이터를 나타내는 타입입니다.
  */
@@ -354,7 +590,7 @@ declare global {
      * @param tileID 타일에 적용할 효과
      * @param option 타일 효과 옵션
      */
-    function putTileEffect(x: number, y: number, tileID: TileEffectType, option?: object): void;
+    function putTileEffect<K extends keyof TileEffectOption>(x: number, y: number, tileID: K, option?: TileEffectOption[K]): void;
 
     /**
      * 지정된 좌표에 오브젝트를 놓음 (기준 좌표 : Left-Top)
@@ -500,7 +736,7 @@ declare global {
      * 오브젝트를 배치할 좌표들을 2차원 배열로 입력하여 한 번에 오브젝트를 설치하는 기능입니다. 이 기능을 사용하면 한 번에 많은 오브젝트를 설치할 경우 부하를 줄이는 효과를 얻을 수 있습니다.
      */
     function putObjectMultiple(
-        tileArray: Array<Array<number>>, type: PutObjectType, dynamicResource: ScriptDynamicResource | null, option?: object
+        tileArray: Array<Array<number>>, type: PutObjectType, dynamicResource: ScriptDynamicResource | null, option?: { overlap: boolean }
     ) : void
     
     /**
