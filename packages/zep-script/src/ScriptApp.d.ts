@@ -1,6 +1,7 @@
 import { ScriptDynamicResource } from "./ScriptDynamicResource";
 import {CustomCenterLabelOption, ScriptPlayer} from "./ScriptPlayer";
 import { ScriptWidget } from "./ScriptWidget";
+import { MapDataTileObject } from "./ScriptMapDataTileObject";
 import { KeyCode } from "./KeyCode";
 
 declare global {
@@ -157,15 +158,7 @@ declare global {
      * 플레이어가 오브젝트와 부딪혔을 때 호출 되는 이벤트
      */
     namespace onObjectTouched {
-      function Add(
-        callback: (
-          sender: ScriptPlayer,
-          x: number,
-          y: number,
-          tileID: number,
-          obj: object
-        ) => void
-      ): void;
+      function Add(callback: (sender: ScriptPlayer, x: number, y: number, tileID: number, obj: MapDataTileObject) => void): void;
     }
 
     /**
