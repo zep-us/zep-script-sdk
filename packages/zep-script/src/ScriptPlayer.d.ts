@@ -265,7 +265,7 @@ export class ScriptPlayer {
    */
   showWidget(
     fileName: string,
-    align: string,
+    align: "popup" | "sidebar" | "top" | "topleft" | "topright" | "middle" | "middleleft" | "middleright" | "bottom" | "bottomleft" | "bottomright",
     width: number,
     height: number
   ): ScriptWidget;
@@ -365,7 +365,7 @@ export class ScriptPlayer {
    */
   showEmbed(
     url: string,
-    align: string,
+    align: "sidebar" | "top" | "topleft" | "topright" | "middle" | "middleleft" | "middleright" | "bottom" | "bottomleft" | "bottomright",
     width: number,
     height: number,
     hasBackdrop?: boolean

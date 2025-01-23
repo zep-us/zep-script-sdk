@@ -423,10 +423,10 @@ declare global {
      * @param height
      */
     function showWidget(
-      fileName: string,
-      align: string,
-      width: number,
-      height: number
+        fileName: string,
+        align: "popup" | "sidebar" | "top" | "topleft" | "topright" | "middle" | "middleleft" | "middleright" | "bottom" | "bottomleft" | "bottomright",
+        width: number,
+        height: number
     ): ScriptWidget;
 
     /**
@@ -437,10 +437,10 @@ declare global {
      * @param height
      */
     function showYoutubeWidget(
-      link: string,
-      align: string,
-      width: number,
-      height: number
+        link: string,
+        align: "popup" | "sidebar" | "top" | "topleft" | "topright" | "middle" | "middleleft" | "middleright" | "bottom" | "bottomleft" | "bottomright",
+        width: number,
+        height: number
     ): ScriptWidget;
 
     /**
