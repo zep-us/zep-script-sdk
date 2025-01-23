@@ -1,6 +1,7 @@
 import { ScriptDynamicResource } from "./ScriptDynamicResource";
 import {CustomCenterLabelOption, ScriptPlayer} from "./ScriptPlayer";
 import { ScriptWidget } from "./ScriptWidget";
+import { KeyCode } from "./KeyCode";
 
 declare global {
   namespace ScriptApp {
@@ -300,10 +301,7 @@ declare global {
      * @param keycode
      * @param callback
      */
-    function addOnKeyDown(
-      keycode: number,
-      callback: (player: ScriptPlayer) => void
-    ): void;
+    function addOnKeyDown(keycode: KeyCode | number, callback: (player: ScriptPlayer) => void): void;
 
     /**
      * enable이 true이면 모바일 환경에서 펀치 버튼이 추가
