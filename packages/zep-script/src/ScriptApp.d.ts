@@ -200,14 +200,20 @@ declare global {
     }
 
     /**
-     * 플레이어가 사이드바 앱을 클릭(터치) 했을 때 호출되는 이벤트 등록
+     * 플레이어가 사이드바 앱 아이콘을 클릭(터치)하여 활성화할 때 호출되는 이벤트 등록
      */
     namespace onSidebarTouched {
-      function Add(callback: (sender: ScriptPlayer) => void): void;
+      function Add(callback: (player: ScriptPlayer) => void): void;
     }
 
     /**
-     * 플레이어가 사이드바 앱을 클릭(터치) 했을 때 호출 되는 이벤트 등록
+     * 플레이어가 활성화된 사이드바 앱의 아이콘을 다시 클릭(터치)하여 비활성화할 때 호출되는 이벤트 등록
+     */
+    namespace onSidebarDeactivated {
+        function Add(callback: (player: ScriptPlayer) => void): void;
+    }
+
+    /**
      * 플레이어가 키 값을 가진 앱 오브젝트와 충돌할 때 호출되는 이벤트 등록
      */
     namespace onAppObjectTouched {
