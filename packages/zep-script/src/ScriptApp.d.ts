@@ -94,7 +94,7 @@ declare global {
     }
 
     /**
-     * 플레이어가 스페이스에서 나갈 때 호출 되는 이벤트 등록
+     * 플레이어가 스페이스에서 들어올 때 호출되는 이벤트 등록
      */
     namespace onJoinPlayer {
       function Add(callback: (player: ScriptPlayer) => void): void;
@@ -308,14 +308,14 @@ declare global {
      * @param locationName 지정영역의 이름
      * @param callback
      */
-    function addOnLocationEnter(locationName: number, callback: (player: ScriptPlayer) => void): void;
+    function addOnLocationEnter(locationName: string, callback: (player: ScriptPlayer) => void): void;
 
     /**
      * 플레이어가 특정 지정영역에서 퇴장할 때 실행되는 콜백 등록
      * @param locationName 지정영역의 이름
      * @param callback
      */
-    function addOnLocationExit(locationName: number, callback: (player: ScriptPlayer) => void): void;
+    function addOnLocationExit(locationName: string, callback: (player: ScriptPlayer) => void): void;
 
     /**
      * 플레이어가 특정 번호의 PA에 입장할 때 실행되는 콜백 등록
