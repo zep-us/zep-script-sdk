@@ -214,6 +214,13 @@ declare global {
     }
 
     /**
+     * 플레이어가 이름을 변경할 때 호출되는 이벤트 등록
+     */
+    namespace onPlayerNameChanged {
+        function Add(callback: (player: ScriptPlayer, oldName: string) => void): void;
+    }
+
+    /**
      * 플레이어가 키 값을 가진 앱 오브젝트와 충돌할 때 호출되는 이벤트 등록
      */
     namespace onAppObjectTouched {
