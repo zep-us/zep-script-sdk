@@ -208,6 +208,7 @@ declare global {
 
     /**
      * 플레이어가 사이드바 앱을 클릭(터치) 했을 때 호출 되는 이벤트 등록
+     * 플레이어가 키 값을 가진 앱 오브젝트와 충돌할 때 호출되는 이벤트 등록
      */
     namespace onAppObjectTouched {
       function Add(
