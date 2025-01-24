@@ -86,7 +86,7 @@ declare global {
      */
 
     /**
-     * App 실행 시에 최초로 호출되는 이벤트 (유저 진입 전)
+     * App 실행 시에 최초로 호출되는 이벤트 등록 (유저 진입 전)
      * Normal App과 Sidebar App은 Script 적용 후 맵이 실행될 때 호출
      */
     namespace onInit {
@@ -94,21 +94,21 @@ declare global {
     }
 
     /**
-     * 플레이어가 스페이스에서 나갈 때 호출 되는 이벤트
+     * 플레이어가 스페이스에서 나갈 때 호출 되는 이벤트 등록
      */
     namespace onJoinPlayer {
       function Add(callback: (player: ScriptPlayer) => void): void;
     }
 
     /**
-     * 플레이어 모두 진입 시 최초로 시작되는 이벤트
+     * 플레이어 모두 진입 시 최초로 시작되는 이벤트 등록
      */
     namespace onStart {
       function Add(callback: () => void): void;
     }
 
     /**
-     * 20ms 마다 호출되는 이벤트
+     * 20ms 마다 호출되는 이벤트 등록
      * dt: deltatime(전 프레임이 완료되기까지 걸린 시간)
      */
     namespace onUpdate {
@@ -116,14 +116,14 @@ declare global {
     }
     
     /**
-     * 플레이어가 스페이스에서 나갈 때 호출 되는 이벤트
+     * 플레이어가 스페이스에서 나갈 때 호출되는 이벤트 등록
      */
     namespace onLeavePlayer {
       function Add(callback: (player: ScriptPlayer) => void): void;
     }
 
     /**
-     * App 종료 시 마지막으로 호출
+     * App 종료 시 마지막으로 호출되는 이벤트 등록
      * Normal App과 Sidebar App은 별도의 종료
      */
     namespace onDestroy {
@@ -131,7 +131,7 @@ declare global {
     }
 
     /**
-     * 플레이어들이 채팅창에 입력하는 모든 채팅에 대해 호출 되는 이벤트
+     * 플레이어들이 채팅창에 입력하는 모든 채팅에 대해 호출되는 이벤트 등록
      * !로 시작하는 텍스트는 채팅창에 나오지 않으나, onSay 함수에는 사용 가능
      */
     namespace onSay {
@@ -141,7 +141,7 @@ declare global {
     }
 
     /**
-     * 플레이어가 다른 플레이어와 부딪혔을 때 호출 되는 이벤트
+     * 플레이어가 다른 플레이어와 부딪혔을 때 호출되는 이벤트 등록
      */
     namespace onPlayerTouched {
       function Add(
@@ -155,14 +155,14 @@ declare global {
     }
 
     /**
-     * 플레이어가 오브젝트와 부딪혔을 때 호출 되는 이벤트
+     * 플레이어가 오브젝트와 부딪혔을 때 호출되는 이벤트 등록
      */
     namespace onObjectTouched {
       function Add(callback: (sender: ScriptPlayer, x: number, y: number, tileID: number, obj: MapDataTileObject) => void): void;
     }
 
     /**
-     * 플레이어가 다른 플레이어를 공격했을 때 (Z키) 호출 되는 이벤트
+     * 플레이어가 다른 플레이어를 공격했을 때 (Z키) 호출되는 이벤트 등록
      */
     namespace onUnitAttacked {
       function Add(
@@ -176,7 +176,7 @@ declare global {
     }
 
     /**
-     * 플레이어가 오브젝트를 공격(Z키)했을 때 호출 되는 이벤트
+     * 플레이어가 오브젝트를 공격(Z키)했을 때 호출되는 이벤트 등록
      */
     namespace onObjectAttacked {
       function Add(
@@ -185,7 +185,7 @@ declare global {
     }
 
     /**
-     * 플레이어가 공격 키(Z)로 키 값을 가진 오브젝트를 공격할 때 동작합니다.
+     * 플레이어가 공격 키(Z)로 키 값을 가진 오브젝트를 공격할 때 호출되는 이벤트 등록
      */
     namespace onAppObjectAttacked {
       function Add(
@@ -200,14 +200,14 @@ declare global {
     }
 
     /**
-     * 플레이어가 사이드바 앱을 클릭(터치) 했을 때 호출 되는 이벤트
+     * 플레이어가 사이드바 앱을 클릭(터치) 했을 때 호출되는 이벤트 등록
      */
     namespace onSidebarTouched {
       function Add(callback: (sender: ScriptPlayer) => void): void;
     }
 
     /**
-     * 플레이어가 사이드바 앱을 클릭(터치) 했을 때 호출 되는 이벤트
+     * 플레이어가 사이드바 앱을 클릭(터치) 했을 때 호출 되는 이벤트 등록
      */
     namespace onAppObjectTouched {
       function Add(
@@ -221,7 +221,7 @@ declare global {
     }
 
     /**
-     * 클라이언트에서 window.parent.postMessage를 사용해 메시지를 보내는 경우 callback 함수를 실행합니다.
+     * 클라이언트에서 window.parent.postMessage를 사용해 메시지를 보내는 경우 실행되는 callback 함수를 등록
      */
     namespace onPostMessage {
       function Add(
@@ -230,7 +230,7 @@ declare global {
     }
 
     /**
-     * 오브젝트와 F 상호작용 시 동작하는 함수를 작성할 수 있습니다.
+     * 오브젝트와 F 상호작용 시 동작하는 함수를 등록합니다.
      * 맵에디터로 설치한 오브젝트와 상호작용 시 동작합니다.
      * 오브젝트인 경우 layerId = 3
      * 상단 오브젝트인 경우 layerId = 5
@@ -255,7 +255,7 @@ declare global {
     function runLater(callback: () => void, time: number): void;
 
     /**
-     * 플레이어가 해당 위치의 타일과 부딪혔을 때 실행
+     * 플레이어가 해당 위치의 타일과 부딪혔을 때 실행되는 콜백 등록
      * @param x
      * @param y
      * @param callback
@@ -280,7 +280,7 @@ declare global {
     function setStorage(string: string): void;
 
     /**
-     * 플레이어가 지정한 위치와 부딪혔을 때 실행
+     * 플레이어가 지정한 위치와 부딪혔을 때 실행되는 콜백 등록
      * @param name
      * @param callback
      */
@@ -318,6 +318,7 @@ declare global {
     function addOnPrivateAreaExit(areaNumber: number, callback: (player: ScriptPlayer, areaNumber: number) => void): void;
 
     /**
+     * 플레이어가 지정된 키를 눌렀을 때 실행되는 콜백 등록
      * @param keycode
      * @param callback
      */
