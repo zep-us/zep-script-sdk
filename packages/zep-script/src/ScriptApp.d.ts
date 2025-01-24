@@ -290,7 +290,34 @@ declare global {
     ): void;
 
     /**
-     * 플레이어가 지정된 키를 눌렀을 때 실행
+     * 플레이어가 특정 지정영역에 입장할 때 실행되는 콜백 등록
+     * @param locationName 지정영역의 이름
+     * @param callback
+     */
+    function addOnLocationEnter(locationName: number, callback: (player: ScriptPlayer) => void): void;
+
+    /**
+     * 플레이어가 특정 지정영역에서 퇴장할 때 실행되는 콜백 등록
+     * @param locationName 지정영역의 이름
+     * @param callback
+     */
+    function addOnLocationExit(locationName: number, callback: (player: ScriptPlayer) => void): void;
+
+    /**
+     * 플레이어가 특정 번호의 PA에 입장할 때 실행되는 콜백 등록
+     * @param areaNumber PA의 번호. -1이면 번호와 무관하게 모든 PA에 입장할 때 콜백 실행
+     * @param callback
+     */
+    function addOnPrivateAreaEnter(areaNumber: number, callback: (player: ScriptPlayer, areaNumber: number) => void): void;
+
+    /**
+     * 플레이어가 특정 번호의 PA에서 퇴장할 때 실행되는 콜백 등록
+     * @param areaNumber PA의 번호. -1이면 번호와 무관하게 모든 PA로부터 퇴장 시 콜백 실행
+     * @param callback
+     */
+    function addOnPrivateAreaExit(areaNumber: number, callback: (player: ScriptPlayer, areaNumber: number) => void): void;
+
+    /**
      * @param keycode
      * @param callback
      */
