@@ -5,3 +5,4 @@ export * from "./src/ScriptMap";
 export * from "./src/ScriptPlayer";
 export * from "./src/ScriptWidget";
 export * from "./src/ScriptUtility";
+export * from "./src/KeyCodeType";
