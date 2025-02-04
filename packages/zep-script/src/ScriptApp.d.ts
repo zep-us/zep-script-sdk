@@ -131,8 +131,8 @@ declare global {
     }
 
     /**
-     * 플레이어들이 채팅창에 입력하는 모든 채팅에 대해 호출되는 이벤트 등록
-     * !로 시작하는 텍스트는 채팅창에 나오지 않으나, onSay 함수에는 사용 가능
+     * 플레이어들이 채팅창에 입력하는 모든 메세지에 대해 호출되는 이벤트 등록
+     * '!'로 시작하는 텍스트는 채팅창에 나오지 않으나, onSay 함수에는 사용 가능
      */
     namespace onSay {
       function Add(
@@ -210,7 +210,7 @@ declare global {
      * 플레이어가 활성화된 사이드바 앱의 아이콘을 다시 클릭(터치)하여 비활성화할 때 호출되는 이벤트 등록
      */
     namespace onSidebarDeactivated {
-        function Add(callback: (player: ScriptPlayer) => void): void;
+      function Add(callback: (player: ScriptPlayer) => void): void;
     }
 
     /**
@@ -289,9 +289,9 @@ declare global {
 
     /**
      * App.setStorage 함수는 기존 App storage 데이터 저장 방식을 보완한 데이터 저장 함수입니다.
-     * @param string
+     * @param data
      */
-    function setStorage(string: string): void;
+    function setStorage(data: string): void;
 
     /**
      * 플레이어가 지정한 위치와 부딪혔을 때 실행되는 콜백 등록

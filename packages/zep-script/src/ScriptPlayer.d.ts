@@ -265,7 +265,7 @@ export class ScriptPlayer {
     width?: number,
     opacity?: number,
     time?: number,
-    option?: CustomCenterLabelOption,
+    option?: CustomCenterLabelOption
   ): void;
 
   /**
@@ -279,7 +279,9 @@ export class ScriptPlayer {
   ): ScriptWidget;
 
   /**
-   * 플레이어의 이메일을 확인
+   * 플레이어의 이메일이 특정 값과 일치하는지 확인합니다.
+   * @param email 비교할 이메일 문자열
+   * @returns 일치하면 true, 아니라면 false
    */
   isEmail(email: string): boolean;
 
@@ -349,7 +351,9 @@ export class ScriptPlayer {
    * @param price 아이템의 가격 (화폐단위: ZEM)
    * @param callback 구매 성공시 동작할 콜백함수
    * @param payToSpaceOwner false인 경우 앱 소유자에게 수익이 전달되고, true인 경우 맵 소유자에게 수익이 전달됩니다. (default: false)
-   * @param option message : 구매창에 표시할 텍스트를 설정 할 수 있습니다. / timer : 구매창을 표시할 시간(ms)을 설정할 수 있습니다.
+   * @param option 구매창의 메시지 및 타이머를 설정하는 옵션 객체입니다.
+   * - message : 구매창에 표시할 텍스트
+   * - timer : 구매창을 표시할 시간(ms)
    */
   showBuyAlert(
     itemName: string,
@@ -434,7 +438,7 @@ export class ScriptPlayer {
 
   /**
    * 플레이어에게 텍스트 창을 보여주는 함수입니다.
-   * @param text
+   * @param text 표시할 텍스트
    */
   showNoteModal(text: string): void;
 
@@ -475,5 +479,5 @@ export class ScriptPlayer {
    * 특정 키 값을 가진 오브젝트를 사라지게 합니다.
    * @param key 사라질 오브젝트의 키 값
    */
-  disappearObject(key: String): void;
+  disappearObject(key: string): void;
 }

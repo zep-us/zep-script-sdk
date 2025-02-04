@@ -1,8 +1,6 @@
 import { ScriptDynamicResource } from "./ScriptDynamicResource";
 import { ObjectEffectType } from "./ScriptObjectEffectType";
 
-export {};
-
 /**
  * 타일 효과 유형을 나타내는 열거형입니다.
  */
@@ -267,7 +265,7 @@ export type AppKeyObjectData = {
   type?: ObjectEffectType | number;
   
   /**
-   * 오브젝트의 키 값입니다.
+   * 오브젝트의 키값입니다.
    */
   key?: string;
 
@@ -278,8 +276,8 @@ export type AppKeyObjectData = {
   useDirAnim?: boolean;
 
   /**
-   * true 이면 통과 불가능 오브젝트로 설정됩니다.
-   */
+   * true이면 오브젝트를 통과할 수 없도록 설정됩니다.
+  */
   impassable?: boolean;
 
   /**
@@ -303,7 +301,7 @@ export type AppKeyObjectData = {
   /**
    * NPC 속성입니다.
    */
-  npcProperty: NpcProperty;
+  npcProperty?: NpcProperty;
 
   /**
    * X 축 오프셋 값입니다.
@@ -535,7 +533,7 @@ type MapDataTileAppObject = MapDataTileObject & {
   tileY: number;
 
   /**
-   * 오브젝트의 키 값입니다.
+   * 오브젝트의 키값입니다.
    */
   key: string;
 
@@ -607,7 +605,7 @@ declare global {
     ): Promise<void>;
 
     /**
-     * 지정한 좌표에 키 값을 가진 오브젝트를 놓음 (기준 좌표 : Left-Top)
+     * 지정한 좌표에 키값을 가진 오브젝트를 놓음 (기준 좌표 : Left-Top)
      * @param x X 좌표
      * @param y Y 좌표
      * @param dynamicResource `App.loadSpritesheet()` 함수를 통해 사전에 로드한 이미지 파일 객체
@@ -664,7 +662,7 @@ declare global {
 
     /**
      * key 값을 가진 오브젝트를 타겟 좌표로 이동
-     * @param key 오브젝트의 키 값
+     * @param key 오브젝트의 키값
      * @param targetX 목표가 되는 X 좌표
      * @param targetY 목표가 되는 Y 좌표
      * @param usePath true일 경우 Impassable 타일을 통과하지 못합니다.(default: true)
@@ -677,8 +675,8 @@ declare global {
     ): boolean;
 
     /**
-     * 해당 키 값을 가진 오브젝트의 정보를 가져옴
-     * @param key 오브젝트의 키 값
+     * 해당 키값을 가진 오브젝트의 정보를 가져옴
+     * @param key 오브젝트의 키값
      */
     function getObjectWithKey(
       key: string,
@@ -716,7 +714,7 @@ declare global {
      * key 값이 일치하는 오브젝트의 스프라이트 애니메이션을 실행시키는 함수
      * @param key 오브젝트의 키값
      * @param animName 플레이할 애니메이션의 이름
-     * @param repeatCount 애니메이션 반복 횟수 ( -1 입력시 무한반복 )
+     * @param repeatCount 애니메이션 반복 횟수 (-1 입력시 무한반복)
      */
     function playObjectAnimationWithKey(
       key: string, 
@@ -733,7 +731,8 @@ declare global {
     ): boolean;
     
     /**
-     * 오브젝트를 배치할 좌표들을 2차원 배열로 입력하여 한 번에 오브젝트를 설치하는 기능입니다. 이 기능을 사용하면 한 번에 많은 오브젝트를 설치할 경우 부하를 줄이는 효과를 얻을 수 있습니다.
+     * 오브젝트를 배치할 좌표들을 2차원 배열로 입력하여 한 번에 오브젝트를 설치하는 기능입니다.
+     * 이 기능을 사용하면 다량의 오브젝트를 설치할 경우 부하를 줄일 수 있습니다.
      */
     function putObjectMultiple(
         tileArray: Array<Array<number>>, type: PutObjectType, dynamicResource: ScriptDynamicResource | null, option?: { overlap: boolean }
@@ -755,7 +754,7 @@ declare global {
     ) : { x: number, y: number }
 
     /**
-     *  파라미터로 전달한 로케이션이 2개이상 존재하는 경우,무작위로 선택하여 해당 로케이션의 설치 좌표를 리턴합니다.
+     *  파라미터로 전달한 로케이션이 2개이상 존재하는 경우, 무작위로 선택하여 해당 로케이션의 설치 좌표를 리턴합니다.
      *  @param locationName 로케이션 이름
      */
     function getLocationRandom(
