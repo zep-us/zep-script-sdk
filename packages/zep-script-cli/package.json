@@ -41,7 +41,7 @@
     "@types/archiver": "^5.3.1",
     "@types/clear": "^0.1.2",
     "@types/figlet": "^1.5.4",
-    "@types/node": "^18.0.1",
+    "@types/node": "^22.13.1",
     "@types/prompt": "^1.1.2",
     "nodemon": "^2.0.18",
     "ts-node": "^10.8.2",
