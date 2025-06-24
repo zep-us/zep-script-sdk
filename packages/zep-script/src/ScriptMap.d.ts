@@ -254,9 +254,55 @@ export type TileEffectAmbientSoundOption = {
     triggerByTouch?: boolean;
 };
 
+export type PutObjectOption = {
+  /**
+   * 오브젝트의 타입입니다.
+   */
+  type?: ObjectEffectType.CHANGE_OBJECT | ObjectEffectType.INTERACTION_WITH_ZEPSCRIPTS;
+  
+  /**
+   * X 축 오프셋 값입니다.
+   */
+  offsetX?: number;
+  
+  /**
+   * Y 축 오프셋 값입니다.
+   */
+  offsetY?: number;
+  
+  /**
+   * 오브젝트가 활성화될 수 있는 거리입니다. 유저가 이 거리 내에 있을 때 오브젝트가 트리거될 수 있습니다.
+   */
+  activeDistance?: number;
+
+  /**
+   * 값이 true이면 사용자가 activeDistance 내에 있으면 자동으로 트리거되고, false이면 사용자가 F 키를 눌렀을 때만 트리거됩니다.
+   */
+  triggerByTouch?: boolean;
+
+  /**
+   * 값이 true이면 오브젝트를 통과할 수 없도록 설정됩니다.
+   */
+  impassable?: boolean;
+
+  /**
+   * 오브젝트의 이동 속도입니다.
+   */
+  movespeed?: number;
+
+  /**
+   * 방향 애니메이션 사용 여부입니다.
+   * 기본 값 false
+   */
+  useDirAnim?: boolean;
+
+  overlap?: boolean;
+  collide?: boolean;
+}
+
 
 /**
- * 애플리케이션 키 오브젝트 데이터를 나타내는 타입입니다.
+ * 키 오브젝트 데이터를 나타내는 타입입니다.
  */
 export type AppKeyObjectData = {
   /**
@@ -324,6 +370,12 @@ export type AppKeyObjectData = {
    * 기본 값 false
    */
   triggerByTouch?: boolean;
+
+  /**
+   * 상단 오브젝트 여부입니다.
+   * 기본 값 false
+   */
+  topObject?: boolean;
 
 }
 
@@ -601,7 +653,7 @@ declare global {
       x: number,
       y: number,
       dynamicResource: ScriptDynamicResource | null,
-      data?: any
+      data?: PutObjectOption
     ): Promise<void>;
 
     /**
@@ -735,7 +787,7 @@ declare global {
      * 이 기능을 사용하면 다량의 오브젝트를 설치할 경우 부하를 줄일 수 있습니다.
      */
     function putObjectMultiple(
-        tileArray: Array<Array<number>>, type: PutObjectType, dynamicResource: ScriptDynamicResource | null, option?: { overlap: boolean }
+        tileArray: Array<Array<number>>, type: PutObjectType, dynamicResource: ScriptDynamicResource | null, option?: PutObjectOption
     ) : void
     
     /**
