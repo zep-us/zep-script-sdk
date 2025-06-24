@@ -2,6 +2,16 @@ import { ScriptDynamicResource } from "./ScriptDynamicResource";
 import { ObjectEffectType } from "./ScriptObjectEffectType";
 
 /**
+ * 오브젝트 변경 하위 타입을 나타내는 열거형입니다.
+ */
+export enum ChangeObjectSubType {
+  DISAPPEAR = 0,
+  REPLACE_IMAGE = 1,
+  PERSONAL_DISAPPEAR = 4,
+  PERSONAL_REPLACE_IMAGE = 5,
+}
+
+/**
  * 타일 효과 유형을 나타내는 열거형입니다.
  */
 export enum TileEffectType {
@@ -254,12 +264,10 @@ export type TileEffectAmbientSoundOption = {
     triggerByTouch?: boolean;
 };
 
-export type PutObjectOption = {
-  /**
-   * 오브젝트의 타입입니다.
-   */
-  type?: ObjectEffectType.CHANGE_OBJECT | ObjectEffectType.INTERACTION_WITH_ZEPSCRIPTS;
-  
+/**
+ * 공통 오브젝트 옵션입니다.
+ */
+type PutObjectOptionBase = {
   /**
    * X 축 오프셋 값입니다.
    */
@@ -299,6 +307,49 @@ export type PutObjectOption = {
   overlap?: boolean;
   collide?: boolean;
 }
+
+/**
+ * CHANGE_OBJECT 타입의 오브젝트 옵션입니다.
+ */
+type PutObjectOptionChangeObject = PutObjectOptionBase & {
+  /**
+   * 오브젝트의 타입입니다.
+   */
+  type: ObjectEffectType.CHANGE_OBJECT;
+  
+  /**
+   * 하위 타입입니다. CHANGE_OBJECT 타입에서만 사용 가능합니다.
+   */
+  subType?: ChangeObjectSubType;
+  
+  /**
+   * ChangeObjectSubType.REPLACE_IMAGE 또는 ChangeObjectSubType.PERSONAL_REPLACE_IMAGE 타입일 때 사용됩니다.
+   * 표시할 이미지 이름입니다.
+   */
+  showImageName?: string;
+}
+
+/**
+ * INTERACTION_WITH_ZEPSCRIPTS 타입의 오브젝트 옵션입니다.
+ */
+type PutObjectOptionInteraction = PutObjectOptionBase & {
+  /**
+   * 오브젝트의 타입입니다.
+   */
+  type?: ObjectEffectType.INTERACTION_WITH_ZEPSCRIPTS;
+}
+
+/**
+ * 타입이 지정되지 않은 기본 오브젝트 옵션입니다.
+ */
+type PutObjectOptionDefault = PutObjectOptionBase & {
+  type?: undefined;
+}
+
+export type PutObjectOption = 
+  | PutObjectOptionChangeObject 
+  | PutObjectOptionInteraction 
+  | PutObjectOptionDefault;
 
 
 /**
