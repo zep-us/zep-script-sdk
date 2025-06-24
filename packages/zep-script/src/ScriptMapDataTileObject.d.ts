@@ -1,0 +1,31 @@
+import { ObjectEffectType } from "./ScriptObjectEffectType";
+
+export type MapDataTileObject = {
+    index: number;
+    depth: number;
+    dynamicResourceId: number;
+    overlap: boolean;
+    collide: boolean;
+    topObject: boolean;
+    scaleX: number;
+    scaleY: number;
+    offsetX: number;
+    offsetY: number;
+    rotation: number;
+    impassable: boolean;
+    activeDistance: number;
+    type: ObjectEffectType | number;
+    text: number;
+    tooltip: string;
+    secret: string;
+    link: string;
+    showImageName: string;
+    subType: number;
+    subText: string;
+    triggerByTouch: boolean;
+    param1: string;
+    param2: string;
+    param3: string;
+    param4: string;
+    isHideObjectName: boolean;
+};

@@ -47,7 +47,7 @@ export type PopupOption = {
    * - 'primary': 푸른색,
    * - 'alert': 붉은색
    */
-  confrimVariant?: "primary" | "alert" ;
+  confirmVariant?: "primary" | "alert" ;
   /**
    * cancel 버튼의 텍스트 (Default: "취소")
    */
@@ -132,14 +132,7 @@ export class ScriptPlayer {
    * 스팟라이트 기능 활성화 여부
    */
   spotlight: boolean;
-  /**
-   * 화상비디오 가능 여부
-   */
-  readonly disableVideo: boolean;
-  /**
-   * 화상오디오 가능 여부
-   */
-  readonly disableAudio: boolean;
+
   /**
    * 어택 타입(기본 : 0, 원거리공격 : 2)
    */
@@ -165,6 +158,11 @@ export class ScriptPlayer {
    * 스페이스 내의 플레이어 값 저장공간(스페이스 한정)
    */
   storage: string;
+
+  /** 
+   * URL 쿼리스트링으로 전달 받은 값을 저장하는 필드
+   */
+  readonly customData: string;
 
   /**
    * 플레이어의 타이틀 색상을 읽거나 수정 할 수 있습니다.
@@ -203,6 +201,11 @@ export class ScriptPlayer {
   readonly isJumping: boolean;
 
   /**
+   * 플레이어가 앉아 있으면 true, 아니면 false를 반환
+   */
+  readonly isSitting: boolean;
+
+  /**
    * 비로그인 플레이어인 경우 true 값을 반환
    */
   readonly isGuest: boolean;
@@ -221,6 +224,11 @@ export class ScriptPlayer {
    * 플레이어의 맵 둘러보기 허용 여부를 설정할 수 있습니다.
    */
   enableFreeView: boolean;
+
+  /** 
+   * 플레이어의 찌르기 공격 허용 여부를 설정할 수 있습니다.
+  */
+  disableAttack: boolean;
 
   /**
    * 플레이어에게 지정된 위치에 해당 text를 3초간 표시
@@ -257,7 +265,7 @@ export class ScriptPlayer {
     width?: number,
     opacity?: number,
     time?: number,
-    option?: CustomCenterLabelOption,
+    option?: CustomCenterLabelOption
   ): void;
 
   /**
@@ -265,13 +273,15 @@ export class ScriptPlayer {
    */
   showWidget(
     fileName: string,
-    align: string,
+    align: "popup" | "sidebar" | "top" | "topleft" | "topright" | "middle" | "middleleft" | "middleright" | "bottom" | "bottomleft" | "bottomright",
     width: number,
     height: number
   ): ScriptWidget;
 
   /**
-   * 플레이어의 이메일을 확인
+   * 플레이어의 이메일이 특정 값과 일치하는지 확인합니다.
+   * @param email 비교할 이메일 문자열
+   * @returns 일치하면 true, 아니라면 false
    */
   isEmail(email: string): boolean;
 
@@ -297,18 +307,26 @@ export class ScriptPlayer {
 
   /**
    * 플레이어에게 사운드를 재생
-   * @param fileName
-   * @param loop
+   * @param fileName 플레이할 사운드 파일의 경로
+   * @param loop 사운드 반복 재생 여부
    * @param overlap 사운드 오버랩(겹침) 재생 가능 여부
-   * @param key 사운드 오버랩(겹침) 재생
+   * @param key 사운드 오버랩(겹침) 재생 시 사용할 키 값
    * @param volume 사운드의 볼륨을 조절하는 데 사용되는 숫자입니다. 값의 범위는 0에서 1까지이며, 0은 소리가 없음을 나타내고, 1은 최대 볼륨을 나타냅니다.
    */
   playSound(fileName: string, loop?: boolean, overlap?: boolean, key?: string, volume?: number): void;
 
   /**
    * 플레이어에게 링크에 해당하는 사운드를 재생
+   * @param link 플레이할 사운드 파일의 URL
+   * @param loop 사운드 반복 재생 여부
    */
   playSoundLink(link: string, loop: boolean): void;
+
+  /**
+   * 플레이어에게 재생되고 있는 사운드를 종료
+   * @param key 중단할 사운드의 키 값
+   */
+  stopSound(key?: string): void;
 
   /**
    * 변경된 플레이어 필드 값 반영
@@ -333,7 +351,9 @@ export class ScriptPlayer {
    * @param price 아이템의 가격 (화폐단위: ZEM)
    * @param callback 구매 성공시 동작할 콜백함수
    * @param payToSpaceOwner false인 경우 앱 소유자에게 수익이 전달되고, true인 경우 맵 소유자에게 수익이 전달됩니다. (default: false)
-   * @param option message : 구매창에 표시할 텍스트를 설정 할 수 있습니다. / timer : 구매창을 표시할 시간(ms)을 설정할 수 있습니다.
+   * @param option 구매창의 메시지 및 타이머를 설정하는 옵션 객체입니다.
+   * - message : 구매창에 표시할 텍스트
+   * - timer : 구매창을 표시할 시간(ms)
    */
   showBuyAlert(
     itemName: string,
@@ -346,7 +366,17 @@ export class ScriptPlayer {
   /**
    * 플레이어의 구매 위젯을 닫습니다.
    */
-  hideByAlert(): void;
+  hideBuyAlert(): void;
+
+  /**
+   * 플레이어에게 위젯의 상/하/좌/우 여백을 화면 크기에 대한 %비율로 정의하여 위젯을 표시합니다.
+   * @param fileName 불러올 위젯 파일의 경로
+   * @param marginTop 화면 크기에 대한 비율로 정의하는 위젯 상단의 여백 (%)
+   * @param marginRight 화면 크기에 대한 비율로 정의하는 위젯 우측의 여백 (%)
+   * @param marginBottom 화면 크기에 대한 비율로 정의하는 위젯 하단의 여백 (%)
+   * @param marginLeft 화면 크기에 대한 비율로 정의하는 위젯 좌측의 여백 (%)
+   */
+  showWidgetResponsive(fileName: string, marginTop: number, marginRight: number, marginBottom: number, marginLeft: number): void;
 
   /**
    * 플레이어에게 웹 URL을 새 창이나 팝업 창으로 표시합니다.
@@ -365,7 +395,7 @@ export class ScriptPlayer {
    */
   showEmbed(
     url: string,
-    align: string,
+    align: "sidebar" | "top" | "topleft" | "topright" | "middle" | "middleleft" | "middleright" | "bottom" | "bottomleft" | "bottomright",
     width: number,
     height: number,
     hasBackdrop?: boolean
@@ -408,7 +438,7 @@ export class ScriptPlayer {
 
   /**
    * 플레이어에게 텍스트 창을 보여주는 함수입니다.
-   * @param text
+   * @param text 표시할 텍스트
    */
   showNoteModal(text: string): void;
 
@@ -418,7 +448,14 @@ export class ScriptPlayer {
    * @param tileY y좌표
    * @param time 시점이 목표 지점까지 이동하는데 걸리는 시간(초)
    */
-  setCameraTarget(tileX: number, tileY: number, time: number): void;
+  setCameraTarget(tileX: number, tileY: number, time?: number): void;
+
+  /**
+   * 플레이어의 시점을 특정 오브젝트로 중심 이동시킵니다.
+   * @param key 오브젝트의 키 값
+   * @param time 시점이 목표 지점까지 이동하는데 걸리는 시간(초)
+   */
+  setCameraTarget(key: string, time?: number): void;
   
   /**
    * 플레이어의 배경 또는 전경 이미지를 설정 할 수 있습니다.
@@ -442,5 +479,5 @@ export class ScriptPlayer {
    * 특정 키 값을 가진 오브젝트를 사라지게 합니다.
    * @param key 사라질 오브젝트의 키 값
    */
-  disappearObject(key: String): void;
+  disappearObject(key: string): void;
 }

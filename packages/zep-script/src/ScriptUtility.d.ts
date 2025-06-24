@@ -9,12 +9,12 @@
 declare global {
     namespace Time {
         /**
-         * ZEP 서버의 현재 시간을 milliseconds 단위의  값으로 리턴합니다.
+         * ZEP 서버의 현재 시간을 milliseconds 단위의 값으로 리턴합니다.
          */
         function getTime():number;
 
         /**
-         * 현재 UTC 시간을 milliseconds 단위의 값으로  리턴합니다.
+         * 현재 UTC 시간을 milliseconds 단위의 값으로 리턴합니다.
          */
         function getUtcTime():number;
 

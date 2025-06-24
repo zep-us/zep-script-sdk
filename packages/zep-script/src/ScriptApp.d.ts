@@ -1,6 +1,8 @@
 import { ScriptDynamicResource } from "./ScriptDynamicResource";
 import {CustomCenterLabelOption, ScriptPlayer} from "./ScriptPlayer";
 import { ScriptWidget } from "./ScriptWidget";
+import { MapDataTileObject } from "./ScriptMapDataTileObject";
+import { KeyCodeType } from "./KeyCodeType";
 
 declare global {
   namespace ScriptApp {
@@ -84,7 +86,7 @@ declare global {
      */
 
     /**
-     * App 실행 시에 최초로 호출되는 이벤트 (유저 진입 전)
+     * App 실행 시에 최초로 호출되는 이벤트 등록 (유저 진입 전)
      * Normal App과 Sidebar App은 Script 적용 후 맵이 실행될 때 호출
      */
     namespace onInit {
@@ -92,21 +94,21 @@ declare global {
     }
 
     /**
-     * 플레이어가 스페이스에서 나갈 때 호출 되는 이벤트
+     * 플레이어가 스페이스에서 들어올 때 호출되는 이벤트 등록
      */
     namespace onJoinPlayer {
       function Add(callback: (player: ScriptPlayer) => void): void;
     }
 
     /**
-     * 플레이어 모두 진입 시 최초로 시작되는 이벤트
+     * 플레이어 모두 진입 시 최초로 시작되는 이벤트 등록
      */
     namespace onStart {
       function Add(callback: () => void): void;
     }
 
     /**
-     * 20ms 마다 호출되는 이벤트
+     * 20ms 마다 호출되는 이벤트 등록
      * dt: deltatime(전 프레임이 완료되기까지 걸린 시간)
      */
     namespace onUpdate {
@@ -114,14 +116,14 @@ declare global {
     }
     
     /**
-     * 플레이어가 스페이스에서 나갈 때 호출 되는 이벤트
+     * 플레이어가 스페이스에서 나갈 때 호출되는 이벤트 등록
      */
     namespace onLeavePlayer {
       function Add(callback: (player: ScriptPlayer) => void): void;
     }
 
     /**
-     * App 종료 시 마지막으로 호출
+     * App 종료 시 마지막으로 호출되는 이벤트 등록
      * Normal App과 Sidebar App은 별도의 종료
      */
     namespace onDestroy {
@@ -129,8 +131,8 @@ declare global {
     }
 
     /**
-     * 플레이어들이 채팅창에 입력하는 모든 채팅에 대해 호출 되는 이벤트
-     * !로 시작하는 텍스트는 채팅창에 나오지 않으나, onSay 함수에는 사용 가능
+     * 플레이어들이 채팅창에 입력하는 모든 메세지에 대해 호출되는 이벤트 등록
+     * '!'로 시작하는 텍스트는 채팅창에 나오지 않으나, onSay 함수에는 사용 가능
      */
     namespace onSay {
       function Add(
@@ -139,7 +141,7 @@ declare global {
     }
 
     /**
-     * 플레이어가 다른 플레이어와 부딪혔을 때 호출 되는 이벤트
+     * 플레이어가 다른 플레이어와 부딪혔을 때 호출되는 이벤트 등록
      */
     namespace onPlayerTouched {
       function Add(
@@ -153,22 +155,14 @@ declare global {
     }
 
     /**
-     * 플레이어가 오브젝트와 부딪혔을 때 호출 되는 이벤트
+     * 플레이어가 오브젝트와 부딪혔을 때 호출되는 이벤트 등록
      */
     namespace onObjectTouched {
-      function Add(
-        callback: (
-          sender: ScriptPlayer,
-          x: number,
-          y: number,
-          tileID: number,
-          obj: object
-        ) => void
-      ): void;
+      function Add(callback: (sender: ScriptPlayer, x: number, y: number, tileID: number, obj: MapDataTileObject) => void): void;
     }
 
     /**
-     * 플레이어가 다른 플레이어를 공격했을 때 (Z키) 호출 되는 이벤트
+     * 플레이어가 다른 플레이어를 공격했을 때 (Z키) 호출되는 이벤트 등록
      */
     namespace onUnitAttacked {
       function Add(
@@ -182,7 +176,7 @@ declare global {
     }
 
     /**
-     * 플레이어가 오브젝트를 공격(Z키)했을 때 호출 되는 이벤트
+     * 플레이어가 오브젝트를 공격(Z키)했을 때 호출되는 이벤트 등록
      */
     namespace onObjectAttacked {
       function Add(
@@ -191,7 +185,7 @@ declare global {
     }
 
     /**
-     * 플레이어가 공격 키(Z)로 키 값을 가진 오브젝트를 공격할 때 동작합니다.
+     * 플레이어가 공격 키(Z)로 키 값을 가진 오브젝트를 공격할 때 호출되는 이벤트 등록
      */
     namespace onAppObjectAttacked {
       function Add(
@@ -206,14 +200,28 @@ declare global {
     }
 
     /**
-     * 플레이어가 사이드바 앱을 클릭(터치) 했을 때 호출 되는 이벤트
+     * 플레이어가 사이드바 앱 아이콘을 클릭(터치)하여 활성화할 때 호출되는 이벤트 등록
      */
     namespace onSidebarTouched {
-      function Add(callback: (sender: ScriptPlayer) => void): void;
+      function Add(callback: (player: ScriptPlayer) => void): void;
     }
 
     /**
-     * 플레이어가 사이드바 앱을 클릭(터치) 했을 때 호출 되는 이벤트
+     * 플레이어가 활성화된 사이드바 앱의 아이콘을 다시 클릭(터치)하여 비활성화할 때 호출되는 이벤트 등록
+     */
+    namespace onSidebarDeactivated {
+      function Add(callback: (player: ScriptPlayer) => void): void;
+    }
+
+    /**
+     * 플레이어가 이름을 변경할 때 호출되는 이벤트 등록
+     */
+    namespace onPlayerNameChanged {
+        function Add(callback: (player: ScriptPlayer, oldName: string) => void): void;
+    }
+
+    /**
+     * 플레이어가 키 값을 가진 앱 오브젝트와 충돌할 때 호출되는 이벤트 등록
      */
     namespace onAppObjectTouched {
       function Add(
@@ -227,7 +235,7 @@ declare global {
     }
 
     /**
-     * 클라이언트에서 window.parent.postMessage를 사용해 메시지를 보내는 경우 callback 함수를 실행합니다.
+     * 클라이언트에서 window.parent.postMessage를 사용해 메시지를 보내는 경우 실행되는 callback 함수를 등록
      */
     namespace onPostMessage {
       function Add(
@@ -236,7 +244,7 @@ declare global {
     }
 
     /**
-     * 오브젝트와 F 상호작용 시 동작하는 함수를 작성할 수 있습니다.
+     * 오브젝트와 F 상호작용 시 동작하는 함수를 등록합니다.
      * 맵에디터로 설치한 오브젝트와 상호작용 시 동작합니다.
      * 오브젝트인 경우 layerId = 3
      * 상단 오브젝트인 경우 layerId = 5
@@ -261,7 +269,7 @@ declare global {
     function runLater(callback: () => void, time: number): void;
 
     /**
-     * 플레이어가 해당 위치의 타일과 부딪혔을 때 실행
+     * 플레이어가 해당 위치의 타일과 부딪혔을 때 실행되는 콜백 등록
      * @param x
      * @param y
      * @param callback
@@ -281,12 +289,12 @@ declare global {
 
     /**
      * App.setStorage 함수는 기존 App storage 데이터 저장 방식을 보완한 데이터 저장 함수입니다.
-     * @param string
+     * @param data
      */
-    function setStorage(string: string): void;
+    function setStorage(data: string): void;
 
     /**
-     * 플레이어가 지정한 위치와 부딪혔을 때 실행
+     * 플레이어가 지정한 위치와 부딪혔을 때 실행되는 콜백 등록
      * @param name
      * @param callback
      */
@@ -296,14 +304,39 @@ declare global {
     ): void;
 
     /**
-     * 플레이어가 지정된 키를 눌렀을 때 실행
+     * 플레이어가 특정 지정영역에 입장할 때 실행되는 콜백 등록
+     * @param locationName 지정영역의 이름
+     * @param callback
+     */
+    function addOnLocationEnter(locationName: string, callback: (player: ScriptPlayer) => void): void;
+
+    /**
+     * 플레이어가 특정 지정영역에서 퇴장할 때 실행되는 콜백 등록
+     * @param locationName 지정영역의 이름
+     * @param callback
+     */
+    function addOnLocationExit(locationName: string, callback: (player: ScriptPlayer) => void): void;
+
+    /**
+     * 플레이어가 특정 번호의 PA에 입장할 때 실행되는 콜백 등록
+     * @param areaNumber PA의 번호. -1이면 번호와 무관하게 모든 PA에 입장할 때 콜백 실행
+     * @param callback
+     */
+    function addOnPrivateAreaEnter(areaNumber: number, callback: (player: ScriptPlayer, areaNumber: number) => void): void;
+
+    /**
+     * 플레이어가 특정 번호의 PA에서 퇴장할 때 실행되는 콜백 등록
+     * @param areaNumber PA의 번호. -1이면 번호와 무관하게 모든 PA로부터 퇴장 시 콜백 실행
+     * @param callback
+     */
+    function addOnPrivateAreaExit(areaNumber: number, callback: (player: ScriptPlayer, areaNumber: number) => void): void;
+
+    /**
+     * 플레이어가 지정된 키를 눌렀을 때 실행되는 콜백 등록
      * @param keycode
      * @param callback
      */
-    function addOnKeyDown(
-      keycode: number,
-      callback: (player: ScriptPlayer) => void
-    ): void;
+    function addOnKeyDown(keycode: KeyCodeType | number, callback: (player: ScriptPlayer) => void): void;
 
     /**
      * enable이 true이면 모바일 환경에서 펀치 버튼이 추가
@@ -432,10 +465,10 @@ declare global {
      * @param height
      */
     function showWidget(
-      fileName: string,
-      align: string,
-      width: number,
-      height: number
+        fileName: string,
+        align: "popup" | "sidebar" | "top" | "topleft" | "topright" | "middle" | "middleleft" | "middleright" | "bottom" | "bottomleft" | "bottomright",
+        width: number,
+        height: number
     ): ScriptWidget;
 
     /**
@@ -446,10 +479,10 @@ declare global {
      * @param height
      */
     function showYoutubeWidget(
-      link: string,
-      align: string,
-      width: number,
-      height: number
+        link: string,
+        align: "popup" | "sidebar" | "top" | "topleft" | "topright" | "middle" | "middleleft" | "middleright" | "bottom" | "bottomleft" | "bottomright",
+        width: number,
+        height: number
     ): ScriptWidget;
 
     /**
