@@ -1,6 +1,13 @@
 {
-  "compilerOptions": {
-    "noEmit": true,
-    "isolatedModules": true
-  }
+	"compilerOptions": {
+		"target": "ES2015",
+		"module": "ES2015",
+		"moduleResolution": "node",
+		"isolatedModules": true,
+		"removeComments": true,
+		"resolveJsonModule": true,
+		"esModuleInterop": true
+	},
+	"include": ["src", "main.ts"],
+	"exclude": ["node_modules"]
 }

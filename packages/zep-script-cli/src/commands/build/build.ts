@@ -21,6 +21,19 @@ function checkMainFile(root: string) {
   throw new Error("No main file found.");
 }
 
+function hasWebpackConfig(root: string) {
+  const configFiles = [
+    "webpack.config.js",
+    "webpack.config.ts", 
+    "webpack.config.mjs",
+    "webpack.config.cjs"
+  ];
+  
+  return configFiles.some(configFile => 
+    fs.existsSync(path.join(root, configFile))
+  );
+}
+
 export default (async function archive([]: Array<string>, options: Options) {
   const cwd = process.cwd();
   const root = options.projectRoot || cwd;
@@ -43,14 +56,21 @@ export default (async function archive([]: Array<string>, options: Options) {
       });
     }
 
-    await execa(
-      "npx",
-      ["babel", "main.ts", "--out-dir", "dist", "--extensions", ".ts"],
-      {
+    if (hasWebpackConfig(root)) {
+      await execa("npx", ["webpack", "--output-path", "./res"], {
         stdio: !logger.isVerbose() ? "pipe" : "inherit",
         cwd: root,
-      }
-    );
+      });
+    } else {
+      await execa(
+        "npx",
+        ["babel", "main.ts", "--out-dir", "dist", "--extensions", ".ts"],
+        {
+          stdio: !logger.isVerbose() ? "pipe" : "inherit",
+          cwd: root,
+        }
+      );
+    }
 
     loader.succeed();
 
