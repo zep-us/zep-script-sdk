@@ -37,7 +37,7 @@ jobs:
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
           npm whoami
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN_250626 }}
 
       - name: GIT Setup
         run: |
@@ -55,4 +55,4 @@ jobs:
           yarn lerna version --yes
           yarn lerna publish from-package --yes
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN_250626 }}
