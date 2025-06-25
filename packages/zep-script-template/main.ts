@@ -4,11 +4,17 @@
 
 import "zep-script";
 
-ScriptApp.showCenterLabel("Hello World");
+import { add } from "./src/add";
 
 let zepLogo = ScriptApp.loadSpritesheet("zep_logo.png");
 
-ScriptMap.putObject(0, 0, zepLogo, { overlap: true });
+ScriptApp.onJoinPlayer.Add(function (player) {
+  ScriptApp.showCenterLabel(`Hello World ${add(1, 6)}`);
+});
+
+ScriptApp.onStart.Add(function () {
+  ScriptMap.putObject(0, 0, zepLogo, { overlap: true });
+});
 
 ScriptApp.onDestroy.Add(function () {
   ScriptMap.clearAllObjects();
