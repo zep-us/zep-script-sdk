@@ -6,6 +6,8 @@
   },
   "files": [
     "res",
+    "webpack.config.js",
+    "src",
     ".gitignore",
     "babel.config.js",
     "main.ts",
