@@ -1,3 +1,4 @@
+import { CameraEffectType } from "./CameraEffectType";
 import { ScriptDynamicResource } from "./ScriptDynamicResource";
 import { ScriptWidget } from "./ScriptWidget";
 
@@ -229,6 +230,17 @@ export class ScriptPlayer {
    * 플레이어의 찌르기 공격 허용 여부를 설정할 수 있습니다.
   */
   disableAttack: boolean;
+
+  /**
+   * 0 = NONE : 아무 효과 없음
+   * 1 = SPOTLIGHT : 비네팅 효과 적용
+   */
+  cameraEffect: CameraEffectType;
+
+  /**
+   * cameraEffect가 SPOTLIGHT일 경우, cameraEffectParam1이 클수록 영역이 커진다.
+   */
+  cameraEffectParam1: number;
 
   /**
    * 플레이어에게 지정된 위치에 해당 text를 3초간 표시
@@ -474,6 +486,13 @@ export class ScriptPlayer {
    * @param offsetY 효과 스프라이트의 Y 축 오프셋 값
    */
   playEffectSprite(resource: ScriptDynamicResource | null, repeatNum: number, offsetX: number, offsetY: number): void;
+
+  /**
+   * 카메라 효과 파라미터 값을 설정합니다.
+   * @param type 
+   * @param param 
+   */
+  setCameraEffectParam(type: CameraEffectType, param: number): void;
 
   /**
    * 특정 키 값을 가진 오브젝트를 사라지게 합니다.

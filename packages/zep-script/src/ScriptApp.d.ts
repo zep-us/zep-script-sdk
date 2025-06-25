@@ -3,6 +3,7 @@ import {CustomCenterLabelOption, ScriptPlayer} from "./ScriptPlayer";
 import { ScriptWidget } from "./ScriptWidget";
 import { MapDataTileObject } from "./ScriptMapDataTileObject";
 import { KeyCodeType } from "./KeyCodeType";
+import { CameraEffectType } from "./CameraEffectType";
 
 declare global {
   namespace ScriptApp {
@@ -52,10 +53,10 @@ declare global {
      * 0 = NONE : 아무 효과 없음
      * 1 = SPOTLIGHT : 비네팅 효과 적용
      */
-    let cameraEffect: number;
+    let cameraEffect: CameraEffectType;
 
     /**
-     * cameraEffect가 NONE이 아닐 경우의 상태값 : 클수록 영역이 커진다.
+     * cameraEffect가 SPOTLIGHT일 경우, cameraEffectParam1이 클수록 영역이 커진다.
      */
     let cameraEffectParam1: number;
 

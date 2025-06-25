@@ -6,3 +6,4 @@ export * from "./src/ScriptPlayer";
 export * from "./src/ScriptWidget";
 export * from "./src/ScriptUtility";
 export * from "./src/KeyCodeType";
+export * from "./src/CameraEffectType";

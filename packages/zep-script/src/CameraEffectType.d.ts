@@ -1,0 +1,1 @@
+export type CameraEffectType = 0 | 1;
