@@ -6,7 +6,7 @@ import "zep-script";
 
 import { add } from "./src/add";
 
-let zepLogo = ScriptApp.loadSpritesheet("zep_logo.png");
+const zepLogo = ScriptApp.loadSpritesheet("zep_logo.png");
 
 ScriptApp.onJoinPlayer.Add(function (player) {
   ScriptApp.showCenterLabel(`Hello World ${add(1, 6)}`);

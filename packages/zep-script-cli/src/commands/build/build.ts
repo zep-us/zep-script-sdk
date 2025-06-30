@@ -50,21 +50,24 @@ export default (async function archive([]: Array<string>, options: Options) {
     loader.start("Building project");
 
     if (projectLanguage === "typescript") {
-      await execa("npx", ["tsc", "-p", ".", "--noEmit"], {
+      const tscPath = require.resolve("typescript/bin/tsc");
+      await execa("node", [tscPath, "-p", ".", "--noEmit"], {
         stdio: !logger.isVerbose() ? "pipe" : "inherit",
         cwd: root,
       });
     }
 
     if (hasWebpackConfig(root)) {
-      await execa("npx", ["webpack", "--output-path", "./res"], {
+      const webpackPath = require.resolve("webpack/bin/webpack.js");
+      await execa("node", [webpackPath, "--output-path", "./res"], {
         stdio: !logger.isVerbose() ? "pipe" : "inherit",
         cwd: root,
       });
     } else {
+      const babelPath = require.resolve("@babel/cli/bin/babel.js");
       await execa(
-        "npx",
-        ["babel", "main.ts", "--out-dir", "dist", "--extensions", ".ts"],
+        "node",
+        [babelPath, "main.ts", "--out-dir", "dist", "--extensions", ".ts"],
         {
           stdio: !logger.isVerbose() ? "pipe" : "inherit",
           cwd: root,

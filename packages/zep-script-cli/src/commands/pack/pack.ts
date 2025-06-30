@@ -37,15 +37,17 @@ export default (async function archive([]: Array<string>, options: Options) {
     loader.start("Building project");
 
     if (projectLanguage === "typescript") {
-      await execa("npx", ["tsc", "-p", ".", "--noEmit"], {
+      const tscPath = require.resolve("typescript/bin/tsc");
+      await execa("node", [tscPath, "-p", ".", "--noEmit"], {
         stdio: !logger.isVerbose() ? "pipe" : "inherit",
         cwd: root,
       });
     }
 
+    const babelPath = require.resolve("@babel/cli/bin/babel.js");
     await execa(
-      "npx",
-      ["babel", "main.ts", "--out-dir", "res", "--extensions", ".ts"],
+      "node",
+      [babelPath, "main.ts", "--out-dir", "res", "--extensions", ".ts"],
       {
         stdio: !logger.isVerbose() ? "pipe" : "inherit",
         cwd: root,
