@@ -24,7 +24,7 @@
     "@types/fs-extra": "^11.0.4",
     "@types/graceful-fs": "^4.1.9",
     "archiver": "^7.0.1",
-    "axios": "^1.10.0",
+    "axios": "^1.15.0",
     "chalk": "^5.4.1",
     "clear": "^0.1.0",
     "commander": "^14.0.0",
