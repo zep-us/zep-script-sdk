@@ -4,7 +4,7 @@ import { ScriptWidget } from "./ScriptWidget";
 import { MapDataTileObject } from "./ScriptMapDataTileObject";
 import { KeyCodeType } from "./KeyCodeType";
 import { CameraEffectType } from "./CameraEffectType";
-import { JsonValue, WidgetAlign } from "./ScriptTypes";
+import { HttpRequestPayload, WidgetAlign } from "./ScriptTypes";
 
 export type ScriptMobileButton = {
   readonly id: number;
@@ -598,7 +598,7 @@ declare global {
      */
     function httpGet(
       url: string,
-      headers: JsonValue,
+      headers: HttpRequestPayload,
       callback: (response: string) => void
     ): boolean;
 
@@ -612,8 +612,8 @@ declare global {
      */
     function httpPost(
       url: string,
-      headers: JsonValue,
-      body: JsonValue,
+      headers: HttpRequestPayload,
+      body: HttpRequestPayload,
       callback: (response: string) => void
     ): boolean;
 
@@ -627,8 +627,8 @@ declare global {
      */
     function httpPostJson(
       url: string,
-      headers: JsonValue,
-      body: JsonValue,
+      headers: HttpRequestPayload,
+      body: HttpRequestPayload,
       callback: (response: string) => void
     ): boolean;
 

@@ -53,6 +53,14 @@ export type HttpHeaderValue = string | number | boolean;
 export type HttpHeaders = Record<string, HttpHeaderValue>;
 
 /**
+ * HTTP 요청에 전달할 수 있는 payload 타입입니다.
+ *
+ * `JsonValue`처럼 JSON으로 직렬화 가능한 값을 권장하지만, 기존 스크립트 앱에서
+ * `data: object` 형태의 payload를 자주 사용하므로 HTTP API에서는 일반 객체도 허용합니다.
+ */
+export type HttpRequestPayload = JsonValue | object;
+
+/**
  * 위젯과 앱 사이에서 주고받는 기본 메시지 payload 타입입니다.
  *
  * 더 정확한 payload 타입이 필요하면 `ScriptWidget<TMessage>` 또는
