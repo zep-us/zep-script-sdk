@@ -80,7 +80,7 @@ zep-script-webpack-template/
 2. **main.ts**에서 필요한 모듈을 import하고 초기화합니다
 3. 예제 코드:
    ```typescript
-   import { ScriptPlayer } from "zep-script";
+   import type { ScriptPlayer } from "zep-script";
    import { OnJoinPlayer } from "./src/OnJoinPlayer";
 
    ScriptApp.onInit.Add(()=>{
@@ -176,7 +176,7 @@ zep-script-webpack-template/
 2. Import and initialize required modules in **main.ts**
 3. Example code:
    ```typescript
-   import { ScriptPlayer } from "zep-script";
+   import type { ScriptPlayer } from "zep-script";
    import { OnJoinPlayer } from "./src/OnJoinPlayer";
 
    ScriptApp.onInit.Add(()=>{

@@ -4,6 +4,20 @@ import { ScriptWidget } from "./ScriptWidget";
 import { MapDataTileObject } from "./ScriptMapDataTileObject";
 import { KeyCodeType } from "./KeyCodeType";
 import { CameraEffectType } from "./CameraEffectType";
+import { JsonValue, WidgetAlign } from "./ScriptTypes";
+
+export type ScriptMobileButton = {
+  readonly id: number;
+  anchor: number;
+  x: number;
+  y: number;
+  image: ScriptDynamicResource | null;
+  callback: {
+    Add(callback: (player: ScriptPlayer, buttonId: number) => void): void;
+  };
+  sendUpdated(): void;
+  destroy(): void;
+};
 
 declare global {
   namespace ScriptApp {
@@ -37,7 +51,7 @@ declare global {
      * (미니 게임을 실행 한 경우 유효)
      * 미니게임을 실행한 플레이어의 ID 값 (Read Only)
      */
-    const creatorID: string | undefined;
+    const creatorID: string;
 
     /**
      * 실행한 App의 Id 해시값
@@ -89,6 +103,9 @@ declare global {
     /**
      * App 실행 시에 최초로 호출되는 이벤트 등록 (유저 진입 전)
      * Normal App과 Sidebar App은 Script 적용 후 맵이 실행될 때 호출
+     *
+     * 무중단 배포 후 앱이 새 서버에서 다시 시작될 때도 호출되므로,
+     * `ScriptApp.getStorage()`로 이전 상태를 복원하는 용도로 사용할 수 있습니다.
      */
     namespace onInit {
       function Add(callback: () => void): void;
@@ -96,6 +113,8 @@ declare global {
 
     /**
      * 플레이어가 스페이스에서 들어올 때 호출되는 이벤트 등록
+     *
+     * 무중단 배포로 재입장 처리된 플레이어는 `player.isMigrationJoin` 값으로 구분할 수 있습니다.
      */
     namespace onJoinPlayer {
       function Add(callback: (player: ScriptPlayer) => void): void;
@@ -121,6 +140,16 @@ declare global {
      */
     namespace onLeavePlayer {
       function Add(callback: (player: ScriptPlayer) => void): void;
+    }
+
+    /**
+     * 무중단 배포로 서버 마이그레이션이 시작될 때 호출되는 이벤트를 등록합니다.
+     *
+     * 메모리에만 저장한 게임 상태는 새 서버에서 초기화될 수 있으므로,
+     * 이 콜백에서 `ScriptApp.setStorage()`를 사용해 복원에 필요한 데이터를 저장하세요.
+     */
+    namespace onMigrationStart {
+      function Add(callback: () => void): void;
     }
 
     /**
@@ -230,7 +259,9 @@ declare global {
           sender: ScriptPlayer,
           key: string,
           x: number,
-          y: number
+          y: number,
+          tileID: number,
+          type: number
         ) => void
       ): void;
     }
@@ -264,16 +295,16 @@ declare global {
 
     /**
      * time(초) 후에 callback 함수를 실행
-     * @param callback
-     * @param time
+     * @param callback 지정한 시간이 지난 뒤 실행할 함수
+     * @param time 지연 시간(초)
      */
     function runLater(callback: () => void, time: number): void;
 
     /**
      * 플레이어가 해당 위치의 타일과 부딪혔을 때 실행되는 콜백 등록
-     * @param x
-     * @param y
-     * @param callback
+     * @param x 타일 X 좌표
+     * @param y 타일 Y 좌표
+     * @param callback 타일에 닿은 플레이어를 받는 콜백
      */
     function addOnTileTouched(
       x: number,
@@ -282,22 +313,22 @@ declare global {
     ): void;
 
     /**
-     * App.getStorage 함수는 앱이 실행중인 같은 스페이스 내 다른 맵의  App storage 데이터 변경 여부를 체크하여
+     * ScriptApp.getStorage 함수는 앱이 실행중인 같은 스페이스 내 다른 맵의  App storage 데이터 변경 여부를 체크하여
      * 같은 데이터를 가지도록 동기화 해주는 함수입니다.
-     * @param callback
+     * @param callback 동기화된 storage 문자열을 받는 콜백
      */
     function getStorage(callback: (storage: string) => void): void;
 
     /**
-     * App.setStorage 함수는 기존 App storage 데이터 저장 방식을 보완한 데이터 저장 함수입니다.
-     * @param data
+     * ScriptApp.setStorage 함수는 기존 App storage 데이터 저장 방식을 보완한 데이터 저장 함수입니다.
+     * @param data 저장할 storage 문자열
      */
     function setStorage(data: string): void;
 
     /**
      * 플레이어가 지정한 위치와 부딪혔을 때 실행되는 콜백 등록
-     * @param name
-     * @param callback
+     * @param name 지정영역 이름
+     * @param callback 지정영역에 닿은 플레이어를 받는 콜백
      */
     function addOnLocationTouched(
       name: string,
@@ -307,57 +338,57 @@ declare global {
     /**
      * 플레이어가 특정 지정영역에 입장할 때 실행되는 콜백 등록
      * @param locationName 지정영역의 이름
-     * @param callback
+     * @param callback 지정영역에 입장한 플레이어를 받는 콜백
      */
     function addOnLocationEnter(locationName: string, callback: (player: ScriptPlayer) => void): void;
 
     /**
      * 플레이어가 특정 지정영역에서 퇴장할 때 실행되는 콜백 등록
      * @param locationName 지정영역의 이름
-     * @param callback
+     * @param callback 지정영역에서 퇴장한 플레이어를 받는 콜백
      */
     function addOnLocationExit(locationName: string, callback: (player: ScriptPlayer) => void): void;
 
     /**
      * 플레이어가 특정 번호의 PA에 입장할 때 실행되는 콜백 등록
      * @param areaNumber PA의 번호. -1이면 번호와 무관하게 모든 PA에 입장할 때 콜백 실행
-     * @param callback
+     * @param callback PA에 입장한 플레이어와 PA 번호를 받는 콜백
      */
     function addOnPrivateAreaEnter(areaNumber: number, callback: (player: ScriptPlayer, areaNumber: number) => void): void;
 
     /**
      * 플레이어가 특정 번호의 PA에서 퇴장할 때 실행되는 콜백 등록
      * @param areaNumber PA의 번호. -1이면 번호와 무관하게 모든 PA로부터 퇴장 시 콜백 실행
-     * @param callback
+     * @param callback PA에서 퇴장한 플레이어와 PA 번호를 받는 콜백
      */
     function addOnPrivateAreaExit(areaNumber: number, callback: (player: ScriptPlayer, areaNumber: number) => void): void;
 
     /**
      * 플레이어가 지정된 키를 눌렀을 때 실행되는 콜백 등록
-     * @param keycode
-     * @param callback
+     * @param keycode 감지할 키 코드
+     * @param callback 키를 누른 플레이어를 받는 콜백
      */
     function addOnKeyDown(keycode: KeyCodeType | number, callback: (player: ScriptPlayer) => void): void;
 
     /**
      * enable이 true이면 모바일 환경에서 펀치 버튼이 추가
-     * @param enabled
+     * @param enabled 모바일 펀치 버튼 표시 여부
      */
     function putMobilePunch(enabled?: boolean): void;
 
     /**
      * 모바일 환경에서 커스텀 모바일 버튼을 추가하고, 버튼을 눌렀을 때 동작하는 함수를 지정
-     * @param anchor
-     * @param posX
-     * @param posY
-     * @param callback
+     * @param anchor 버튼 위치의 기준점
+     * @param posX 기준점에서의 X 오프셋
+     * @param posY 기준점에서의 Y 오프셋
+     * @param callback 버튼을 누른 플레이어를 받는 콜백
      */
     function addMobileButton(
       anchor: number,
       posX: number,
       posY: number,
       callback: (player: ScriptPlayer) => void
-    ): void;
+    ): ScriptMobileButton;
 
     /**
      * ==========================================
@@ -367,11 +398,12 @@ declare global {
 
     /**
      * 스프라이트 시트 그림 파일을 읽어 객체화
-     * @param fileName
-     * @param frameWidth
-     * @param frameHeight
-     * @param anims
-     * @param frameRate
+     * @param fileName 로드할 이미지 파일 경로
+     * @param frameWidth 프레임 한 칸의 너비(px)
+     * @param frameHeight 프레임 한 칸의 높이(px)
+     * @param anims 애니메이션별 프레임 인덱스 목록
+     * @param frameRate 초당 재생할 프레임 수
+     * @returns 로드된 동적 리소스 객체
      */
 
     function loadSpritesheet(
@@ -432,7 +464,7 @@ declare global {
      * @param width 라벨의 너비 n% (0 ~ 100)
      * @param opacity 라벨 배경색 투명도 (0 ~ 1)
      * @param time 라벨 표시 시간 (default 3000)
-     * @param option
+     * @param option 라벨 모서리, padding, 투명도 등을 설정하는 옵션
      */
     function showCustomLabel(
       text: string,
@@ -442,49 +474,58 @@ declare global {
       width?: number,
       opacity?: number,
       time?: number,
-      option? : CustomCenterLabelOption
+      option?: CustomCenterLabelOption
     ): void;
 
     /**
      * 채팅창에 해당 text내용을 출력
-     * @param text
-     * @param color
+     * @param text 출력할 채팅 메시지
+     * @param color 메시지 색상
      */
     function sayToAll(text: string, color?: number): void;
 
     /**
-     * 해당 ID의 Widget을 가져오기
-     * @param id
+     * 해당 ID의 위젯 객체를 가져옵니다.
+     *
+     * @template TMessage 위젯과 주고받을 메시지 payload 타입
+     * @param id 가져올 위젯 ID
+     * @returns 지정한 ID의 위젯 객체
      */
-    function getWidgetByID(id: number): ScriptWidget;
+    function getWidgetByID<TMessage = any>(id: number): ScriptWidget<TMessage>;
 
     /**
-     * 모든 플레이어에게 지정된 align의 위치에 해당 html파일을 위젯으로 불러오기
-     * @param fileName
-     * @param align
-     * @param width
-     * @param height
+     * 모든 플레이어에게 지정한 HTML 파일을 위젯으로 표시합니다.
+     *
+     * @template TMessage 위젯과 주고받을 메시지 payload 타입
+     * @param fileName 표시할 HTML 파일 경로
+     * @param align 위젯을 표시할 화면 위치
+     * @param width 위젯 가로 크기(px)
+     * @param height 위젯 세로 크기(px)
+     * @returns 생성된 위젯 객체
      */
-    function showWidget(
+    function showWidget<TMessage = any>(
         fileName: string,
-        align: "popup" | "sidebar" | "top" | "topleft" | "topright" | "middle" | "middleleft" | "middleright" | "bottom" | "bottomleft" | "bottomright",
-        width: number,
-        height: number
-    ): ScriptWidget;
+        align?: WidgetAlign,
+        width?: number,
+        height?: number
+    ): ScriptWidget<TMessage>;
 
     /**
-     * 모든 플레이어에게 지정된 align의 위치에 해당 YouTube link의 동영상을 재생시킴
-     * @param link
-     * @param align
-     * @param width
-     * @param height
+     * 모든 플레이어에게 지정한 YouTube 링크를 위젯으로 표시합니다.
+     *
+     * @template TMessage 위젯과 주고받을 메시지 payload 타입
+     * @param link 재생할 YouTube URL
+     * @param align 위젯을 표시할 화면 위치
+     * @param width 위젯 가로 크기(px)
+     * @param height 위젯 세로 크기(px)
+     * @returns 생성된 위젯 객체
      */
-    function showYoutubeWidget(
+    function showYoutubeWidget<TMessage = any>(
         link: string,
-        align: "popup" | "sidebar" | "top" | "topleft" | "topright" | "middle" | "middleleft" | "middleright" | "bottom" | "bottomleft" | "bottomright",
-        width: number,
-        height: number
-    ): ScriptWidget;
+        align?: WidgetAlign,
+        width?: number,
+        height?: number
+    ): ScriptWidget<TMessage>;
 
     /**
      * ==========================================
@@ -494,16 +535,16 @@ declare global {
 
     /**
      * playerID 에 해당하는 플레이어를 tileX, tileY 좌표로 소환한다.
-     * @param playerID
-     * @param tileX
-     * @param tileY
+     * @param playerID 소환할 플레이어 ID
+     * @param tileX 이동할 타일 X 좌표
+     * @param tileY 이동할 타일 Y 좌표
      */
     function spawnPlayer(playerID: string, tileX: number, tileY: number): void;
 
     /**
      * playerID 에 해당하는 플레이어를 추방한다.
      * 추방당한 유저는 24시간 동안 해당 스페이스에 접근하지 못하게 된다.
-     * @param playerID
+     * @param playerID 추방할 플레이어 ID
      */
     function kickPlayer(playerID: string): void;
 
@@ -515,8 +556,8 @@ declare global {
 
     /**
      * 모든 플레이어에게 사운드를 재생
-     * @param fileName
-     * @param loop
+     * @param fileName 재생할 사운드 파일 경로
+     * @param loop 반복 재생 여부
      * @param overlap 사운드 오버랩(겹침) 재생 가능 여부
      */
     function playSound(
@@ -527,10 +568,10 @@ declare global {
 
     /**
      * 모든 플레이어에게 링크에 해당하는 사운드를 재생
-     * @param link
+     * @param link 재생할 사운드 파일 URL
      * @param loop 반복 재생 여부
      */
-    function playSoundLink(link: string, loop?: boolean): void;
+    function playSoundLink(link: string, loop?: boolean, overlap?: boolean): void;
 
     /**
      * 모든 재생되는 사운드를 멈춤
@@ -549,44 +590,47 @@ declare global {
      */
 
     /**
-     * 해당 URL에 HTTP Get 요청을 실행
-     * @param url
-     * @param headers
-     * @param callback
+     * 해당 URL로 HTTP GET 요청을 보냅니다.
+     *
+     * @param url 요청을 보낼 URL
+     * @param headers 요청에 포함할 HTTP header 객체
+     * @param callback 응답 본문 문자열을 받는 콜백
      */
     function httpGet(
       url: string,
-      headers: object,
+      headers: JsonValue,
       callback: (response: string) => void
-    ): void;
+    ): boolean;
 
     /**
-     * 해당 URL에 HTTP Post 포스팅을 실행
-     * @param url
-     * @param headers
-     * @param body
-     * @param callback
+     * 해당 URL로 HTTP POST 요청을 보냅니다.
+     *
+     * @param url 요청을 보낼 URL
+     * @param headers 요청에 포함할 HTTP header 객체
+     * @param body 요청 body로 보낼 JSON 객체
+     * @param callback 응답 본문 문자열을 받는 콜백
      */
     function httpPost(
       url: string,
-      headers: object,
-      body: object,
+      headers: JsonValue,
+      body: JsonValue,
       callback: (response: string) => void
-    ): void;
+    ): boolean;
 
     /**
-     * 해당 URL에 Json 형태의 http post 요청을 보내는 함수
-     * @param url
-     * @param headers
-     * @param body
-     * @param callback
+     * 해당 URL로 JSON 형식의 HTTP POST 요청을 보냅니다.
+     *
+     * @param url 요청을 보낼 URL
+     * @param headers 요청에 포함할 HTTP header 객체
+     * @param body JSON으로 직렬화할 요청 body
+     * @param callback 응답 본문 문자열을 받는 콜백
      */
     function httpPostJson(
       url: string,
-      headers: object,
-      body: object,
+      headers: JsonValue,
+      body: JsonValue,
       callback: (response: string) => void
-    ): void;
+    ): boolean;
 
     /**
      * ==========================================
@@ -607,7 +651,7 @@ declare global {
     /**
      * 미니게임 앱을 강제 종료하는 함수
      */
-    function forceDestroy(): void;
+    function forceDestroy(): boolean;
 
     /**
      * 모든 채팅 내용을 삭제하는 함수
@@ -622,7 +666,7 @@ declare global {
     /**
      * 로드한 이미지로 펀치 버튼을 만들어 추가합니다.
      */
-    function putMobilePunchWithIcon(icon: ScriptDynamicResource): void;
+    function putMobilePunchWithIcon(icon: ScriptDynamicResource, enabled?: boolean): void;
 
     /**
      * Staff이상 권한의 유저 채팅창에 text 내용을 출력합니다.

@@ -1,6 +1,7 @@
 import { CameraEffectType } from "./CameraEffectType";
 import { ScriptDynamicResource } from "./ScriptDynamicResource";
 import { ScriptWidget } from "./ScriptWidget";
+import { EmbedAlign, WidgetAlign } from "./ScriptTypes";
 
 export enum ColorType {
   WHITE,
@@ -81,7 +82,10 @@ export type ShowBuyAlertOption = {
 };
 
 export type BuyAlertResult = {
-  Refund: () => {};
+  /**
+   * 완료된 구매를 환불 처리합니다.
+   */
+  Refund: () => void;
 };
 
 export class ScriptPlayer {
@@ -154,7 +158,7 @@ export class ScriptPlayer {
   /**
    * 전자지갑 주소(Read Only)
    */
-  readonly walletAddress: string;
+  walletAddress: string;
   /**
    * 스페이스 내의 플레이어 값 저장공간(스페이스 한정)
    */
@@ -212,6 +216,13 @@ export class ScriptPlayer {
   readonly isGuest: boolean;
 
   /**
+   * 무중단 배포 과정에서 연결을 유지한 채 새 서버로 재입장 처리된 플레이어이면 true를 반환합니다.
+   *
+   * 일반 신규 입장 플레이어와 마이그레이션으로 재입장한 플레이어를 구분해 상태 복원 로직을 적용할 때 사용합니다.
+   */
+  readonly isMigrationJoin: boolean;
+
+  /**
    * 플레이어의 브라우저에서 사용하는 언어 설정 값
    */
   readonly language: string;
@@ -224,7 +235,7 @@ export class ScriptPlayer {
   /**
    * 플레이어의 맵 둘러보기 허용 여부를 설정할 수 있습니다.
    */
-  enableFreeView: boolean;
+  enableFreeView: boolean | null;
 
   /** 
    * 플레이어의 찌르기 공격 허용 여부를 설정할 수 있습니다.
@@ -267,7 +278,7 @@ export class ScriptPlayer {
    * @param width 라벨의 너비 n% (0 ~ 100)
    * @param opacity 라벨 배경색 투명도 (0 ~ 1)
    * @param time 라벨 표시 시간 (default 3000)
-   * @param option
+   * @param option 라벨 모서리, padding, 투명도 등을 설정하는 옵션
    */
   showCustomLabel(
     text: string,
@@ -281,14 +292,21 @@ export class ScriptPlayer {
   ): void;
 
   /**
-   * 플레이어에게 지정된 align의 위치에 해당 html파일을 위젯으로 불러옴
+   * 플레이어에게 지정한 HTML 파일을 위젯으로 표시합니다.
+   *
+   * @template TMessage 위젯과 주고받을 메시지 payload 타입
+   * @param fileName 표시할 HTML 파일 경로
+   * @param align 위젯을 표시할 화면 위치
+   * @param width 위젯 가로 크기(px)
+   * @param height 위젯 세로 크기(px)
+   * @returns 생성된 위젯 객체
    */
-  showWidget(
+  showWidget<TMessage = any>(
     fileName: string,
-    align: "popup" | "sidebar" | "top" | "topleft" | "topright" | "middle" | "middleleft" | "middleright" | "bottom" | "bottomleft" | "bottomright",
-    width: number,
-    height: number
-  ): ScriptWidget;
+    align?: WidgetAlign,
+    width?: number,
+    height?: number
+  ): ScriptWidget<TMessage>;
 
   /**
    * 플레이어의 이메일이 특정 값과 일치하는지 확인합니다.
@@ -315,7 +333,7 @@ export class ScriptPlayer {
   /**
    * 플레이어를 해당 스페이스 해당 맵으로 이동시키기
    */
-  spawnAtMap(worldHashID: string, mapHashID: string): void;
+  spawnAtMap(worldHashID: string, mapHashID?: string | null): void;
 
   /**
    * 플레이어에게 사운드를 재생
@@ -332,13 +350,13 @@ export class ScriptPlayer {
    * @param link 플레이할 사운드 파일의 URL
    * @param loop 사운드 반복 재생 여부
    */
-  playSoundLink(link: string, loop: boolean): void;
+  playSoundLink(link: string, loop?: boolean, overlap?: boolean, key?: string, volume?: number): void;
 
   /**
    * 플레이어에게 재생되고 있는 사운드를 종료
    * @param key 중단할 사운드의 키 값
    */
-  stopSound(key?: string): void;
+  stopSound(key: string): void;
 
   /**
    * 변경된 플레이어 필드 값 반영
@@ -358,10 +376,11 @@ export class ScriptPlayer {
   sendMessage(message: string, color?: number): void;
 
   /**
-   * 플레이어 개인에게 채팅 메시지를 보냅니다.
+   * 플레이어에게 구매 확인창을 표시합니다.
+   *
    * @param itemName 구매창에 표시할 아이템의 이름
    * @param price 아이템의 가격 (화폐단위: ZEM)
-   * @param callback 구매 성공시 동작할 콜백함수
+   * @param callback 구매 성공 시 실행할 콜백. `buyAlertResult.Refund()`로 구매를 환불할 수 있습니다.
    * @param payToSpaceOwner false인 경우 앱 소유자에게 수익이 전달되고, true인 경우 맵 소유자에게 수익이 전달됩니다. (default: false)
    * @param option 구매창의 메시지 및 타이머를 설정하는 옵션 객체입니다.
    * - message : 구매창에 표시할 텍스트
@@ -388,7 +407,7 @@ export class ScriptPlayer {
    * @param marginBottom 화면 크기에 대한 비율로 정의하는 위젯 하단의 여백 (%)
    * @param marginLeft 화면 크기에 대한 비율로 정의하는 위젯 좌측의 여백 (%)
    */
-  showWidgetResponsive(fileName: string, marginTop: number, marginRight: number, marginBottom: number, marginLeft: number): void;
+  showWidgetResponsive<TMessage = any>(fileName: string, marginTop: number, marginRight: number, marginBottom: number, marginLeft: number): ScriptWidget<TMessage>;
 
   /**
    * 플레이어에게 웹 URL을 새 창이나 팝업 창으로 표시합니다.
@@ -400,47 +419,49 @@ export class ScriptPlayer {
   /**
    * 해당 플레이어에게 지정된 align의 위치에 url 임베드  화면을 표시하는 함수입니다.
    * @param url 웹 url 주소
-   * @param align 임베드를 표시할 위치
+   * @param align 임베드를 표시할 위치. 임베드는 `popup` 위치를 지원하지 않습니다.
    * @param width 임베드 가로 크기(px)
    * @param height 임베드 세로 크기(px)
    * @param hasBackdrop true일 경우 임베드의 바깥 배경에 그림자를 표시합니다.
    */
   showEmbed(
     url: string,
-    align: "sidebar" | "top" | "topleft" | "topright" | "middle" | "middleleft" | "middleright" | "bottom" | "bottomleft" | "bottomright",
-    width: number,
-    height: number,
+    align?: EmbedAlign,
+    width?: number,
+    height?: number,
     hasBackdrop?: boolean
   ): void;
 
   /**
    * 플레이어에게 입력창을 보여주고, 플레이어의 응답에 따라 동작하는 callback 함수를 작성할 수 있습니다.
-   * @param text
-   * @param callback
+   * @param text 입력창에 표시할 텍스트
+   * @param callback 플레이어가 입력한 문자열을 받는 콜백
+   * @param option 입력창 버튼, placeholder, 입력 타입을 설정하는 옵션
    */
   showPrompt(text: string, callback?: (res: string) => void, option?: PopupOption): void;
 
   /**
    * 플레이어에게 확인창을 보여주고, 플레이어가 OK를 눌렀을 때 동작하는 callback 함수를 작성할 수 있습니다.
    * cancel을 누를 경우에는 callback 함수가 동작하지 않습니다.
-   * @param text
-   * @param callback
+   * @param text 확인창에 표시할 텍스트
+   * @param callback 플레이어가 OK를 눌렀을 때 실행되는 콜백
+   * @param option 확인창 버튼과 본문을 설정하는 옵션
    */
   showConfirm(text: string, callback?: (res: boolean) => void, option?: PopupOption): void;
 
   /**
    * 플레이어에게 경고창을 보여주고, 플레이어가 OK를 눌렀을 때 동작하는 callback 함수를 작성할 수 있습니다.
-   * @param text
-   * @param callback
-   * @param option
+   * @param text 경고창에 표시할 텍스트
+   * @param callback 플레이어가 OK를 눌렀을 때 실행되는 콜백
+   * @param option 경고창 버튼과 본문을 설정하는 옵션
    */
   showAlert(text: string, callback?: (res: boolean) => void, option?: PopupOption): void;
 
   /**
    * @private
-   * @param key
+   * @param key 지역화 문자열 키
    */
-  localize(key: string): string;
+  localize(key: string, language?: string | null): string;
 
   /**
    * 플레이어에게 입력한 이미지 주소에 해당하는 이미지를 표시합니다.
@@ -460,14 +481,16 @@ export class ScriptPlayer {
    * @param tileY y좌표
    * @param time 시점이 목표 지점까지 이동하는데 걸리는 시간(초)
    */
-  setCameraTarget(tileX: number, tileY: number, time?: number): void;
+  setCameraTarget(tileX: number, tileY: number, time?: number, easingType?: string): void;
 
   /**
    * 플레이어의 시점을 특정 오브젝트로 중심 이동시킵니다.
    * @param key 오브젝트의 키 값
    * @param time 시점이 목표 지점까지 이동하는데 걸리는 시간(초)
    */
-  setCameraTarget(key: string, time?: number): void;
+  setCameraTarget(key: string, time?: number, easingType?: string): void;
+
+  setCameraTarget(player: ScriptPlayer, time?: number, easingType?: string): void;
   
   /**
    * 플레이어의 배경 또는 전경 이미지를 설정 할 수 있습니다.
@@ -476,7 +499,7 @@ export class ScriptPlayer {
    * @param offsetY px 단위로 y 축 방향의 오프셋을 설정할 수 있는 속성
    * @param type 설정타입, 0: 배경 설정 , 1 : 전경 설정
    */
-  setEffectSprite(resource: ScriptDynamicResource | null, offsetX: number, offsetY: number, type: number): void;
+  setEffectSprite(resource: ScriptDynamicResource, offsetX?: number, offsetY?: number, type?: number, individual?: boolean): void;
 
   /**
    * 플레이어에게 효과 스프라이트를 재생합니다.
@@ -485,12 +508,12 @@ export class ScriptPlayer {
    * @param offsetX 효과 스프라이트의 X 축 오프셋 값
    * @param offsetY 효과 스프라이트의 Y 축 오프셋 값
    */
-  playEffectSprite(resource: ScriptDynamicResource | null, repeatNum: number, offsetX: number, offsetY: number): void;
+  playEffectSprite(resource: ScriptDynamicResource, repeatNum: number, offsetX?: number, offsetY?: number): void;
 
   /**
    * 카메라 효과 파라미터 값을 설정합니다.
-   * @param type 
-   * @param param 
+   * @param type 카메라 효과 타입
+   * @param param 카메라 효과에 전달할 파라미터 값
    */
   setCameraEffectParam(type: CameraEffectType, param: number): void;
 

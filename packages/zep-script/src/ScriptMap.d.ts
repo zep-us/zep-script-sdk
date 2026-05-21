@@ -1,5 +1,6 @@
 import { ScriptDynamicResource } from "./ScriptDynamicResource";
 import { ObjectEffectType } from "./ScriptObjectEffectType";
+import { JsonValue } from "./ScriptTypes";
 
 /**
  * 오브젝트 변경 하위 타입을 나타내는 열거형입니다.
@@ -21,12 +22,15 @@ export enum TileEffectType {
   PORTAL = 3,
   PRIVATE_AREA = 4,
   SPOTLIGHT = 5,
-  EMBED = 6,
-  LOCATION = 7,
-  AMBIENT_SOUND = 8,
-  TILE_EMBED = 9,
-  WEB_PORTAL = 10,
-  SPACE_PORTAL = 11
+  NPC = 6,
+  EMBED = 7,
+  LOCATION = 8,
+  AMBIENT_SOUND = 9,
+  TILE_EMBED = 10,
+  WEB_PORTAL = 11,
+  VIDEO_SLOT = 12,
+  SPACE_PORTAL = 14,
+  IMAGE_UPLOAD = 15
 }
 
 export type TileEffectOption = {
@@ -36,12 +40,15 @@ export type TileEffectOption = {
     [TileEffectType.PORTAL]: TileEffectPortalOption;
     [TileEffectType.PRIVATE_AREA]: TileEffectPrivateAreaOption;
     [TileEffectType.SPOTLIGHT]: null;
+    [TileEffectType.NPC]: null;
     [TileEffectType.EMBED]: TileEffectEmbedOption;
     [TileEffectType.LOCATION]: TileEffectLocationOption;
     [TileEffectType.AMBIENT_SOUND]: TileEffectAmbientSoundOption;
     [TileEffectType.TILE_EMBED]: TileEffectTileEmbedOption;
     [TileEffectType.WEB_PORTAL]: TileEffectWebPortalOption;
+    [TileEffectType.VIDEO_SLOT]: JsonValue;
     [TileEffectType.SPACE_PORTAL]: TileEffectSpacePortalOption;
+    [TileEffectType.IMAGE_UPLOAD]: JsonValue;
 };
 
 /**
@@ -464,6 +471,7 @@ export type NpcProperty = {
  * 오브젝트 배치 유형을 나타내는 열거형입니다.
  */
 export enum PutObjectType {
+  POINT = 0,
   STROKE = 1
 }
 
@@ -497,7 +505,7 @@ export type LocationInfo = {
   label: string;
 }
 
-type MapDataTileObject = {
+export type MapDataTileObject = {
   /**
    * 인덱스 값입니다.
    */
@@ -556,7 +564,7 @@ type MapDataTileObject = {
   /**
    * 기능 유형입니다.
    */
-  type: number;
+  type: ObjectEffectType | number;
 
   /**
    * 텍스트입니다.
@@ -624,7 +632,7 @@ type MapDataTileObject = {
   isHideObjectName: boolean;
 }
 
-type MapDataTileAppObject = MapDataTileObject & {
+export type MapDataTileAppObject = MapDataTileObject & {
   /**
    * X 좌표
    */
@@ -654,7 +662,7 @@ type MapDataTileAppObject = MapDataTileObject & {
 /**
  * NPC 속성을 포함하는 오브젝트 타입입니다.
  */
-type NpcObject = MapDataTileAppObject & {
+export type NpcObject = MapDataTileAppObject & {
   /**
    * NPC 속성입니다.
    */
@@ -665,6 +673,24 @@ type NpcObject = MapDataTileAppObject & {
    */
   sendUpdated: () => void;
 }
+
+/**
+ * NPC 속성을 포함하는 키 오브젝트 생성 옵션입니다.
+ *
+ * 이 타입을 `ScriptMap.putObjectWithKey()`에 전달하면 반환값이 `NpcObject`로 추론됩니다.
+ */
+export type AppKeyObjectDataWithNpc = AppKeyObjectData & {
+  npcProperty: NpcProperty;
+};
+
+/**
+ * NPC 속성을 포함하지 않는 키 오브젝트 생성 옵션입니다.
+ *
+ * 이 타입을 `ScriptMap.putObjectWithKey()`에 전달하면 반환값이 일반 `MapDataTileAppObject`로 추론됩니다.
+ */
+export type AppKeyObjectDataWithoutNpc = Omit<AppKeyObjectData, "npcProperty"> & {
+  npcProperty?: never;
+};
 
 
 declare global {
@@ -697,36 +723,63 @@ declare global {
      * 지정된 좌표에 오브젝트를 놓음 (기준 좌표 : Left-Top)
      * @param x X 좌표
      * @param y Y 좌표
-     * @param dynamicResource `App.loadSpritesheet()` 함수를 통해 사전에 로드한 이미지 파일 객체
-     * @param data
+     * @param dynamicResource `ScriptApp.loadSpritesheet()`로 미리 로드한 이미지 리소스
+     * @param data 배치할 오브젝트의 동작, 충돌, 오프셋 옵션
      */
     function putObject(
       x: number,
       y: number,
       dynamicResource: ScriptDynamicResource | null,
       data?: PutObjectOption
-    ): Promise<void>;
+    ): void;
 
     /**
-     * 지정한 좌표에 키값을 가진 오브젝트를 놓음 (기준 좌표 : Left-Top)
+     * 지정한 좌표에 NPC 속성을 가진 키 오브젝트를 배치합니다. 기준 좌표는 좌상단입니다.
+     *
      * @param x X 좌표
      * @param y Y 좌표
-     * @param dynamicResource `App.loadSpritesheet()` 함수를 통해 사전에 로드한 이미지 파일 객체
-     * @param option
+     * @param dynamicResource `ScriptApp.loadSpritesheet()`로 미리 로드한 이미지 리소스
+     * @param option `npcProperty`를 포함한 오브젝트 옵션
+     * @returns NPC 전용 속성과 `sendUpdated()`를 포함한 오브젝트
      */
-     function putObjectWithKey(
+    function putObjectWithKey(
         x: number,
         y: number,
         dynamicResource: ScriptDynamicResource | null,
-        option?: Omit<AppKeyObjectData, "npcProperty">,
-     ): MapDataTileAppObject;
+        option: AppKeyObjectDataWithNpc,
+    ): NpcObject;
 
+    /**
+     * 지정한 좌표에 키 오브젝트를 배치합니다. 기준 좌표는 좌상단입니다.
+     *
+     * @param x X 좌표
+     * @param y Y 좌표
+     * @param dynamicResource `ScriptApp.loadSpritesheet()`로 미리 로드한 이미지 리소스
+     * @param option `npcProperty`를 포함하지 않는 오브젝트 옵션
+     * @returns 배치된 일반 키 오브젝트
+     */
+    function putObjectWithKey(
+        x: number,
+        y: number,
+        dynamicResource: ScriptDynamicResource | null,
+        option?: AppKeyObjectDataWithoutNpc,
+    ): MapDataTileAppObject;
+
+    /**
+     * 지정한 좌표에 키 오브젝트를 배치합니다. 옵션이 union 타입이면 반환값도 일반 오브젝트 또는 NPC 오브젝트 union으로 추론됩니다.
+     *
+     * @param x X 좌표
+     * @param y Y 좌표
+     * @param dynamicResource `ScriptApp.loadSpritesheet()`로 미리 로드한 이미지 리소스
+     * @param option 오브젝트 옵션
+     * @returns 배치된 키 오브젝트
+     */
     function putObjectWithKey(
         x: number,
         y: number,
         dynamicResource: ScriptDynamicResource | null,
         option?: AppKeyObjectData,
-    ): NpcObject;
+    ): MapDataTileAppObject | NpcObject;
 
     /**
      * 해당 좌표에 있는 오브젝트의 스프라이트 애니메이션을 실행시킴 (putObject가 선행되어야 함)
@@ -739,7 +792,7 @@ declare global {
       x: number,
       y: number,
       name: string,
-      loop: number
+      loop?: number
     ): void;
 
     /**
@@ -760,8 +813,8 @@ declare global {
       y: number,
       targetX: number,
       targetY: number,
-      time: number
-    ): void;
+      time?: number
+    ): boolean;
 
     /**
      * key 값을 가진 오브젝트를 타겟 좌표로 이동
@@ -774,7 +827,8 @@ declare global {
       key: string,
       targetX: number,
       targetY: number,
-      usePath?: boolean
+      usePath?: boolean,
+      time?: number
     ): boolean;
 
     /**
@@ -821,8 +875,8 @@ declare global {
      */
     function playObjectAnimationWithKey(
       key: string, 
-      animName: string, 
-      repeatCount: number
+      animName?: string,
+      repeatCount?: number
     ): void;
 
     /**

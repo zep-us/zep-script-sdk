@@ -1,9 +1,10 @@
 ﻿export enum DateType {
-    MILLISECONDS,
-    SECONDS ,
-    MINUTES ,
-    HOURS ,
-    DAYS ,
+    NONE = 0,
+    MILLISECONDS = 1,
+    SECONDS = 2,
+    MINUTES = 3,
+    HOURS = 4,
+    DAYS = 5,
 }
 
 declare global {
@@ -26,6 +27,6 @@ declare global {
          * @param timeB 차이를 계산할 시간 (milliseconds)
          * @param returnType DateType.MILLISECONDS ( ms 단위 ), DateType.SECONDS (초 단위 ), DateType.MINUTES ( 분 단위 ), DateType.HOURS ( 시간 단위 ), DateType.DAYS ( 일 단위 )
          */
-        function getTimeInterval(timeA: number, timeB: number, returnType: DateType) : number;
+        function getTimeInterval(timeA: number, timeB: number, returnType?: DateType) : number;
     }
 }

@@ -1,5 +1,5 @@
 export type ScriptDynamicResource = {
-    int: number,
+    id: number,
     name: string,
     type: string,
     body: string,

@@ -1,2 +1,3 @@
-import { ScriptPlayer } from "./src/ScriptPlayer";
+'use strict';
 
+module.exports = {};

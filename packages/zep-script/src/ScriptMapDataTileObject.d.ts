@@ -15,7 +15,7 @@ export type MapDataTileObject = {
     impassable: boolean;
     activeDistance: number;
     type: ObjectEffectType | number;
-    text: number;
+    text: string;
     tooltip: string;
     secret: string;
     link: string;

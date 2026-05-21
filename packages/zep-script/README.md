@@ -44,6 +44,36 @@ import 'zep-script';
 ScriptApp.showCenterLabel("Hello world");
 ```
 
+### API hover language
+
+Editor hovers are rendered from the JSDoc comments in the `.d.ts` file that TypeScript loads for the imported module. TypeScript does not switch third-party package comments by the user's editor locale, so one `import 'zep-script'` entrypoint cannot automatically show Korean comments for Korean users and English comments for English users.
+
+If localized API hovers are required, provide separate declaration entrypoints (for example `zep-script/ko` and `zep-script/en`) or separate packages with language-specific `.d.ts` files. The current package ships one shared declaration set.
+
+### Zero-downtime deployment migration
+
+Use `ScriptApp.onMigrationStart` to persist in-memory state before server migration, then restore it from storage when the app starts again. Players who rejoin through migration can be detected with `player.isMigrationJoin`.
+
+```ts
+ScriptApp.onMigrationStart.Add(() => {
+  ScriptApp.setStorage(JSON.stringify(currentGameState));
+});
+
+ScriptApp.onInit.Add(() => {
+  ScriptApp.getStorage((savedState) => {
+    if (savedState) {
+      restoreGameState(JSON.parse(savedState));
+    }
+  });
+});
+
+ScriptApp.onJoinPlayer.Add((player) => {
+  if (player.isMigrationJoin) {
+    restorePlayerState(player);
+  }
+});
+```
+
 ### Transpiling
 
 As some APIs of ZEP Script conflicts with TypeScript's namespaces, you need to use babel to transpile your code.
