@@ -1,6 +1,6 @@
 {
   "name": "@zep.us/zep-script-template",
-  "version": "0.16.4",
+  "version": "0.16.5",
   "publishConfig": {
     "access": "public"
   },
@@ -32,6 +32,6 @@
     "typescript": "^4.7.4",
     "webpack": "^5.99.9",
     "webpack-cli": "^6.0.1",
-    "zep-script": "0.16.4"
+    "zep-script": "0.16.5"
   }
 }
