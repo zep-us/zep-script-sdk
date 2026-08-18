@@ -796,9 +796,10 @@ declare global {
     ): void;
 
     /**
-     * ZEP 스크립트로 생성된 모든 오브젝트를 제거
+     * 현재 앱이 생성한 모든 오브젝트를 제거
+     * @param appId -1이면 모든 앱이 생성한 오브젝트를 제거
      */
-    function clearAllObjects(): void;
+    function clearAllObjects(appId?: number): void;
 
     /**
      * 해당 좌표의 오브젝트를 타겟 좌표로 time(초) 동안 이동
